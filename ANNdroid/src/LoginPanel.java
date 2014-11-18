@@ -29,7 +29,7 @@ public class LoginPanel extends JPanel{
 
 		loginPane = new JPanel(null);
 		loginPane.setPreferredSize(new Dimension(getWidth()/2, getHeight()/4));
-		loginPane.setBounds(getWidth()/4, getHeight()/4, getWidth()/2, getHeight()/4);
+		loginPane.setBounds(getWidth()/4, getHeight()/3, getWidth()/2, getHeight()/4);
 
 		errorLabel = new JLabel("");
 		errorLabel.setBounds(loginPane.getWidth()/4, loginPane.getHeight()/3 - 10, loginPane.getWidth()/2, 20);
@@ -61,11 +61,11 @@ public class LoginPanel extends JPanel{
 		loginPane.add(pwordField);
 
 		loginBtn = new JButton("login");
-		loginBtn.setBounds(10, pwordLabel.getY() + 30, (loginPane.getWidth() - errorLabel.getWidth())/2, loginPane.getHeight()/7);
+		loginBtn.setBounds(errorLabel.getX(), pwordLabel.getY() + 30, errorLabel.getWidth()/2, loginPane.getHeight()/7);
 		loginPane.add(loginBtn);
 
 		exitBtn = new JButton("exit");
-		exitBtn.setBounds(pwordField.getX() + pwordField.getWidth() - 15, pwordLabel.getY() + 30, (loginPane.getWidth() - errorLabel.getWidth())/2, loginPane.getHeight()/7);
+		exitBtn.setBounds(loginBtn.getX() + loginBtn.getWidth(), pwordLabel.getY() + 30, loginBtn.getWidth(), loginPane.getHeight()/7);
 		loginPane.add(exitBtn);
 		exitBtn.addActionListener(event->{System.exit(1);});
 
@@ -75,13 +75,13 @@ public class LoginPanel extends JPanel{
 	}
 
 	public void resize(){
-		loginPane.setBounds(getWidth()/4, getHeight()/4, getWidth()/2, getHeight()/4);
+		loginPane.setBounds(getWidth()/4, getHeight()/3, getWidth()/2, getHeight()/4);
 		errorLabel.setBounds(loginPane.getWidth()/4, loginPane.getHeight()/3 - 10, loginPane.getWidth()/2, 20);
 		unameLabel.setBounds(errorLabel.getX(), loginPane.getHeight()/3 + 15, loginPane.getWidth()/5, 20);
 		unameField.setBounds(unameLabel.getX() + unameLabel.getWidth(), unameLabel.getY(), errorLabel.getWidth()-unameLabel.getWidth(), 20);
 		pwordLabel.setBounds(loginPane.getWidth()/4, unameLabel.getY() + 30, loginPane.getWidth()/5, 20);
 		pwordField.setBounds(pwordLabel.getX() + pwordLabel.getWidth(), pwordLabel.getY(), errorLabel.getWidth()-pwordLabel.getWidth(), 20);
-		loginBtn.setBounds(10, pwordLabel.getY() + 30, (loginPane.getWidth() - errorLabel.getWidth())/2, loginPane.getHeight()/7);
-		exitBtn.setBounds(pwordField.getX() + pwordField.getWidth() - 15, pwordLabel.getY() + 30, (loginPane.getWidth() - errorLabel.getWidth())/2, loginPane.getHeight()/7);
+		loginBtn.setBounds(errorLabel.getX(), pwordLabel.getY() + 30, errorLabel.getWidth()/2, loginPane.getHeight()/7);
+		exitBtn.setBounds(loginBtn.getX() + loginBtn.getWidth(), pwordLabel.getY() + 30, loginBtn.getWidth(), loginPane.getHeight()/7);
 	}
 }
