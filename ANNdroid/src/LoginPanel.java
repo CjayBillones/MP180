@@ -1,136 +1,87 @@
 package ANNdroid.src;
 
-import java.lang.String;
-
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import javax.swing.JLayeredPane;
+import javax.swing.SwingConstants;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.CardLayout;
 
 public class LoginPanel extends JPanel{
 
-	private JLayeredPane jlp;
-	private JPanel loginPanel;
-	private JLabel errorLabel;
-	private JLabel unameLabel;
-	private JLabel pwordLabel;
-	private JTextField unameField;
-	private JPasswordField pwordField;
-	private JButton loginBtn;
-	private JButton exitBtn;
+	JPanel loginPane;
+	JLabel errorLabel;
+	JLabel unameLabel;
+	JLabel pwordLabel;
+	JTextField unameField;
+	JPasswordField pwordField;
+	JButton loginBtn;
+	JButton exitBtn;
 
-	private String unameLogin = "";
-	private String pwordLogin = "";
+	public LoginPanel(JPanel bgPanel){
 
-	public LoginPanel(){
-
+		setLayout(null);
 		setPreferredSize(new Dimension(ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT));
+		setBounds(0, 0, ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT);
 
-		jlp = new JLayeredPane();
-		jlp.setPreferredSize(new Dimension(800, 600));
-		jlp.setBounds(0, 0, 800, 600);
+		loginPane = new JPanel(null);
+		loginPane.setPreferredSize(new Dimension(getWidth()/2, getHeight()/4));
+		loginPane.setBounds(getWidth()/4, getHeight()/4, getWidth()/2, getHeight()/4);
 
 		errorLabel = new JLabel("");
-		errorLabel.setBounds(260, 180, 280, 25);
-		errorLabel.setForeground(Color.RED);
-		errorLabel.setFont(errorLabel.getFont().deriveFont(11f));
-		
-		unameLabel = new JLabel("username: ");
-		unameLabel.setBounds(260, 210, 80, 20);
+		errorLabel.setBounds(loginPane.getWidth()/4, loginPane.getHeight()/3 - 10, loginPane.getWidth()/2, 20);
+		errorLabel.setForeground(Color.WHITE);
+		errorLabel.setBackground(Color.BLACK);
+		errorLabel.setOpaque(true);
+		loginPane.add(errorLabel);
+
+		unameLabel = new JLabel("username: ", SwingConstants.CENTER);
+		unameLabel.setBounds(errorLabel.getX(), loginPane.getHeight()/3 + 15, loginPane.getWidth()/5, 20);
 		unameLabel.setForeground(Color.WHITE);
-		
-		unameField = new JTextField("", 15);
-		unameField.setBounds(340, 210, 200, 25);
-		unameField.addFocusListener(new FocusListener(){
-			
-			public void focusGained(FocusEvent e){} //Do nothing
+		unameLabel.setBackground(Color.BLACK);
+		unameLabel.setOpaque(true);
+		loginPane.add(unameLabel);
 
-			public void focusLost(FocusEvent e){
-				unameLogin = unameField.getText();
-			}
-		});
+		unameField = new JTextField();
+		unameField.setBounds(unameLabel.getX() + unameLabel.getWidth(), unameLabel.getY(), errorLabel.getWidth()-unameLabel.getWidth(), 20);
+		loginPane.add(unameField);
 
-		pwordLabel = new JLabel("password: ");
-		pwordLabel.setBounds(260, 250, 80, 20);
+		pwordLabel = new JLabel("password: ", SwingConstants.CENTER);
+		pwordLabel.setBounds(loginPane.getWidth()/4, unameLabel.getY() + 30, loginPane.getWidth()/5, 20);
 		pwordLabel.setForeground(Color.WHITE);
+		pwordLabel.setBackground(Color.BLACK);
+		pwordLabel.setOpaque(true);
+		loginPane.add(pwordLabel);
 
-		pwordField = new JPasswordField("" ,15);
-		pwordField.setBounds(340, 250, 200, 25);
-		pwordField.addFocusListener(new FocusListener(){
-			
-			public void focusGained(FocusEvent e){} //Do nothing
-
-			public void focusLost(FocusEvent e){
-				pwordLogin = String.valueOf(pwordField.getPassword());
-			}
-		});
+		pwordField = new JPasswordField();
+		pwordField.setBounds(pwordLabel.getX() + pwordLabel.getWidth(), pwordLabel.getY(), errorLabel.getWidth()-pwordLabel.getWidth(), 20);
+		loginPane.add(pwordField);
 
 		loginBtn = new JButton("login");
-		loginBtn.setBounds(400, 290, 70, 20);
-		/**loginBtn.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-
-				User u = Utilities.authenticate(unameLogin);
-				
-				if(u == null)
-					errorLabel.setText("* user does not exist");
-				else if(u != null && !u.getPassword().equals(Utilities.hashPassword(pwordLogin)))
-					errorLabel.setText("* incorrect password");
-				else{
-					Framework.gameState = Framework.GameState.ADMIN;
-					((AdminPanel)Framework.adminPanel).setUser(u);
-					reinitialize();
-				}
-			}
-		});**/
-		loginBtn.addActionListener(event -> { 
-			User u = Utilities.authenticate(unameLogin);
-			
-			if(u == null) errorLabel.setText("* user does not exist");
-			else if(u != null && !u.getPassword().equals(Utilities.hashPassword(pwordLogin)))
-				errorLabel.setText("* incorrect password");
-			else{
-				Framework.gameState = Framework.GameState.ADMIN;
-				((AdminPanel)Framework.adminPanel).setUser(u);
-				reinitialize();
-			}
-		});
+		loginBtn.setBounds(10, pwordLabel.getY() + 30, (loginPane.getWidth() - errorLabel.getWidth())/2, loginPane.getHeight()/7);
+		loginPane.add(loginBtn);
 
 		exitBtn = new JButton("exit");
-		exitBtn.setBounds(478, 290, 60, 20);
-		/**exitBtn.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				System.exit(1);
-			}
-		});**/
-		exitBtn.addActionListener(event -> System.exit(1));
+		exitBtn.setBounds(pwordField.getX() + pwordField.getWidth() - 15, pwordLabel.getY() + 30, (loginPane.getWidth() - errorLabel.getWidth())/2, loginPane.getHeight()/7);
+		loginPane.add(exitBtn);
+		exitBtn.addActionListener(event->{System.exit(1);});
 
-		jlp.add(errorLabel, 0);
-		jlp.add(unameLabel, 0);
-		jlp.add(unameField, 0);
-		jlp.add(pwordLabel, 0);
-		jlp.add(pwordField, 0);
-		jlp.add(loginBtn, 	0);
-		jlp.add(exitBtn,		0);
-		this.add(jlp);
+		add(loginPane);
+		add(bgPanel);
+		
 	}
 
-	public void reinitialize(){
-		this.unameLogin = "";
-		this.pwordLogin = "";
-		errorLabel.setText("");
-		unameField.setText("");
-		pwordField.setText("");
+	public void resize(){
+		loginPane.setBounds(getWidth()/4, getHeight()/4, getWidth()/2, getHeight()/4);
+		errorLabel.setBounds(loginPane.getWidth()/4, loginPane.getHeight()/3 - 10, loginPane.getWidth()/2, 20);
+		unameLabel.setBounds(errorLabel.getX(), loginPane.getHeight()/3 + 15, loginPane.getWidth()/5, 20);
+		unameField.setBounds(unameLabel.getX() + unameLabel.getWidth(), unameLabel.getY(), errorLabel.getWidth()-unameLabel.getWidth(), 20);
+		pwordLabel.setBounds(loginPane.getWidth()/4, unameLabel.getY() + 30, loginPane.getWidth()/5, 20);
+		pwordField.setBounds(pwordLabel.getX() + pwordLabel.getWidth(), pwordLabel.getY(), errorLabel.getWidth()-pwordLabel.getWidth(), 20);
+		loginBtn.setBounds(10, pwordLabel.getY() + 30, (loginPane.getWidth() - errorLabel.getWidth())/2, loginPane.getHeight()/7);
+		exitBtn.setBounds(pwordField.getX() + pwordField.getWidth() - 15, pwordLabel.getY() + 30, (loginPane.getWidth() - errorLabel.getWidth())/2, loginPane.getHeight()/7);
 	}
 }

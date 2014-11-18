@@ -19,13 +19,6 @@ import java.awt.image.BufferedImage;
 
 public class Framework extends JPanel{
 
-	public static int frameWidth;
-	public static int frameHeight;
-	public static final long secInNanoSec = 1000000000L;
-	public static final long milisecInNanoSec = 1000000L;
-
-	private final int GAME_FPS = 60;
-
 	public static final String LOGIN = "login";
 	public static final String ADMIN = "admin";
 
@@ -40,7 +33,7 @@ public class Framework extends JPanel{
 	public static GameState gameState;
 
 	public Framework(CardLayout c){
-		super(c);
+		//super(c);
 
 		this.framework = this;
 		gameState = GameState.LOG_IN;
@@ -52,10 +45,9 @@ public class Framework extends JPanel{
 
 	public void initialize(){
 		
-		this.setPreferredSize(new Dimension(ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT));
-		this.setBounds(0, 0, ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT);
-		this.setBackground(Color.BLACK);
-		//this.bgImage = ANNdroid.TK.getImage("ANNdroid/resources/mainbg.jpg");
+		setPreferredSize(new Dimension(ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT));
+		setBounds(0, 0, ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT);
+		setBackground(Color.BLACK);
 		
 		try{
 			originalBGImage = ImageIO.read(new File("ANNdroid/resources/mainbg.jpg"));
@@ -66,22 +58,22 @@ public class Framework extends JPanel{
 		addComponentListener(new ComponentListener(){
 		
 			public void componentResized(ComponentEvent e) {
-					resize();
+				resize();
 			}
 
 			public void componentHidden(ComponentEvent e) {}
 			public void componentMoved(ComponentEvent e) {}
-			public void componentShown(ComponentEvent e) {}			
+			public void componentShown(ComponentEvent e) {}     
 		});
 
 		loginPanel = new LoginPanel();
-		loginPanel.setOpaque(false);
+		loginPanel.setOpaque(true);
 
 		adminPanel = new AdminPanel();
 		adminPanel.setOpaque(false);
 
-		this.add(loginPanel, LOGIN);
-		this.add(adminPanel, ADMIN);
+		add(loginPanel, LOGIN);
+		add(adminPanel, ADMIN);
 	}
 
 	private void GameLoop(){
