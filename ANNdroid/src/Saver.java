@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 public class Saver{
-
 	public void saveUsers(LinkedList<User> userList, String fileName)throws NullPointerException{
 
 		if(userList.size() == 0)
@@ -30,10 +29,7 @@ public class Saver{
 				oos.writeObject(userList.get(ac));
 			}
 			oos.close();
-		}catch(IOException e){
-			e.printStackTrace();
-		}
+		}catch(IOException e){	e.printStackTrace();	}
 
 	}
-
 }

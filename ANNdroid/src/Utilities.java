@@ -1,10 +1,10 @@
 package ANNdroid.src;
 
+import java.io.IOException;
+import java.util.LinkedList;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import java.util.LinkedList;
-import java.io.IOException;
 
 public class Utilities{
 
@@ -23,16 +23,13 @@ public class Utilities{
 						sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
 				}
 				generatedPassword = sb.toString();
-		}
-		catch(NoSuchAlgorithmException e){
-				e.printStackTrace();
-		}
+		}catch(NoSuchAlgorithmException e){	e.printStackTrace();	}
 		return generatedPassword;
 	}
 
 	public static User authenticate(String username){
 
-    for(User u : ANNdroid.userList){
+    for(User u : ANNdroid.simulator.userList){
       if(u.getUsername().equals(username)) return u;
     }
     return null;

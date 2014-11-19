@@ -9,6 +9,11 @@ import javax.swing.SwingConstants;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.CardLayout;
+import java.awt.event.FocusEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.ActionListener;
 
 public class LoginPanel extends JPanel{
 
@@ -20,6 +25,9 @@ public class LoginPanel extends JPanel{
 	JPasswordField pwordField;
 	JButton loginBtn;
 	JButton exitBtn;
+
+	String unameLogin;
+	String pwordLogin;
 
 	public LoginPanel(JPanel bgPanel){
 
@@ -33,7 +41,7 @@ public class LoginPanel extends JPanel{
 
 		errorLabel = new JLabel("");
 		errorLabel.setBounds(loginPane.getWidth()/4, loginPane.getHeight()/3 - 10, loginPane.getWidth()/2, 20);
-		errorLabel.setForeground(Color.WHITE);
+		errorLabel.setForeground(Color.RED);
 		errorLabel.setBackground(Color.BLACK);
 		errorLabel.setOpaque(true);
 		loginPane.add(errorLabel);
@@ -48,6 +56,8 @@ public class LoginPanel extends JPanel{
 		unameField = new JTextField();
 		unameField.setBounds(unameLabel.getX() + unameLabel.getWidth(), unameLabel.getY(), errorLabel.getWidth()-unameLabel.getWidth(), 20);
 		loginPane.add(unameField);
+		unameField.addFocusListener(new FieldFocusListener(0));
+		unameField.addActionListener(event -> {pwordField.requestFocus();});
 
 		pwordLabel = new JLabel("password: ", SwingConstants.CENTER);
 		pwordLabel.setBounds(loginPane.getWidth()/4, unameLabel.getY() + 30, loginPane.getWidth()/5, 20);
@@ -59,10 +69,13 @@ public class LoginPanel extends JPanel{
 		pwordField = new JPasswordField();
 		pwordField.setBounds(pwordLabel.getX() + pwordLabel.getWidth(), pwordLabel.getY(), errorLabel.getWidth()-pwordLabel.getWidth(), 20);
 		loginPane.add(pwordField);
+		pwordField.addFocusListener(new FieldFocusListener(1));
+		pwordField.addActionListener(new LoginAction(0));
 
 		loginBtn = new JButton("login");
 		loginBtn.setBounds(errorLabel.getX(), pwordLabel.getY() + 30, errorLabel.getWidth()/2, loginPane.getHeight()/7);
 		loginPane.add(loginBtn);
+		loginBtn.addActionListener(new LoginAction(1));
 
 		exitBtn = new JButton("exit");
 		exitBtn.setBounds(loginBtn.getX() + loginBtn.getWidth(), pwordLabel.getY() + 30, loginBtn.getWidth(), loginPane.getHeight()/7);
@@ -83,5 +96,63 @@ public class LoginPanel extends JPanel{
 		pwordField.setBounds(pwordLabel.getX() + pwordLabel.getWidth(), pwordLabel.getY(), errorLabel.getWidth()-pwordLabel.getWidth(), 20);
 		loginBtn.setBounds(errorLabel.getX(), pwordLabel.getY() + 30, errorLabel.getWidth()/2, loginPane.getHeight()/7);
 		exitBtn.setBounds(loginBtn.getX() + loginBtn.getWidth(), pwordLabel.getY() + 30, loginBtn.getWidth(), loginPane.getHeight()/7);
+	}
+
+	public void reinitialize(boolean error){
+		if(!error) errorLabel.setText("");
+		unameField.setText("");
+		pwordField.setText("");
+		unameLogin = "";
+		pwordLogin = "";
+	}
+
+	private class FieldFocusListener extends FocusAdapter{
+
+		// mode: 0 - unameField //
+		// mode: 1 - pwordField //
+		int mode;
+
+		public FieldFocusListener(int mode){
+			this.mode = mode;
+		}
+
+		public void focusLost(FocusEvent e){
+			if(mode == 0) unameLogin = unameField.getText();
+			else if(mode == 1) pwordLogin = Utilities.hashPassword(String.valueOf(pwordField.getPassword())); 
+		}
+
+	}
+
+	private class LoginAction implements ActionListener{
+
+		// mode: 0 - pressed enter //
+		// mode: 1 - login button //
+		int mode;
+
+		public LoginAction(int mode){
+			this.mode = mode;
+		}
+
+		public void actionPerformed(ActionEvent e){
+			
+			if(mode == 0) pwordLogin = Utilities.hashPassword(String.valueOf(pwordField.getPassword())); 
+			
+			User u = Utilities.authenticate(unameLogin);
+			
+			if(u == null){
+				errorLabel.setText("* user does not exist");
+				reinitialize(true);
+			}
+			else if(u != null && !u.getPassword().equals(pwordLogin)){
+				errorLabel.setText("* incorrect password");
+				reinitialize(true);
+			}
+			else{
+				ANNdroid.simulator.active = u;
+				CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
+				c1.show(ANNdroid.cards, ANNdroid.ADMINPANEL);
+				reinitialize(false);
+			}
+		}
 	}
 }

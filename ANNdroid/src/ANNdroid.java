@@ -20,6 +20,8 @@ public class ANNdroid extends JFrame{
 	public static final int SCREEN_XPOS = TK.getScreenSize().width/4;
 	public static final int SCREEN_YPOS = TK.getScreenSize().height/8;
 
+	public static Simulator simulator;
+
 	// Card Layout //
 	public static JPanel cards;
 	public final static String LOGINPANEL = "login";
@@ -31,8 +33,11 @@ public class ANNdroid extends JFrame{
 	public static JPanel adminPanel;
 
 	public ANNdroid(){
-		// Frame Properties //
+
 		super("ANNdroid");
+		simulator = new Simulator();
+
+		// Frame Properties //
 		setResizable(true);
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		setMinimumSize(new Dimension(800, 600));
@@ -52,11 +57,12 @@ public class ANNdroid extends JFrame{
 		// Initialize Cards //
 		bgPanel = new BackgroundPanel();
 		loginPanel = new LoginPanel(bgPanel);
+		adminPanel = new AdminPanel(bgPanel);
 
 		// Add Cards/Panel to Cards Container //
 		cards = new JPanel(new CardLayout());
 		cards.add(loginPanel, LOGINPANEL);
-		//cards.add(adminPanel, ADMINPANEL);
+		cards.add(adminPanel, ADMINPANEL);
 	
 		c.add(cards);
 	}

@@ -10,7 +10,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 public class Loader{
-
+	
 	public LinkedList<User> loadUsers(String fileName) throws IOException{
 		
 		File file = new File(fileName);
@@ -28,19 +28,14 @@ public class Loader{
 					userList.add(u);
 				}
 				ois.close();
-			}catch(IOException e){
-				e.printStackTrace();
-			}catch(ClassNotFoundException e){
-				e.printStackTrace();
-			}
+			}catch(IOException e){	e.printStackTrace();
+			}catch(ClassNotFoundException e){	e.printStackTrace();	}
 		}
 		else{
 			User u = new Admin("admin", Utilities.hashPassword("password"));
 			userList.add(u);
-			ANNdroid.saver.saveUsers(userList, "ANNdroid/bin/users.bin");
+			Simulator.saver.saveUsers(userList, "ANNdroid/bin/users.bin");
 		}
-
 		return userList;
 	}
-
 }
