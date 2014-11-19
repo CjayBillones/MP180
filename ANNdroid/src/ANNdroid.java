@@ -76,8 +76,10 @@ public class ANNdroid extends JFrame{
 		public void componentResized(ComponentEvent e){
 			bgPanel.setBounds(0, 0, getWidth(), getHeight()); // Resizes the bgPanel so that the resize() will execute // 
 			loginPanel.setBounds(0, 0, getWidth(), getHeight());
+			adminPanel.setBounds(0, 0, getWidth(), getHeight());
 			((BackgroundPanel)bgPanel).resize(); // Resizes the bgImage //
 			((LoginPanel)loginPanel).resize();
+			((AdminPanel)adminPanel).resize();
 		}
 	}
 }

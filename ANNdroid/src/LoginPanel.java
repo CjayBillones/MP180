@@ -117,15 +117,18 @@ public class LoginPanel extends JPanel{
 		}
 
 		public void focusLost(FocusEvent e){
-			if(mode == 0) unameLogin = unameField.getText();
-			else if(mode == 1) pwordLogin = Utilities.hashPassword(String.valueOf(pwordField.getPassword())); 
+			if(this.mode == 0) unameLogin = unameField.getText();
+			else if(this.mode == 1){
+				pwordLogin = Utilities.hashPassword(String.valueOf(pwordField.getPassword()));
+				unameField.requestFocus();
+			} 
 		}
 
 	}
 
 	private class LoginAction implements ActionListener{
 
-		// mode: 0 - pressed enter //
+		// mode: 0 - pressed enter on password field //
 		// mode: 1 - login button //
 		int mode;
 
@@ -134,20 +137,26 @@ public class LoginPanel extends JPanel{
 		}
 
 		public void actionPerformed(ActionEvent e){
-			
-			if(mode == 0) pwordLogin = Utilities.hashPassword(String.valueOf(pwordField.getPassword())); 
+
+			if(this.mode == 0) pwordLogin = Utilities.hashPassword(String.valueOf(pwordField.getPassword()));
 			
 			User u = Utilities.authenticate(unameLogin);
 			
 			if(u == null){
 				errorLabel.setText("* user does not exist");
 				reinitialize(true);
+				unameField.requestFocus();
 			}
 			else if(u != null && !u.getPassword().equals(pwordLogin)){
 				errorLabel.setText("* incorrect password");
 				reinitialize(true);
+				unameField.requestFocus();
 			}
 			else{
+
+				remove(ANNdroid.bgPanel);
+				ANNdroid.adminPanel.add(ANNdroid.bgPanel);
+
 				ANNdroid.simulator.active = u;
 				CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
 				c1.show(ANNdroid.cards, ANNdroid.ADMINPANEL);

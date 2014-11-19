@@ -34,7 +34,7 @@ public class Loader{
 		else{
 			User u = new Admin("admin", Utilities.hashPassword("password"));
 			userList.add(u);
-			Simulator.saver.saveUsers(userList, "ANNdroid/bin/users.bin");
+			ANNdroid.simulator.saver.saveUsers(userList, "ANNdroid/bin/users.bin");
 		}
 		return userList;
 	}
