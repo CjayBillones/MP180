@@ -38,12 +38,23 @@ public class AdminPanel extends JPanel{
 	JPasswordField newPwordField;
 	JPasswordField conPwordField;
 	JButton confirmBtn;
-	JButton canceltBtn;
+	JButton cancelBtn1;
 
 	// For Change Password //
 	String oldPword = "";
 	String newPword = "";
 	String conPword = "";
+
+	// Create Teacher Account Option Layout //
+	JLabel fnameLabel;
+	JLabel lnameLabel;
+	JLabel unameLabel;
+	JLabel pwordLabel;
+	JTextField fnameField;
+	JTextField lnameField;
+	JTextField unameField;
+	JPasswordField pwordField;
+	JButton createBtn;
 
 	public AdminPanel(JPanel bgPanel){
 
@@ -138,13 +149,13 @@ public class AdminPanel extends JPanel{
 		changePwordPane.add(confirmBtn);
 		confirmBtn.addActionListener(new ChangePasswordActionListener(1));
 
-		canceltBtn = new JButton("Cancel");
-		canceltBtn.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());
-		changePwordPane.add(canceltBtn);
-		canceltBtn.addActionListener(new ChangePasswordActionListener(2));
+		cancelBtn1 = new JButton("Cancel");
+		cancelBtn1.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());
+		changePwordPane.add(cancelBtn1);
+		cancelBtn1.addActionListener(new ChangePasswordActionListener(2));
 
 		errorLabel = new JLabel("");
-		errorLabel.setBounds(changePwordPane.getWidth()/16, changePwordPane.getHeight()/4 - 25, confirmBtn.getWidth() + canceltBtn.getWidth(), 20);
+		errorLabel.setBounds(changePwordPane.getWidth()/16, changePwordPane.getHeight()/4 - 25, confirmBtn.getWidth() + cancelBtn1.getWidth(), 20);
 		errorLabel.setForeground(Color.RED);
 		errorLabel.setBackground(Color.BLACK);
 		errorLabel.setOpaque(true);
@@ -172,20 +183,26 @@ public class AdminPanel extends JPanel{
 		conPwordLabel.setBounds(newPwordLabel.getX(), newPwordLabel.getY() + 30, oldPwordLabel.getWidth(), 20);
 		conPwordField.setBounds(oldPwordField.getX(), conPwordLabel.getY(), oldPwordField.getWidth(), 20);
 		confirmBtn.setBounds(changePwordPane.getWidth()/16, conPwordLabel.getY() + 30, conPwordLabel.getWidth() - changePwordPane.getWidth()/16,changePwordPane.getHeight()/7);
-		canceltBtn.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());		
-		errorLabel.setBounds(changePwordPane.getWidth()/16, changePwordPane.getHeight()/4 - 25, confirmBtn.getWidth() + canceltBtn.getWidth(), 20);
+		cancelBtn1.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());		
+		errorLabel.setBounds(changePwordPane.getWidth()/16, changePwordPane.getHeight()/4 - 25, confirmBtn.getWidth() + cancelBtn1.getWidth(), 20);
 	}
 
-	public void reinitializeChangePassword(boolean error, boolean changeMode){
+	public void reinitialize(boolean error, boolean changeMode, int state){
 
-		if(changeMode || !error) errorLabel.setText("");
-		
-		oldPword = "";
-		newPword = "";
-		conPword = "";
-		oldPwordField.setText("");
-		newPwordField.setText("");
-		conPwordField.setText("");
+		// state: 0 - Create Account //
+		// state: 1 - Delete Account //
+		// state: 2 - Change Password //
+
+		if(state == 2){
+			if(changeMode || !error) errorLabel.setText("");
+			
+			oldPword = "";
+			newPword = "";
+			conPword = "";
+			oldPwordField.setText("");
+			newPwordField.setText("");
+			conPwordField.setText("");
+		}
 	}
 
 	private class ChangePasswordFieldsFocusListener extends FocusAdapter{
@@ -222,7 +239,7 @@ public class AdminPanel extends JPanel{
 		public void actionPerformed(ActionEvent e){
 
 			if(mode == 2){
-				reinitializeChangePassword(false, true);
+				reinitialize(false, true, 2);
 				changePwordPane.setVisible(false);
 			}
 			else{
@@ -230,17 +247,17 @@ public class AdminPanel extends JPanel{
 				if(!ANNdroid.simulator.active.getPassword().equals(oldPword)){
 					errorLabel.setText("* old password did not match");
 					errorLabel.setForeground(Color.RED);
-					reinitializeChangePassword(true, false);
+					reinitialize(true, false, 2);
 				}
 				else if(ANNdroid.simulator.active.getPassword().equals(oldPword) && newPword.length() < 6){
 					errorLabel.setText("* new password must be at least 6 characters");
 					errorLabel.setForeground(Color.RED);
-					reinitializeChangePassword(true, false);
+					reinitialize(true, false, 2);
 				}
 				else if(ANNdroid.simulator.active.getPassword().equals(oldPword) && !newPword.equals(conPword)){
 					errorLabel.setText("* new and confirmation password did not match");
 					errorLabel.setForeground(Color.RED);
-					reinitializeChangePassword(true, false);
+					reinitialize(true, false, 2);
 				}
 				else{
 					errorLabel.setText("* successfully changed password");
@@ -249,7 +266,7 @@ public class AdminPanel extends JPanel{
 					ANNdroid.simulator.active.setPassword(Utilities.hashPassword(newPword));
 					ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");
 
-					reinitializeChangePassword(true, false);					
+					reinitialize(true, false, 2);					
 				}
 			}
 		}
@@ -271,18 +288,18 @@ public class AdminPanel extends JPanel{
 		public void actionPerformed(ActionEvent e){
 			if(this.mode == 0){
 				changePwordPane.setVisible(false);
-				reinitializeChangePassword(false, true);
+				reinitialize(false, true, 2);
 			}
 			else if(this.mode == 1){
 				changePwordPane.setVisible(false);
-				reinitializeChangePassword(false, true);
+				reinitialize(false, true, 2);
 			}
 			else if(this.mode == 2){
 				changePwordPane.setVisible(true);
 			}
 			else{
 				changePwordPane.setVisible(false);
-				reinitializeChangePassword(false, true);
+				reinitialize(false, true, 2);
 				
 				ANNdroid.simulator.active = null;
 				ANNdroid.loginPanel.add(ANNdroid.bgPanel);
