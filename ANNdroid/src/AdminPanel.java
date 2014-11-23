@@ -225,7 +225,7 @@ public class AdminPanel extends JPanel{
 		pwordField = new JPasswordField();
 		pwordField.setBounds(fnameLabel.getWidth(), pwordLabel.getY(), fnameField.getWidth(), 20);
 		createTeachPane.add(pwordField);
-		pwordField.addFocusListener(new ChangePasswordFieldsFocusListener(3));
+		pwordField.addFocusListener(new CreateTeachFieldsFocusListener(3));
 		pwordField.addActionListener(new CreateTeachActionListener());
 
 		createBtn = new JButton("Create");
@@ -397,7 +397,7 @@ public class AdminPanel extends JPanel{
 				ANNdroid.simulator.userList.add(new Admin(uname, Utilities.hashPassword(pword), fname, lname));
 				ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");
 			}
-			reinitialize(true, false, 0);			
+			reinitialize(true, false, 0);		
 		}
 	}
 
