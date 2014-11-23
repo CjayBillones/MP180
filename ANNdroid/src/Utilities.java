@@ -1,6 +1,7 @@
 package ANNdroid.src;
 
 import java.io.IOException;
+import java.lang.Character;
 import java.util.LinkedList;
 
 import java.security.MessageDigest;
@@ -32,5 +33,23 @@ public class Utilities{
 	      if(u.getUsername().equals(username)) return u;
 	    }
 	    return null;
+	}
+
+	public static boolean isAlpha(String s){
+		char[] chars = s.toCharArray();
+
+		for(char c: chars){
+			if(!Character.isLetter(c) && c != ' ') return false;
+		}
+		return true;
+	}
+
+	public static boolean isAlphaNumeric(String s){
+		char[] chars = s.toCharArray();
+
+		for(char c: chars){
+			if(!Character.isLetter(c) && !Character.isDigit(c)) return false;
+		}
+		return true;
 	}
 }

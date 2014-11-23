@@ -27,28 +27,10 @@ public class AdminPanel extends JPanel{
 	JButton changePwordBtn;
 	JButton logoutBtn;
 
-	// Change Password Option Layout //
-	JPanel changePwordPane;
-
-	JLabel errorLabel;
-	JLabel oldPwordLabel;
-	JLabel newPwordLabel;
-	JLabel conPwordLabel;
-	JPasswordField oldPwordField;
-	JPasswordField newPwordField;
-	JPasswordField conPwordField;
-	JButton confirmBtn;
-	JButton cancelBtn1;
-
-	// For Change Password //
-	String oldPword = "";
-	String newPword = "";
-	String conPword = "";
-
 	// Create Teacher Account Option Layout //
 	JPanel createTeachPane;
 
-	JLabel responseLabel;
+	JLabel errorLabel1;
 	JLabel fnameLabel;
 	JLabel lnameLabel;
 	JLabel unameLabel;
@@ -58,12 +40,33 @@ public class AdminPanel extends JPanel{
 	JTextField unameField;
 	JPasswordField pwordField;
 	JButton createBtn;
+	JButton cancelBtn1;
 
 	// Create Teacher Values //
 	String fname = "";
 	String lname = "";
 	String uname = "";
 	String pword = "";
+
+	// Change Password Option Layout //
+	JPanel changePwordPane;
+
+	JLabel errorLabel3;
+	JLabel oldPwordLabel;
+	JLabel newPwordLabel;
+	JLabel conPwordLabel;
+	JPasswordField oldPwordField;
+	JPasswordField newPwordField;
+	JPasswordField conPwordField;
+	JButton confirmBtn;
+	JButton cancelBtn3;
+
+	// Change Password Values //
+	String oldPword = "";
+	String newPword = "";
+	String conPword = "";
+
+
 
 	public AdminPanel(JPanel bgPanel){
 
@@ -85,90 +88,28 @@ public class AdminPanel extends JPanel{
 		createAcctBtn = new JButton("Create Teacher Account");
 		createAcctBtn.setBounds(0, 0, buttonPane.getWidth(), 50);
 		buttonPane.add(createAcctBtn);
-		createAcctBtn.addActionListener(new LeftSidePaneButtonsListener(0));
+		createAcctBtn.addActionListener(new AdminActionListener(0, 0));
 
 		deleteAcctBtn = new JButton("Delete Teacher Account");
 		deleteAcctBtn.setBounds(0, 50, buttonPane.getWidth(), 50);
 		buttonPane.add(deleteAcctBtn);
-		deleteAcctBtn.addActionListener(new LeftSidePaneButtonsListener(1));
+		deleteAcctBtn.addActionListener(new AdminActionListener(0, 1));
 
 		changePwordBtn = new JButton("Change Password");
 		changePwordBtn.setBounds(0, 100, buttonPane.getWidth(), 50);
 		buttonPane.add(changePwordBtn);
-		changePwordBtn.addActionListener(new LeftSidePaneButtonsListener(2));
+		changePwordBtn.addActionListener(new AdminActionListener(0, 2));
 
 		logoutBtn = new JButton("Logout");
 		logoutBtn.setBounds(0, buttonPane.getHeight()-50, buttonPane.getWidth(), 50);
 		buttonPane.add(logoutBtn);
-		logoutBtn.addActionListener(new LeftSidePaneButtonsListener(3));
+		logoutBtn.addActionListener(new AdminActionListener(0, 3));
 		logoutBtn.addFocusListener(new FocusListener(){
 			public void focusGained(FocusEvent e){}
 			public void focusLost(FocusEvent e){
 				createAcctBtn.requestFocus();
 			}
 		});
-
-		// Change Password Pane Initialization //
-		changePwordPane = new JPanel(null);
-		changePwordPane.setPreferredSize(new Dimension(getWidth() - leftSidePane.getWidth() - 200, getHeight()-430));
-		changePwordPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, getHeight()-430);
-		changePwordPane.setVisible(false);
-
-		oldPwordLabel = new JLabel("Old Password: ", SwingConstants.RIGHT);
-		oldPwordLabel.setBounds(0, changePwordPane.getHeight()/4, changePwordPane.getWidth()/2, 20);
-		oldPwordLabel.setForeground(Color.WHITE);
-		oldPwordLabel.setBackground(Color.BLACK);
-		oldPwordLabel.setOpaque(true);
-		changePwordPane.add(oldPwordLabel);
-
-		oldPwordField = new JPasswordField();
-		oldPwordField.setBounds(oldPwordLabel.getWidth(), oldPwordLabel.getY(), (7*changePwordPane.getWidth())/16, 20);
-		changePwordPane.add(oldPwordField);
-		oldPwordField.addFocusListener(new ChangePasswordFieldsFocusListener(0));
-		oldPwordField.addActionListener(event -> {newPwordField.requestFocus();});
-
-		newPwordLabel = new JLabel("New Password: ", SwingConstants.RIGHT);
-		newPwordLabel.setBounds(oldPwordLabel.getX(), oldPwordLabel.getY() + 30, oldPwordLabel.getWidth(), 20);
-		newPwordLabel.setForeground(Color.WHITE);
-		newPwordLabel.setBackground(Color.BLACK);
-		newPwordLabel.setOpaque(true);
-		changePwordPane.add(newPwordLabel);
-
-		newPwordField = new JPasswordField();
-		newPwordField.setBounds(oldPwordField.getX(), oldPwordField.getY() + 30, oldPwordField.getWidth(), 20);
-		changePwordPane.add(newPwordField);
-		newPwordField.addFocusListener(new ChangePasswordFieldsFocusListener(1));
-		newPwordField.addActionListener(event -> {conPwordField.requestFocus();});
-
-		conPwordLabel = new JLabel("Confirm New Password: ", SwingConstants.RIGHT);
-		conPwordLabel.setBounds(newPwordLabel.getX(), newPwordLabel.getY() + 30, oldPwordLabel.getWidth(), 20);
-		conPwordLabel.setForeground(Color.WHITE);
-		conPwordLabel.setBackground(Color.BLACK);
-		conPwordLabel.setOpaque(true);
-		changePwordPane.add(conPwordLabel);		
-
-		conPwordField = new JPasswordField();
-		conPwordField.setBounds(oldPwordField.getX(), newPwordField.getY() + 30, oldPwordField.getWidth(), 20);
-		changePwordPane.add(conPwordField);
-		conPwordField.addFocusListener(new ChangePasswordFieldsFocusListener(2));
-		conPwordField.addActionListener(new ChangePasswordActionListener(0));
-
-		confirmBtn = new JButton("Confirm");
-		confirmBtn.setBounds(changePwordPane.getWidth()/16, conPwordLabel.getY() + 30, conPwordLabel.getWidth() - changePwordPane.getWidth()/16,changePwordPane.getHeight()/7);
-		changePwordPane.add(confirmBtn);
-		confirmBtn.addActionListener(new ChangePasswordActionListener(1));
-
-		cancelBtn1 = new JButton("Cancel");
-		cancelBtn1.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());
-		changePwordPane.add(cancelBtn1);
-		cancelBtn1.addActionListener(new ChangePasswordActionListener(2));
-
-		errorLabel = new JLabel("");
-		errorLabel.setBounds(changePwordPane.getWidth()/16, changePwordPane.getHeight()/4 - 25, confirmBtn.getWidth() + cancelBtn1.getWidth(), 20);
-		errorLabel.setForeground(Color.RED);
-		errorLabel.setBackground(Color.BLACK);
-		errorLabel.setOpaque(true);
-		changePwordPane.add(errorLabel);		
 
 		// Create Teach Pane Initialization //
 		createTeachPane = new JPanel(null);
@@ -186,7 +127,7 @@ public class AdminPanel extends JPanel{
 		fnameField = new JTextField();
 		fnameField.setBounds(fnameLabel.getWidth(), fnameLabel.getY(), (7*createTeachPane.getWidth())/16, 20);
 		createTeachPane.add(fnameField);
-		fnameField.addFocusListener(new CreateTeachFieldsFocusListener(0));
+		fnameField.addFocusListener(new FieldsFocusListener(0, 0));
 		fnameField.addActionListener(event -> {lnameField.requestFocus();});
 
 		lnameLabel = new JLabel("Last Name: ", SwingConstants.RIGHT);
@@ -199,7 +140,7 @@ public class AdminPanel extends JPanel{
 		lnameField = new JTextField();
 		lnameField.setBounds(lnameLabel.getWidth(), lnameLabel.getY(), fnameField.getWidth(), 20);
 		createTeachPane.add(lnameField);
-		lnameField.addFocusListener(new CreateTeachFieldsFocusListener(1));
+		lnameField.addFocusListener(new FieldsFocusListener(0, 1));
 		lnameField.addActionListener(event -> {unameField.requestFocus();});
 
 		unameLabel = new JLabel("Username: ", SwingConstants.RIGHT);
@@ -212,7 +153,7 @@ public class AdminPanel extends JPanel{
 		unameField = new JTextField();
 		unameField.setBounds(unameLabel.getWidth(), unameLabel.getY(), fnameField.getWidth(), 20);
 		createTeachPane.add(unameField);
-		unameField.addFocusListener(new CreateTeachFieldsFocusListener(2));
+		unameField.addFocusListener(new FieldsFocusListener(0, 2));
 		unameField.addActionListener(event -> {pwordField.requestFocus();});
 
 		pwordLabel = new JLabel("Password: ", SwingConstants.RIGHT);
@@ -225,24 +166,91 @@ public class AdminPanel extends JPanel{
 		pwordField = new JPasswordField();
 		pwordField.setBounds(fnameLabel.getWidth(), pwordLabel.getY(), fnameField.getWidth(), 20);
 		createTeachPane.add(pwordField);
-		pwordField.addFocusListener(new CreateTeachFieldsFocusListener(3));
-		pwordField.addActionListener(new CreateTeachActionListener());
+		pwordField.addFocusListener(new FieldsFocusListener(0, 3));
 
 		createBtn = new JButton("Create");
 		createBtn.setBounds(createTeachPane.getWidth()/16, pwordLabel.getY() + 30, pwordLabel.getWidth() - createTeachPane.getWidth()/16, createTeachPane.getHeight()/7);
 		createTeachPane.add(createBtn);
-		createBtn.addActionListener(new CreateTeachActionListener());
+		createBtn.addActionListener(new AdminActionListener(1, 0));
 
-		responseLabel = new JLabel("");
-		responseLabel.setBounds(createTeachPane.getWidth()/16, createTeachPane.getHeight()/4 - 25, createTeachPane.getWidth() - (createTeachPane.getWidth()/8), 20);
-		responseLabel.setForeground(Color.RED);
-		responseLabel.setBackground(Color.BLACK);
-		responseLabel.setOpaque(true);
-		createTeachPane.add(responseLabel);
+		cancelBtn1 = new JButton("Cancel");
+		cancelBtn1.setBounds(createBtn.getX() + createBtn.getWidth(), createBtn.getY(), createBtn.getWidth(), createBtn.getHeight());
+		createTeachPane.add(cancelBtn1);
+		cancelBtn1.addActionListener(new AdminActionListener(1, 1));
+
+		errorLabel1 = new JLabel("");
+		errorLabel1.setBounds(createTeachPane.getWidth()/16, createTeachPane.getHeight()/4 - 25, createTeachPane.getWidth() - (createTeachPane.getWidth()/8), 20);
+		errorLabel1.setForeground(Color.RED);
+		errorLabel1.setBackground(Color.BLACK);
+		errorLabel1.setOpaque(true);
+		createTeachPane.add(errorLabel1);
+
+
+		// Change Password Pane Initialization //
+		changePwordPane = new JPanel(null);
+		changePwordPane.setPreferredSize(new Dimension(getWidth() - leftSidePane.getWidth() - 200, getHeight()-430));
+		changePwordPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, getHeight()-430);
+		changePwordPane.setVisible(false);
+
+		oldPwordLabel = new JLabel("Old Password: ", SwingConstants.RIGHT);
+		oldPwordLabel.setBounds(0, changePwordPane.getHeight()/4, changePwordPane.getWidth()/2, 20);
+		oldPwordLabel.setForeground(Color.WHITE);
+		oldPwordLabel.setBackground(Color.BLACK);
+		oldPwordLabel.setOpaque(true);
+		changePwordPane.add(oldPwordLabel);
+
+		oldPwordField = new JPasswordField();
+		oldPwordField.setBounds(oldPwordLabel.getWidth(), oldPwordLabel.getY(), (7*changePwordPane.getWidth())/16, 20);
+		changePwordPane.add(oldPwordField);
+		oldPwordField.addFocusListener(new FieldsFocusListener(2, 0));
+		oldPwordField.addActionListener(event -> {newPwordField.requestFocus();});
+
+		newPwordLabel = new JLabel("New Password: ", SwingConstants.RIGHT);
+		newPwordLabel.setBounds(oldPwordLabel.getX(), oldPwordLabel.getY() + 30, oldPwordLabel.getWidth(), 20);
+		newPwordLabel.setForeground(Color.WHITE);
+		newPwordLabel.setBackground(Color.BLACK);
+		newPwordLabel.setOpaque(true);
+		changePwordPane.add(newPwordLabel);
+
+		newPwordField = new JPasswordField();
+		newPwordField.setBounds(oldPwordField.getX(), oldPwordField.getY() + 30, oldPwordField.getWidth(), 20);
+		changePwordPane.add(newPwordField);
+		newPwordField.addFocusListener(new FieldsFocusListener(2, 1));
+		newPwordField.addActionListener(event -> {conPwordField.requestFocus();});
+
+		conPwordLabel = new JLabel("Confirm New Password: ", SwingConstants.RIGHT);
+		conPwordLabel.setBounds(newPwordLabel.getX(), newPwordLabel.getY() + 30, oldPwordLabel.getWidth(), 20);
+		conPwordLabel.setForeground(Color.WHITE);
+		conPwordLabel.setBackground(Color.BLACK);
+		conPwordLabel.setOpaque(true);
+		changePwordPane.add(conPwordLabel);		
+
+		conPwordField = new JPasswordField();
+		conPwordField.setBounds(oldPwordField.getX(), newPwordField.getY() + 30, oldPwordField.getWidth(), 20);
+		changePwordPane.add(conPwordField);
+		conPwordField.addFocusListener(new FieldsFocusListener(2, 2));
+		conPwordField.addActionListener(new AdminActionListener(3, 0));
+
+		confirmBtn = new JButton("Confirm");
+		confirmBtn.setBounds(changePwordPane.getWidth()/16, conPwordLabel.getY() + 30, conPwordLabel.getWidth() - changePwordPane.getWidth()/16,changePwordPane.getHeight()/7);
+		changePwordPane.add(confirmBtn);
+		confirmBtn.addActionListener(new AdminActionListener(3, 1));
+
+		cancelBtn3 = new JButton("Cancel");
+		cancelBtn3.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());
+		changePwordPane.add(cancelBtn3);
+		cancelBtn3.addActionListener(new AdminActionListener(3, 2));
+
+		errorLabel3 = new JLabel("");
+		errorLabel3.setBounds(changePwordPane.getWidth()/16, changePwordPane.getHeight()/4 - 25, confirmBtn.getWidth() + cancelBtn3.getWidth(), 20);
+		errorLabel3.setForeground(Color.RED);
+		errorLabel3.setBackground(Color.BLACK);
+		errorLabel3.setOpaque(true);
+		changePwordPane.add(errorLabel3);		
 
 		add(leftSidePane);
-		add(changePwordPane);
 		add(createTeachPane);
+		add(changePwordPane);
 	}
 
 	public void resize(){
@@ -253,19 +261,7 @@ public class AdminPanel extends JPanel{
 		deleteAcctBtn.setBounds(0, 50, buttonPane.getWidth(), 50);
 		changePwordBtn.setBounds(0, 100, buttonPane.getWidth(), 50);
 		logoutBtn.setBounds(0, buttonPane.getHeight()-50, buttonPane.getWidth(), 50);
-		
-		// Resize Change Password Pane //
-		changePwordPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, changePwordPane.getHeight());
-		oldPwordLabel.setBounds(0, changePwordPane.getHeight()/4, changePwordPane.getWidth()/2, 20);
-		oldPwordField.setBounds(oldPwordLabel.getWidth(), oldPwordLabel.getY(), (7*changePwordPane.getWidth())/16, 20);
-		newPwordLabel.setBounds(oldPwordLabel.getX(), oldPwordLabel.getY() + 30, oldPwordLabel.getWidth(), 20);
-		newPwordField.setBounds(oldPwordField.getX(), newPwordLabel.getY(), oldPwordField.getWidth(), 20);
-		conPwordLabel.setBounds(newPwordLabel.getX(), newPwordLabel.getY() + 30, oldPwordLabel.getWidth(), 20);
-		conPwordField.setBounds(oldPwordField.getX(), conPwordLabel.getY(), oldPwordField.getWidth(), 20);
-		confirmBtn.setBounds(changePwordPane.getWidth()/16, conPwordLabel.getY() + 30, conPwordLabel.getWidth() - changePwordPane.getWidth()/16,changePwordPane.getHeight()/7);
-		cancelBtn1.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());		
-		errorLabel.setBounds(changePwordPane.getWidth()/16, changePwordPane.getHeight()/4 - 25, confirmBtn.getWidth() + cancelBtn1.getWidth(), 20);
-	
+
 		// Resize CreateTeach Pane //
 		createTeachPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, createTeachPane.getHeight());
 		fnameLabel.setBounds(0, createTeachPane.getHeight()/4, createTeachPane.getWidth()/2, 20);
@@ -277,7 +273,21 @@ public class AdminPanel extends JPanel{
 		pwordLabel.setBounds(fnameLabel.getX(), unameField.getY() + 30, fnameLabel.getWidth(), 20);
 		pwordField.setBounds(fnameLabel.getWidth(), pwordLabel.getY(), fnameField.getWidth(), 20);
 		createBtn.setBounds(createTeachPane.getWidth()/16, pwordLabel.getY() + 30, pwordLabel.getWidth() - createTeachPane.getWidth()/16, createTeachPane.getHeight()/7);
-		responseLabel.setBounds(createTeachPane.getWidth()/16, createTeachPane.getHeight()/4 - 25, createTeachPane.getWidth() - (createTeachPane.getWidth()/8), 20);
+		cancelBtn1.setBounds(createBtn.getX() + createBtn.getWidth(), createBtn.getY(), createBtn.getWidth(), createBtn.getHeight());
+		errorLabel1.setBounds(createTeachPane.getWidth()/16, createTeachPane.getHeight()/4 - 25, createTeachPane.getWidth() - (createTeachPane.getWidth()/8), 20);
+		
+		// Resize Change Password Pane //
+		changePwordPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, changePwordPane.getHeight());
+		oldPwordLabel.setBounds(0, changePwordPane.getHeight()/4, changePwordPane.getWidth()/2, 20);
+		oldPwordField.setBounds(oldPwordLabel.getWidth(), oldPwordLabel.getY(), (7*changePwordPane.getWidth())/16, 20);
+		newPwordLabel.setBounds(oldPwordLabel.getX(), oldPwordLabel.getY() + 30, oldPwordLabel.getWidth(), 20);
+		newPwordField.setBounds(oldPwordField.getX(), newPwordLabel.getY(), oldPwordField.getWidth(), 20);
+		conPwordLabel.setBounds(newPwordLabel.getX(), newPwordLabel.getY() + 30, oldPwordLabel.getWidth(), 20);
+		conPwordField.setBounds(oldPwordField.getX(), conPwordLabel.getY(), oldPwordField.getWidth(), 20);
+		confirmBtn.setBounds(changePwordPane.getWidth()/16, conPwordLabel.getY() + 30, conPwordLabel.getWidth() - changePwordPane.getWidth()/16,changePwordPane.getHeight()/7);
+		cancelBtn3.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());		
+		errorLabel3.setBounds(changePwordPane.getWidth()/16, changePwordPane.getHeight()/4 - 25, confirmBtn.getWidth() + cancelBtn1.getWidth(), 20);
+
 	}
 
 	public void reinitialize(boolean error, boolean changeMode, int state){
@@ -286,7 +296,7 @@ public class AdminPanel extends JPanel{
 		// state: 1 - Delete Account //
 		// state: 2 - Change Password //
 		if(state == 0){
-			if(changeMode || !error) responseLabel.setText("");
+			if(changeMode || !error) errorLabel1.setText("");
 
 			fname = "";
 			lname = "";
@@ -298,7 +308,7 @@ public class AdminPanel extends JPanel{
 			pwordField.setText("");
 		}
 		else if(state == 2){
-			if(changeMode || !error) errorLabel.setText("");
+			if(changeMode || !error) errorLabel3.setText("");
 			
 			oldPword = "";
 			newPword = "";
@@ -309,162 +319,172 @@ public class AdminPanel extends JPanel{
 		}
 	}
 
-	private class ChangePasswordFieldsFocusListener extends FocusAdapter{
-		// mode: 0 - old password //
-		// mode: 1 - new password //
-		// mode: 2 - con password //
+	private class FieldsFocusListener extends FocusAdapter{
+		// state: 0 - Create Teacher Account //
+			// mode: 0 - fname //
+			// mode: 1 - lname //
+			// mode: 2 - uname //
+			// mode: 3 - pword //
+		// state: 1 - Delete Teacher Account //
+		// state: 2 - Change Passsword //
+			// mode: 0 - old password //
+			// mode: 1 - new password //
+			// mode: 2 - con password //
 
+		int state;
 		int mode;
 
-		public ChangePasswordFieldsFocusListener(int mode){
+		public FieldsFocusListener(int state, int mode){
+			this.state = state;
 			this.mode = mode;
 		}
 
 		public void focusLost(FocusEvent e){
-			if(this.mode == 0) oldPword = Utilities.hashPassword(String.valueOf(oldPwordField.getPassword()));
-			else if(this.mode == 1) newPword = String.valueOf(newPwordField.getPassword());
-			else conPword = String.valueOf(conPwordField.getPassword());
+			if(this.state == 0){
+				if(this.mode == 0) fname = String.valueOf(fnameField.getText());
+				else if(this.mode == 1) lname = String.valueOf(lnameField.getText());
+				else if(this.mode == 2) uname = String.valueOf(unameField.getText());
+				else pword = String.valueOf(pwordField.getPassword());				
+			}
+			else if(this.state == 2){
+				if(this.mode == 0) oldPword = Utilities.hashPassword(String.valueOf(oldPwordField.getPassword()));
+				else if(this.mode == 1) newPword = String.valueOf(newPwordField.getPassword());
+				else conPword = String.valueOf(conPwordField.getPassword());
+			}
 		}
 
 	}
 
-	private class ChangePasswordActionListener implements ActionListener{
+	private class AdminActionListener implements ActionListener{
+		// state: 0 - Left Side Pane Buttons //
+			// mode: 0 - Create Teacher Account Pane //
+			// mode: 1 - Delete Teacher Account Pane //
+			// mode: 2 - Change Password Pane //
+			// mode: otherwise - Logout //
+		// state: 1 - Create Teacher Account //
+			// mode: 0 - create button //
+			// mode: 1 - cancel button //
+		// state: 2 - Delete Teacher Account //
+		// state: 3 - Change Password //
+			// mode: 0 - pressed enter on con password //
+			// mode: 1 - confirm button //
+			// mode: 2 - cancel button//
 
-		// mode: 0 - pressed enter on con password //
-		// mode: 1 - confirm button //
-		// mode: 2 - cancel button//
-
+		int state;
 		int mode;
 
-		public ChangePasswordActionListener(int mode){
+		public AdminActionListener(int state, int mode){
+			this.state = state;
 			this.mode = mode;
 		}
 
 		public void actionPerformed(ActionEvent e){
+			if(this.state == 0){
+				if(this.mode == 0){
+					createTeachPane.setVisible(true);
+					
+					changePwordPane.setVisible(false);
+					reinitialize(false, true, 2);
+				}
+				else if(this.mode == 1){
+					changePwordPane.setVisible(false);
+					reinitialize(false, true, 2);
 
-			if(mode == 2){
-				reinitialize(false, true, 2);
-				changePwordPane.setVisible(false);
-			}
-			else{
-				conPword = String.valueOf(conPwordField.getPassword());
-				if(!ANNdroid.simulator.active.getPassword().equals(oldPword)){
-					errorLabel.setText("* old password did not match");
-					errorLabel.setForeground(Color.RED);
-					reinitialize(true, false, 2);
+					createTeachPane.setVisible(false);
+					reinitialize(false, true, 0);
 				}
-				else if(ANNdroid.simulator.active.getPassword().equals(oldPword) && newPword.length() < 6){
-					errorLabel.setText("* new password must be at least 6 characters");
-					errorLabel.setForeground(Color.RED);
-					reinitialize(true, false, 2);
-				}
-				else if(ANNdroid.simulator.active.getPassword().equals(oldPword) && !newPword.equals(conPword)){
-					errorLabel.setText("* new and confirmation password did not match");
-					errorLabel.setForeground(Color.RED);
-					reinitialize(true, false, 2);
+				else if(this.mode == 2){
+					changePwordPane.setVisible(true);
+
+					createTeachPane.setVisible(false);
+					reinitialize(false, true, 0);
 				}
 				else{
-					errorLabel.setText("* successfully changed password");
-					errorLabel.setForeground(Color.YELLOW);
+					changePwordPane.setVisible(false);
+					reinitialize(false, true, 2);
 
-					ANNdroid.simulator.active.setPassword(Utilities.hashPassword(newPword));
-					ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");
+					createTeachPane.setVisible(false);
+					reinitialize(false, true, 0);
 
-					reinitialize(true, false, 2);					
+					ANNdroid.simulator.active = null;
+					ANNdroid.loginPanel.add(ANNdroid.bgPanel);
+					remove(ANNdroid.bgPanel);
+			
+					CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
+					c1.show(ANNdroid.cards, ANNdroid.LOGINPANEL);				
+				}				
+			}
+			else if(this.state == 1){
+				if(this.mode == 0){
+					if(fname.equals("")){
+						errorLabel1.setText("* first name must not be blank");
+						errorLabel1.setForeground(Color.RED);
+					}
+					else if(!Utilities.isAlpha(fname)){
+						errorLabel1.setText("* first name must only contain letters or space");
+						errorLabel1.setForeground(Color.RED);
+					}
+					else if(lname.equals("")){
+						errorLabel1.setText("* last name must not be blank");
+						errorLabel1.setForeground(Color.RED);
+					}
+					else if(!Utilities.isAlpha(lname)){
+						errorLabel1.setText("* last name must only contain letters or space");
+						errorLabel1.setForeground(Color.RED);
+					}
+					else if(uname.equals("")){
+						errorLabel1.setText("* username must not be blank");
+						errorLabel1.setForeground(Color.RED);
+					}
+					else if(!Utilities.isAlphaNumeric(uname)){
+						errorLabel1.setText("* username must only contain letters or digits");
+						errorLabel1.setForeground(Color.RED);
+					}
+					else if(pword.length() < 6){
+						errorLabel1.setText("* password needs to be atleast 6 characters");
+						errorLabel1.setForeground(Color.RED);
+					}
+					else{
+						errorLabel1.setText("* successfully created teacher account");
+						errorLabel1.setForeground(Color.YELLOW);
+						((Admin)ANNdroid.simulator.active).createAcct(uname, Utilities.hashPassword(pword), fname, lname);
+					}
+					reinitialize(true, false, 0);
+				}
+				else{
+					reinitialize(false, true, 0);
+					createTeachPane.setVisible(false);
+				}
+			}
+			else if(this.state == 3){
+				if(this.mode == 2){
+					reinitialize(false, true, 2);
+					changePwordPane.setVisible(false);
+				}
+				else{
+					conPword = String.valueOf(conPwordField.getPassword());
+					if(!ANNdroid.simulator.active.getPassword().equals(oldPword)){
+						errorLabel3.setText("* old password did not match");
+						errorLabel3.setForeground(Color.RED);
+					}
+					else if(ANNdroid.simulator.active.getPassword().equals(oldPword) && newPword.length() < 6){
+						errorLabel3.setText("* new password must be at least 6 characters");
+						errorLabel3.setForeground(Color.RED);
+					}
+					else if(ANNdroid.simulator.active.getPassword().equals(oldPword) && !newPword.equals(conPword)){
+						errorLabel3.setText("* new and confirmation password did not match");
+						errorLabel3.setForeground(Color.RED);
+					}
+					else{
+						errorLabel3.setText("* successfully changed password");
+						errorLabel3.setForeground(Color.YELLOW);
+
+						ANNdroid.simulator.active.setPassword(Utilities.hashPassword(newPword));
+						ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");
+					}
+					reinitialize(true, false, 2);
 				}
 			}
 		}
-
 	}
-
-	private class CreateTeachFieldsFocusListener extends FocusAdapter{
-		// mode: 0 - first name //
-		// mode: 1 - last name //
-		// mode: 2 - username //
-		// mode: 3 - password //
-
-		int mode;
-
-		public CreateTeachFieldsFocusListener(int mode){
-			this.mode = mode;
-		}
-
-		public void focusLost(FocusEvent e){
-			if(this.mode == 0) fname = String.valueOf(fnameField.getText());
-			else if(this.mode == 1) lname = String.valueOf(lnameField.getText());
-			else if(this.mode == 2) uname = String.valueOf(unameField.getText());
-			else pword = String.valueOf(pwordField.getPassword());
-		}
-	}
-
-	private class CreateTeachActionListener implements ActionListener{
-		public void actionPerformed(ActionEvent e){
-			if(pword.length() < 6){
-				responseLabel.setText("* password needs to be atleast 6 characters");
-				responseLabel.setForeground(Color.RED);
-
-				reinitialize(true, false, 0);
-			}
-			else{
-				responseLabel.setText("* successfully created teacher account");
-				responseLabel.setForeground(Color.YELLOW);
-
-				ANNdroid.simulator.userList.add(new Teacher(uname, Utilities.hashPassword(pword), fname, lname));
-				ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");
-
-				reinitialize(true, false, 0);
-			}
-			reinitialize(true, false, 0);		
-		}
-	}
-
-	private class LeftSidePaneButtonsListener implements ActionListener{
-		// mode: 0 - Create Account //
-		// mode: 1 - Delete Account //
-		// mode: 2 - Change Password //
-		// mode: 3 - Logout
-
-		int mode;
-
-		public LeftSidePaneButtonsListener(int mode){
-			this.mode = mode;
-		}
-
-		public void actionPerformed(ActionEvent e){
-			if(this.mode == 0){
-				createTeachPane.setVisible(true);
-				
-				changePwordPane.setVisible(false);
-				reinitialize(false, true, 2);
-			}
-			else if(this.mode == 1){
-				changePwordPane.setVisible(false);
-				reinitialize(false, true, 2);
-
-				createTeachPane.setVisible(false);
-				reinitialize(false, true, 0);
-			}
-			else if(this.mode == 2){
-				changePwordPane.setVisible(true);
-
-				createTeachPane.setVisible(false);
-				reinitialize(false, true, 0);
-			}
-			else{
-				changePwordPane.setVisible(false);
-				reinitialize(false, true, 2);
-
-				createTeachPane.setVisible(false);
-				reinitialize(false, true, 0);
-
-				ANNdroid.simulator.active = null;
-				ANNdroid.loginPanel.add(ANNdroid.bgPanel);
-				remove(ANNdroid.bgPanel);
-		
-				CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
-				c1.show(ANNdroid.cards, ANNdroid.LOGINPANEL);				
-			}
-		}
-	}
-
 }

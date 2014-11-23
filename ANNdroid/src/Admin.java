@@ -19,4 +19,9 @@ public class Admin extends User implements Serializable{
 		this.firstName = "";
 		this.lastName = "";
 	}
+
+	public void createAcct(String uname, String pword, String fname, String lname){
+		ANNdroid.simulator.userList.add(new Teacher(uname, pword, fname, lname));
+		ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");		
+	}
 }
