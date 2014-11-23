@@ -417,17 +417,25 @@ public class AdminPanel extends JPanel{
 			if(this.mode == 0){
 				changePwordPane.setVisible(false);
 				reinitialize(false, true, 2);
+				
+				createTeachPane.setVisible(true);
 			}
 			else if(this.mode == 1){
 				changePwordPane.setVisible(false);
 				reinitialize(false, true, 2);
+
+				createTeachPane.setVisible(false);
 			}
 			else if(this.mode == 2){
 				changePwordPane.setVisible(true);
+
+				createTeachPane.setVisible(false);
 			}
 			else{
 				changePwordPane.setVisible(false);
 				reinitialize(false, true, 2);
+
+				createTeachPane.setVisible(false);
 				
 				ANNdroid.simulator.active = null;
 				ANNdroid.loginPanel.add(ANNdroid.bgPanel);
