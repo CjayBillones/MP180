@@ -173,7 +173,7 @@ public class AdminPanel extends JPanel{
 		// Create Admin Pane Initialization //
 		createTeachPane = new JPanel(null);
 		createTeachPane.setPreferredSize(new Dimension(getWidth() - leftSidePane.getWidth() - 200, getHeight()-430));
-		createTeachPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, getHeight()-430);
+		createTeachPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, getHeight()-400);
 		createTeachPane.setVisible(false);
 
 		fnameLabel = new JLabel("First Name: ", SwingConstants.RIGHT);
@@ -189,7 +189,7 @@ public class AdminPanel extends JPanel{
 		fnameField.addFocusListener(new CreateTeachFieldsFocusListener(0));
 		fnameField.addActionListener(event -> {lnameField.requestFocus();});
 
-		lnameLabel = new JLabel("Username: ", SwingConstants.RIGHT);
+		lnameLabel = new JLabel("Last Name: ", SwingConstants.RIGHT);
 		lnameLabel.setBounds(fnameLabel.getX(), fnameLabel.getY() + 30, fnameLabel.getWidth(), 20);
 		lnameLabel.setForeground(Color.WHITE);
 		lnameLabel.setBackground(Color.BLACK);
@@ -203,7 +203,7 @@ public class AdminPanel extends JPanel{
 		lnameField.addActionListener(event -> {unameField.requestFocus();});
 
 		unameLabel = new JLabel("Username: ", SwingConstants.RIGHT);
-		unameLabel.setBounds(fnameLabel.getX(), lnameField.getY() + 30, fnameLabel.getWidth(), 20);
+		unameLabel.setBounds(fnameLabel.getX(), lnameLabel.getY() + 30, fnameLabel.getWidth(), 20);
 		unameLabel.setForeground(Color.WHITE);
 		unameLabel.setBackground(Color.BLACK);
 		unameLabel.setOpaque(true);
@@ -216,14 +216,14 @@ public class AdminPanel extends JPanel{
 		unameField.addActionListener(event -> {pwordField.requestFocus();});
 
 		pwordLabel = new JLabel("Password: ", SwingConstants.RIGHT);
-		unameLabel.setBounds(fnameLabel.getX(), unameField.getY() + 30, fnameLabel.getWidth(), 20);
+		pwordLabel.setBounds(fnameLabel.getX(), unameField.getY() + 30, fnameLabel.getWidth(), 20);
 		pwordLabel.setForeground(Color.WHITE);
 		pwordLabel.setBackground(Color.BLACK);
 		pwordLabel.setOpaque(true);
 		createTeachPane.add(pwordLabel);
 
 		pwordField = new JPasswordField();
-		pwordField.setBounds(oldPwordField.getWidth(), pwordLabel.getY() + 30, oldPwordField.getWidth(), 20);
+		pwordField.setBounds(fnameLabel.getWidth(), pwordLabel.getY(), fnameField.getWidth(), 20);
 		createTeachPane.add(pwordField);
 		pwordField.addFocusListener(new ChangePasswordFieldsFocusListener(3));
 		pwordField.addActionListener(new CreateTeachActionListener());
@@ -232,9 +232,9 @@ public class AdminPanel extends JPanel{
 		createBtn.setBounds(createTeachPane.getWidth()/16, pwordLabel.getY() + 30, pwordLabel.getWidth() - createTeachPane.getWidth()/16, createTeachPane.getHeight()/7);
 		createTeachPane.add(createBtn);
 		createBtn.addActionListener(new CreateTeachActionListener());
-
+//*/
 		responseLabel = new JLabel("");
-		responseLabel.setBounds(createTeachPane.getWidth()/16, createTeachPane.getHeight()/4 - 25, createBtn.getWidth(), 20);
+		responseLabel.setBounds(createTeachPane.getWidth()/16, createTeachPane.getHeight()/4 - 25, createTeachPane.getWidth() - (createTeachPane.getWidth()/8), 20);
 		responseLabel.setForeground(Color.RED);
 		responseLabel.setBackground(Color.BLACK);
 		responseLabel.setOpaque(true);
@@ -415,10 +415,9 @@ public class AdminPanel extends JPanel{
 
 		public void actionPerformed(ActionEvent e){
 			if(this.mode == 0){
+				createTeachPane.setVisible(true);
 				changePwordPane.setVisible(false);
 				reinitialize(false, true, 2);
-				
-				createTeachPane.setVisible(true);
 			}
 			else if(this.mode == 1){
 				changePwordPane.setVisible(false);

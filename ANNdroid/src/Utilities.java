@@ -28,10 +28,9 @@ public class Utilities{
 	}
 
 	public static User authenticate(String username){
-
-    for(User u : ANNdroid.simulator.userList){
-      if(u.getUsername().equals(username)) return u;
-    }
-    return null;
+	    for(User u : ANNdroid.simulator.userList){
+	      if(u.getUsername().equals(username)) return u;
+	    }
+	    return null;
 	}
 }
