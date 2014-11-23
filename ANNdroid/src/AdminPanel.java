@@ -60,10 +60,10 @@ public class AdminPanel extends JPanel{
 	JButton createBtn;
 
 	// Create Teacher Values //
-	String fname;
-	String lname;
-	String uname;
-	String pword;
+	String fname = "";
+	String lname = "";
+	String uname = "";
+	String pword = "";
 
 	public AdminPanel(JPanel bgPanel){
 
@@ -170,9 +170,9 @@ public class AdminPanel extends JPanel{
 		errorLabel.setOpaque(true);
 		changePwordPane.add(errorLabel);		
 
-		// Create Admin Pane Initialization //
+		// Create Teach Pane Initialization //
 		createTeachPane = new JPanel(null);
-		createTeachPane.setPreferredSize(new Dimension(getWidth() - leftSidePane.getWidth() - 200, getHeight()-430));
+		createTeachPane.setPreferredSize(new Dimension(getWidth() - leftSidePane.getWidth() - 200, getHeight()-400));
 		createTeachPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, getHeight()-400);
 		createTeachPane.setVisible(false);
 
@@ -232,7 +232,7 @@ public class AdminPanel extends JPanel{
 		createBtn.setBounds(createTeachPane.getWidth()/16, pwordLabel.getY() + 30, pwordLabel.getWidth() - createTeachPane.getWidth()/16, createTeachPane.getHeight()/7);
 		createTeachPane.add(createBtn);
 		createBtn.addActionListener(new CreateTeachActionListener());
-//*/
+
 		responseLabel = new JLabel("");
 		responseLabel.setBounds(createTeachPane.getWidth()/16, createTeachPane.getHeight()/4 - 25, createTeachPane.getWidth() - (createTeachPane.getWidth()/8), 20);
 		responseLabel.setForeground(Color.RED);
@@ -265,6 +265,19 @@ public class AdminPanel extends JPanel{
 		confirmBtn.setBounds(changePwordPane.getWidth()/16, conPwordLabel.getY() + 30, conPwordLabel.getWidth() - changePwordPane.getWidth()/16,changePwordPane.getHeight()/7);
 		cancelBtn1.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());		
 		errorLabel.setBounds(changePwordPane.getWidth()/16, changePwordPane.getHeight()/4 - 25, confirmBtn.getWidth() + cancelBtn1.getWidth(), 20);
+	
+		// Resize CreateTeach Pane //
+		createTeachPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, createTeachPane.getHeight());
+		fnameLabel.setBounds(0, createTeachPane.getHeight()/4, createTeachPane.getWidth()/2, 20);
+		fnameField.setBounds(fnameLabel.getWidth(), fnameLabel.getY(), (7*createTeachPane.getWidth())/16, 20);
+		lnameLabel.setBounds(fnameLabel.getX(), fnameLabel.getY() + 30, fnameLabel.getWidth(), 20);
+		lnameField.setBounds(lnameLabel.getWidth(), lnameLabel.getY(), fnameField.getWidth(), 20);
+		unameLabel.setBounds(fnameLabel.getX(), lnameLabel.getY() + 30, fnameLabel.getWidth(), 20);
+		unameField.setBounds(unameLabel.getWidth(), unameLabel.getY(), fnameField.getWidth(), 20);
+		pwordLabel.setBounds(fnameLabel.getX(), unameField.getY() + 30, fnameLabel.getWidth(), 20);
+		pwordField.setBounds(fnameLabel.getWidth(), pwordLabel.getY(), fnameField.getWidth(), 20);
+		createBtn.setBounds(createTeachPane.getWidth()/16, pwordLabel.getY() + 30, pwordLabel.getWidth() - createTeachPane.getWidth()/16, createTeachPane.getHeight()/7);
+		responseLabel.setBounds(createTeachPane.getWidth()/16, createTeachPane.getHeight()/4 - 25, createTeachPane.getWidth() - (createTeachPane.getWidth()/8), 20);
 	}
 
 	public void reinitialize(boolean error, boolean changeMode, int state){
@@ -389,6 +402,8 @@ public class AdminPanel extends JPanel{
 			if(pword.length() < 6){
 				responseLabel.setText("* password needs to be atleast 6 characters");
 				responseLabel.setForeground(Color.RED);
+
+				reinitialize(true, false, 0);
 			}
 			else{
 				responseLabel.setText("* successfully created teacher account");
@@ -396,6 +411,8 @@ public class AdminPanel extends JPanel{
 
 				ANNdroid.simulator.userList.add(new Teacher(uname, Utilities.hashPassword(pword), fname, lname));
 				ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");
+
+				reinitialize(true, false, 0);
 			}
 			reinitialize(true, false, 0);		
 		}
@@ -416,6 +433,7 @@ public class AdminPanel extends JPanel{
 		public void actionPerformed(ActionEvent e){
 			if(this.mode == 0){
 				createTeachPane.setVisible(true);
+				
 				changePwordPane.setVisible(false);
 				reinitialize(false, true, 2);
 			}
@@ -424,18 +442,21 @@ public class AdminPanel extends JPanel{
 				reinitialize(false, true, 2);
 
 				createTeachPane.setVisible(false);
+				reinitialize(false, true, 0);
 			}
 			else if(this.mode == 2){
 				changePwordPane.setVisible(true);
 
 				createTeachPane.setVisible(false);
+				reinitialize(false, true, 0);
 			}
 			else{
 				changePwordPane.setVisible(false);
 				reinitialize(false, true, 2);
 
 				createTeachPane.setVisible(false);
-				
+				reinitialize(false, true, 0);
+
 				ANNdroid.simulator.active = null;
 				ANNdroid.loginPanel.add(ANNdroid.bgPanel);
 				remove(ANNdroid.bgPanel);
