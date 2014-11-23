@@ -25,6 +25,7 @@ public class Loader{
 
 				for(int ac = 0; ac < size; ac++){
 					User u = (User)ois.readObject();
+					System.out.println(u.getUsername());
 					userList.add(u);
 				}
 				ois.close();
