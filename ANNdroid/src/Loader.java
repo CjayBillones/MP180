@@ -25,7 +25,9 @@ public class Loader{
 
 				for(int ac = 0; ac < size; ac++){
 					User u = (User)ois.readObject();
-					System.out.println(u.getUsername());
+
+					if(u instanceof Admin)	System.out.println(u.getUsername() + " - Admin");
+					else if(u instanceof Teacher)	System.out.println(u.getUsername() + " - Teacher");
 					userList.add(u);
 				}
 				ois.close();
