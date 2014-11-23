@@ -394,7 +394,7 @@ public class AdminPanel extends JPanel{
 				responseLabel.setText("* successfully created teacher account");
 				responseLabel.setForeground(Color.YELLOW);
 
-				ANNdroid.simulator.userList.add(new Admin(uname, Utilities.hashPassword(pword), fname, lname));
+				ANNdroid.simulator.userList.add(new Teacher(uname, Utilities.hashPassword(pword), fname, lname));
 				ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");
 			}
 			reinitialize(true, false, 0);			
