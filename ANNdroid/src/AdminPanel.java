@@ -46,6 +46,9 @@ public class AdminPanel extends JPanel{
 	String conPword = "";
 
 	// Create Teacher Account Option Layout //
+	JPanel createTeachPane;
+
+	JLabel responseLabel;
 	JLabel fnameLabel;
 	JLabel lnameLabel;
 	JLabel unameLabel;
@@ -55,6 +58,12 @@ public class AdminPanel extends JPanel{
 	JTextField unameField;
 	JPasswordField pwordField;
 	JButton createBtn;
+
+	// Create Teacher Values //
+	String fname;
+	String lname;
+	String uname;
+	String pword;
 
 	public AdminPanel(JPanel bgPanel){
 
@@ -161,8 +170,79 @@ public class AdminPanel extends JPanel{
 		errorLabel.setOpaque(true);
 		changePwordPane.add(errorLabel);		
 
+		// Create Admin Pane Initialization //
+		createTeachPane = new JPanel(null);
+		createTeachPane.setPreferredSize(new Dimension(getWidth() - leftSidePane.getWidth() - 200, getHeight()-430));
+		createTeachPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, getHeight()-430);
+		createTeachPane.setVisible(false);
+
+		fnameLabel = new JLabel("First Name: ", SwingConstants.RIGHT);
+		fnameLabel.setBounds(0, createTeachPane.getHeight()/4, createTeachPane.getWidth()/2, 20);
+		fnameLabel.setForeground(Color.WHITE);
+		fnameLabel.setBackground(Color.BLACK);
+		fnameLabel.setOpaque(true);
+		createTeachPane.add(fnameLabel);
+
+		fnameField = new JTextField();
+		fnameField.setBounds(fnameLabel.getWidth(), fnameLabel.getY(), (7*createTeachPane.getWidth())/16, 20);
+		createTeachPane.add(fnameField);
+		fnameField.addFocusListener(new CreateTeachFieldsFocusListener(0));
+		fnameField.addActionListener(event -> {lnameField.requestFocus();});
+
+		lnameLabel = new JLabel("Username: ", SwingConstants.RIGHT);
+		lnameLabel.setBounds(fnameLabel.getX(), fnameLabel.getY() + 30, fnameLabel.getWidth(), 20);
+		lnameLabel.setForeground(Color.WHITE);
+		lnameLabel.setBackground(Color.BLACK);
+		lnameLabel.setOpaque(true);
+		createTeachPane.add(lnameLabel);
+
+		lnameField = new JTextField();
+		lnameField.setBounds(lnameLabel.getWidth(), lnameLabel.getY(), fnameField.getWidth(), 20);
+		createTeachPane.add(lnameField);
+		lnameField.addFocusListener(new CreateTeachFieldsFocusListener(1));
+		lnameField.addActionListener(event -> {unameField.requestFocus();});
+
+		unameLabel = new JLabel("Username: ", SwingConstants.RIGHT);
+		unameLabel.setBounds(fnameLabel.getX(), lnameField.getY() + 30, fnameLabel.getWidth(), 20);
+		unameLabel.setForeground(Color.WHITE);
+		unameLabel.setBackground(Color.BLACK);
+		unameLabel.setOpaque(true);
+		createTeachPane.add(unameLabel);
+
+		unameField = new JTextField();
+		unameField.setBounds(unameLabel.getWidth(), unameLabel.getY(), fnameField.getWidth(), 20);
+		createTeachPane.add(unameField);
+		unameField.addFocusListener(new CreateTeachFieldsFocusListener(2));
+		unameField.addActionListener(event -> {pwordField.requestFocus();});
+
+		pwordLabel = new JLabel("Password: ", SwingConstants.RIGHT);
+		unameLabel.setBounds(fnameLabel.getX(), unameField.getY() + 30, fnameLabel.getWidth(), 20);
+		pwordLabel.setForeground(Color.WHITE);
+		pwordLabel.setBackground(Color.BLACK);
+		pwordLabel.setOpaque(true);
+		createTeachPane.add(pwordLabel);
+
+		pwordField = new JPasswordField();
+		pwordField.setBounds(oldPwordField.getWidth(), pwordLabel.getY() + 30, oldPwordField.getWidth(), 20);
+		createTeachPane.add(pwordField);
+		pwordField.addFocusListener(new ChangePasswordFieldsFocusListener(3));
+		pwordField.addActionListener(new CreateTeachActionListener());
+
+		createBtn = new JButton("Create");
+		createBtn.setBounds(createTeachPane.getWidth()/16, pwordLabel.getY() + 30, pwordLabel.getWidth() - createTeachPane.getWidth()/16, createTeachPane.getHeight()/7);
+		createTeachPane.add(createBtn);
+		createBtn.addActionListener(new CreateTeachActionListener());
+
+		responseLabel = new JLabel("");
+		responseLabel.setBounds(createTeachPane.getWidth()/16, createTeachPane.getHeight()/4 - 25, createBtn.getWidth(), 20);
+		responseLabel.setForeground(Color.RED);
+		responseLabel.setBackground(Color.BLACK);
+		responseLabel.setOpaque(true);
+		createTeachPane.add(responseLabel);
+
 		add(leftSidePane);
 		add(changePwordPane);
+		add(createTeachPane);
 	}
 
 	public void resize(){
@@ -192,8 +272,19 @@ public class AdminPanel extends JPanel{
 		// state: 0 - Create Account //
 		// state: 1 - Delete Account //
 		// state: 2 - Change Password //
+		if(state == 0){
+			if(changeMode || !error) responseLabel.setText("");
 
-		if(state == 2){
+			fname = "";
+			lname = "";
+			uname = "";
+			pword = "";
+			fnameField.setText("");
+			lnameField.setText("");
+			unameField.setText("");
+			pwordField.setText("");
+		}
+		else if(state == 2){
 			if(changeMode || !error) errorLabel.setText("");
 			
 			oldPword = "";
@@ -271,6 +362,43 @@ public class AdminPanel extends JPanel{
 			}
 		}
 
+	}
+
+	private class CreateTeachFieldsFocusListener extends FocusAdapter{
+		// mode: 0 - first name //
+		// mode: 1 - last name //
+		// mode: 2 - username //
+		// mode: 3 - password //
+
+		int mode;
+
+		public CreateTeachFieldsFocusListener(int mode){
+			this.mode = mode;
+		}
+
+		public void focusLost(FocusEvent e){
+			if(this.mode == 0) fname = String.valueOf(fnameField.getText());
+			else if(this.mode == 1) lname = String.valueOf(lnameField.getText());
+			else if(this.mode == 2) uname = String.valueOf(unameField.getText());
+			else pword = String.valueOf(pwordField.getPassword());
+		}
+	}
+
+	private class CreateTeachActionListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			if(pword.length() < 6){
+				responseLabel.setText("* password needs to be atleast 6 characters");
+				responseLabel.setForeground(Color.RED);
+			}
+			else{
+				responseLabel.setText("* successfully created teacher account");
+				responseLabel.setForeground(Color.YELLOW);
+
+				ANNdroid.simulator.userList.add(new Admin(uname, Utilities.hashPassword(pword), fname, lname));
+				ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");
+			}
+			reinitialize(true, false, 0);			
+		}
 	}
 
 	private class LeftSidePaneButtonsListener implements ActionListener{
