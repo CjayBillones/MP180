@@ -24,4 +24,9 @@ public class Admin extends User implements Serializable{
 		ANNdroid.simulator.userList.add(new Teacher(uname, pword, fname, lname));
 		ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");		
 	}
+
+	public void delAcct(int index){
+		ANNdroid.simulator.userList.remove(index);
+		ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");
+	}
 }

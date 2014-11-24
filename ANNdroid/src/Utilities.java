@@ -52,4 +52,11 @@ public class Utilities{
 		}
 		return true;
 	}
+
+	public static int exists(String username){
+		for(User u : ANNdroid.simulator.userList){
+			if(u.getUsername().equals(username)) return ANNdroid.simulator.userList.indexOf(u);
+		}
+		return -1;
+	}
 }

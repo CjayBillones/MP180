@@ -234,7 +234,7 @@ public class AdminPanel extends JPanel{
 		deleteBtn = new JButton("Confirm");
 		deleteBtn.setBounds(delTeachPane.getWidth()/16, adminPwordLabel.getY() + 30, adminPwordLabel.getWidth() - delTeachPane.getWidth()/16, delTeachPane.getHeight()/7);
 		delTeachPane.add(deleteBtn);
-		//confirmBtn.addActionListener(new AdminActionListener(3, 1));
+		deleteBtn.addActionListener(new AdminActionListener(2, 0));
 
 		cancelBtn2 = new JButton("Cancel");
 		cancelBtn2.setBounds(deleteBtn.getX() + deleteBtn.getWidth(), deleteBtn.getY(), deleteBtn.getWidth(), deleteBtn.getHeight());
@@ -547,6 +547,10 @@ public class AdminPanel extends JPanel{
 						errorLabel1.setText("* password needs to be atleast 6 characters");
 						errorLabel1.setForeground(Color.RED);
 					}
+					else if(Utilities.exists(uname) != -1){
+						errorLabel1.setText("* username already exists");
+						errorLabel1.setForeground(Color.RED);
+					}
 					else{
 						errorLabel1.setText("* successfully created teacher account");
 						errorLabel1.setForeground(Color.YELLOW);
@@ -563,6 +567,23 @@ public class AdminPanel extends JPanel{
 				if(this.mode == 1){
 					reinitialize(false, true, 1);
 					delTeachPane.setVisible(false);
+				}
+				else{
+					delPword = String.valueOf(adminPwordField.getPassword());
+					if(!ANNdroid.simulator.active.getPassword().equals(Utilities.hashPassword(delPword))){
+						errorLabel2.setText("* incorrect password for admin");
+						errorLabel2.setForeground(Color.RED);
+					}
+					else if(Utilities.exists(delUname) == -1){
+						errorLabel2.setText("* username does not exist");
+						errorLabel2.setForeground(Color.RED);
+					}
+					else if(Utilities.exists(delUname) != -1){
+						errorLabel2.setText("* successfully deleted teacher account");
+						errorLabel2.setForeground(Color.YELLOW);
+						((Admin)ANNdroid.simulator.active).delAcct(Utilities.exists(delUname));
+					}
+					reinitialize(true, false, 1);
 				}
 			}
 			else if(this.state == 3){
