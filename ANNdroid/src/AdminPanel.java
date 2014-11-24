@@ -27,7 +27,7 @@ public class AdminPanel extends JPanel{
 	JButton changePwordBtn;
 	JButton logoutBtn;
 
-	// Create Teacher Account Option Layout //
+	// Create Teacher Account Layout //
 	JPanel createTeachPane;
 
 	JLabel errorLabel1;
@@ -47,6 +47,21 @@ public class AdminPanel extends JPanel{
 	String lname = "";
 	String uname = "";
 	String pword = "";
+
+	// Delete Teacher Account Layout //
+	JPanel delTeachPane;
+
+	JLabel errorLabel2;
+	JLabel delUnameLabel;
+	JLabel adminPwordLabel;
+	JTextField delUnameField;
+	JPasswordField adminPwordField;
+	JButton deleteBtn;
+	JButton cancelBtn2;
+
+	// Delete Teacher Values //
+	String delUname = "";
+	String delPword = "";
 
 	// Change Password Option Layout //
 	JPanel changePwordPane;
@@ -185,11 +200,58 @@ public class AdminPanel extends JPanel{
 		errorLabel1.setOpaque(true);
 		createTeachPane.add(errorLabel1);
 
+		// Delete Teacher Pane Initialization //
+		delTeachPane = new JPanel(null);
+		delTeachPane.setPreferredSize(new Dimension(getWidth() - leftSidePane.getWidth() - 200, getHeight() - 470));
+		delTeachPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, getHeight() - 470);
+		delTeachPane.setVisible(false);
+
+		delUnameLabel = new JLabel("username: ", SwingConstants.RIGHT);
+		delUnameLabel.setBounds(0, delTeachPane.getHeight()/3, delTeachPane.getWidth()/2, 20);
+		delUnameLabel.setForeground(Color.WHITE);
+		delUnameLabel.setBackground(Color.BLACK);
+		delUnameLabel.setOpaque(true);
+		delTeachPane.add(delUnameLabel);
+
+		delUnameField = new JTextField();
+		delUnameField.setBounds(delUnameLabel.getWidth(), delUnameLabel.getY(), (7*delTeachPane.getWidth())/16, 20);
+		delTeachPane.add(delUnameField);
+		delUnameField.addFocusListener(new FieldsFocusListener(1, 0));
+		delUnameField.addActionListener(event -> {adminPwordField.requestFocus();});
+
+		adminPwordLabel = new JLabel("admin password: ", SwingConstants.RIGHT);
+		adminPwordLabel.setBounds(delUnameLabel.getX(), delUnameLabel.getY() + 30, delUnameLabel.getWidth(), 20);
+		adminPwordLabel.setForeground(Color.WHITE);
+		adminPwordLabel.setBackground(Color.BLACK);
+		adminPwordLabel.setOpaque(true);		
+		delTeachPane.add(adminPwordLabel);
+
+		adminPwordField = new JPasswordField();
+		adminPwordField.setBounds(delUnameField.getX(), delUnameField.getY() + 30, delUnameField.getWidth(), 20);
+		delTeachPane.add(adminPwordField);
+		delUnameField.addFocusListener(new FieldsFocusListener(1, 1));
+
+		deleteBtn = new JButton("Confirm");
+		deleteBtn.setBounds(delTeachPane.getWidth()/16, adminPwordLabel.getY() + 30, adminPwordLabel.getWidth() - delTeachPane.getWidth()/16, delTeachPane.getHeight()/7);
+		delTeachPane.add(deleteBtn);
+		//confirmBtn.addActionListener(new AdminActionListener(3, 1));
+
+		cancelBtn2 = new JButton("Cancel");
+		cancelBtn2.setBounds(deleteBtn.getX() + deleteBtn.getWidth(), deleteBtn.getY(), deleteBtn.getWidth(), deleteBtn.getHeight());
+		delTeachPane.add(cancelBtn2);
+		cancelBtn2.addActionListener(new AdminActionListener(2, 1));		
+
+		errorLabel2 = new JLabel("");
+		errorLabel2.setBounds(delTeachPane.getWidth()/16, delTeachPane.getHeight()/3 - 25, deleteBtn.getWidth() + cancelBtn2.getWidth(), 20);
+		errorLabel2.setForeground(Color.RED);
+		errorLabel2.setBackground(Color.BLACK);
+		errorLabel2.setOpaque(true);
+		delTeachPane.add(errorLabel2);		
 
 		// Change Password Pane Initialization //
 		changePwordPane = new JPanel(null);
-		changePwordPane.setPreferredSize(new Dimension(getWidth() - leftSidePane.getWidth() - 200, getHeight()-430));
-		changePwordPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, getHeight()-430);
+		changePwordPane.setPreferredSize(new Dimension(getWidth() - leftSidePane.getWidth() - 200, getHeight() - 430));
+		changePwordPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, getHeight() - 430);
 		changePwordPane.setVisible(false);
 
 		oldPwordLabel = new JLabel("Old Password: ", SwingConstants.RIGHT);
@@ -250,6 +312,7 @@ public class AdminPanel extends JPanel{
 
 		add(leftSidePane);
 		add(createTeachPane);
+		add(delTeachPane);
 		add(changePwordPane);
 	}
 
@@ -276,6 +339,16 @@ public class AdminPanel extends JPanel{
 		cancelBtn1.setBounds(createBtn.getX() + createBtn.getWidth(), createBtn.getY(), createBtn.getWidth(), createBtn.getHeight());
 		errorLabel1.setBounds(createTeachPane.getWidth()/16, createTeachPane.getHeight()/4 - 25, createTeachPane.getWidth() - (createTeachPane.getWidth()/8), 20);
 		
+		// Resize DelTeach Pane //
+		delTeachPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, delTeachPane.getHeight());
+		delUnameLabel.setBounds(0, delTeachPane.getHeight()/3, delTeachPane.getWidth()/2, 20);
+		delUnameField.setBounds(delUnameLabel.getWidth(), delUnameLabel.getY(), (7*delTeachPane.getWidth())/16, 20);
+		adminPwordLabel.setBounds(delUnameLabel.getX(), delUnameLabel.getY() + 30, delUnameLabel.getWidth(), 20);
+		adminPwordField.setBounds(delUnameField.getX(), delUnameField.getY() + 30, delUnameField.getWidth(), 20);
+		deleteBtn.setBounds(delTeachPane.getWidth()/16, adminPwordLabel.getY() + 30, adminPwordLabel.getWidth() - delTeachPane.getWidth()/16, delTeachPane.getHeight()/7);
+		cancelBtn2.setBounds(deleteBtn.getX() + deleteBtn.getWidth(), deleteBtn.getY(), deleteBtn.getWidth(), deleteBtn.getHeight());
+		errorLabel2.setBounds(delTeachPane.getWidth()/16, delTeachPane.getHeight()/3 - 25, deleteBtn.getWidth() + cancelBtn2.getWidth(), 20);
+
 		// Resize Change Password Pane //
 		changePwordPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, changePwordPane.getHeight());
 		oldPwordLabel.setBounds(0, changePwordPane.getHeight()/4, changePwordPane.getWidth()/2, 20);
@@ -307,6 +380,14 @@ public class AdminPanel extends JPanel{
 			unameField.setText("");
 			pwordField.setText("");
 		}
+		else if(state == 1){
+			if(changeMode || !error) errorLabel2.setText("");
+
+			delUname = "";
+			delPword = "";
+			delUnameField.setText("");
+			adminPwordField.setText("");
+		}
 		else if(state == 2){
 			if(changeMode || !error) errorLabel3.setText("");
 			
@@ -326,6 +407,8 @@ public class AdminPanel extends JPanel{
 			// mode: 2 - uname //
 			// mode: 3 - pword //
 		// state: 1 - Delete Teacher Account //
+			// mode: 0 - delUname //
+			// mode: 1 - delPword //
 		// state: 2 - Change Passsword //
 			// mode: 0 - old password //
 			// mode: 1 - new password //
@@ -346,6 +429,10 @@ public class AdminPanel extends JPanel{
 				else if(this.mode == 2) uname = String.valueOf(unameField.getText());
 				else pword = String.valueOf(pwordField.getPassword());				
 			}
+			else if(this.state == 1){
+				if(this.mode == 0) delUname = String.valueOf(delUnameField.getText());
+				else if(this.mode == 1) delPword = String.valueOf(adminPwordField.getPassword());
+			}
 			else if(this.state == 2){
 				if(this.mode == 0) oldPword = Utilities.hashPassword(String.valueOf(oldPwordField.getPassword()));
 				else if(this.mode == 1) newPword = String.valueOf(newPwordField.getPassword());
@@ -365,6 +452,8 @@ public class AdminPanel extends JPanel{
 			// mode: 0 - create button //
 			// mode: 1 - cancel button //
 		// state: 2 - Delete Teacher Account //
+			// mode: 0 - delete button //
+			// mode: 1 - cancel button //
 		// state: 3 - Change Password //
 			// mode: 0 - pressed enter on con password //
 			// mode: 1 - confirm button //
@@ -383,28 +472,42 @@ public class AdminPanel extends JPanel{
 				if(this.mode == 0){
 					createTeachPane.setVisible(true);
 					
+					delTeachPane.setVisible(false);
+					reinitialize(false, true, 1);
+
 					changePwordPane.setVisible(false);
 					reinitialize(false, true, 2);
 				}
 				else if(this.mode == 1){
+					createTeachPane.setVisible(false);
+					reinitialize(false, true, 0);
+
+					delTeachPane.setVisible(true);
+
 					changePwordPane.setVisible(false);
 					reinitialize(false, true, 2);
 
-					createTeachPane.setVisible(false);
-					reinitialize(false, true, 0);
+
 				}
 				else if(this.mode == 2){
+					createTeachPane.setVisible(false);
+					reinitialize(false, true, 0);
+
+					delTeachPane.setVisible(false);
+					reinitialize(false, true, 1);
+
 					changePwordPane.setVisible(true);
 
-					createTeachPane.setVisible(false);
-					reinitialize(false, true, 0);
 				}
 				else{
-					changePwordPane.setVisible(false);
-					reinitialize(false, true, 2);
-
 					createTeachPane.setVisible(false);
 					reinitialize(false, true, 0);
+
+					delTeachPane.setVisible(false);
+					reinitialize(false, true, 1);					
+
+					changePwordPane.setVisible(false);
+					reinitialize(false, true, 2);
 
 					ANNdroid.simulator.active = null;
 					ANNdroid.loginPanel.add(ANNdroid.bgPanel);
@@ -454,6 +557,12 @@ public class AdminPanel extends JPanel{
 				else{
 					reinitialize(false, true, 0);
 					createTeachPane.setVisible(false);
+				}
+			}
+			else if(this.state == 2){
+				if(this.mode == 1){
+					reinitialize(false, true, 1);
+					delTeachPane.setVisible(false);
 				}
 			}
 			else if(this.state == 3){
