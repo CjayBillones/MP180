@@ -28,6 +28,7 @@ public class Loader{
 
 					if(u instanceof Admin)	System.out.println(u.getUsername() + " - Admin");
 					else if(u instanceof Teacher)	System.out.println(u.getUsername() + " - Teacher");
+					else if(u instanceof Student) System.out.println(u.getUsername() + " - Student");
 					userList.add(u);
 				}
 				ois.close();

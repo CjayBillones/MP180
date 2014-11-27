@@ -26,11 +26,13 @@ public class ANNdroid extends JFrame{
 	public static JPanel cards;
 	public final static String LOGINPANEL = "login";
 	public final static String ADMINPANEL = "admin";
+	public final static String TEACHERPANEL = "teacher";
 
 	// Cards/Panels //
 	public static JPanel bgPanel;
 	public static JPanel loginPanel;
 	public static JPanel adminPanel;
+	public static JPanel teacherPanel;
 
 	public ANNdroid(){
 
@@ -58,11 +60,13 @@ public class ANNdroid extends JFrame{
 		bgPanel = new BackgroundPanel();
 		loginPanel = new LoginPanel(bgPanel);
 		adminPanel = new AdminPanel(bgPanel);
+		teacherPanel = new TeacherPanel();
 
 		// Add Cards/Panel to Cards Container //
 		cards = new JPanel(new CardLayout());
 		cards.add(loginPanel, LOGINPANEL);
 		cards.add(adminPanel, ADMINPANEL);
+		cards.add(teacherPanel, TEACHERPANEL);
 	
 		c.add(cards);
 	}
@@ -77,9 +81,11 @@ public class ANNdroid extends JFrame{
 			bgPanel.setBounds(0, 0, getWidth(), getHeight()); // Resizes the bgPanel so that the resize() will execute // 
 			loginPanel.setBounds(0, 0, getWidth(), getHeight());
 			adminPanel.setBounds(0, 0, getWidth(), getHeight());
+			teacherPanel.setBounds(0, 0, getWidth(), getHeight());
 			((BackgroundPanel)bgPanel).resize(); // Resizes the bgImage //
 			((LoginPanel)loginPanel).resize();
 			((AdminPanel)adminPanel).resize();
+			((TeacherPanel)teacherPanel).resize();
 		}
 	}
 }

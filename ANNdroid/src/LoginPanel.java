@@ -155,12 +155,20 @@ public class LoginPanel extends JPanel{
 			else{
 
 				remove(ANNdroid.bgPanel);
-				ANNdroid.adminPanel.add(ANNdroid.bgPanel);
 
 				ANNdroid.simulator.active = u;
-				CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
-				c1.show(ANNdroid.cards, ANNdroid.ADMINPANEL);
-				reinitialize(false);
+				if(u instanceof Admin){
+					ANNdroid.adminPanel.add(ANNdroid.bgPanel);
+					CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
+					c1.show(ANNdroid.cards, ANNdroid.ADMINPANEL);
+					reinitialize(false);
+				}
+				else if(u instanceof Teacher){
+					ANNdroid.teacherPanel.add(ANNdroid.bgPanel);
+					CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
+					c1.show(ANNdroid.cards, ANNdroid.TEACHERPANEL);
+					reinitialize(false);
+				}
 			}
 		}
 	}

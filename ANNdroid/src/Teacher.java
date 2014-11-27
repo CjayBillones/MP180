@@ -15,4 +15,13 @@ public class Teacher extends User implements Serializable{
 		this.lname = lname;
 	}
 
+	public void createAcct(String uname, String pword, String fname, String lname){
+		ANNdroid.simulator.userList.add(new Student(uname, pword, fname, lname));
+		ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");		
+	}
+
+	public void delAcct(int index){
+		ANNdroid.simulator.userList.remove(index);
+		ANNdroid.simulator.saver.saveUsers(Simulator.userList, "ANNdroid/bin/users.bin");
+	}
 }
