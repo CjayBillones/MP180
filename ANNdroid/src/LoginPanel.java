@@ -169,6 +169,12 @@ public class LoginPanel extends JPanel{
 					c1.show(ANNdroid.cards, ANNdroid.TEACHERPANEL);
 					reinitialize(false);
 				}
+				else if(u instanceof Student){
+					ANNdroid.studentPanel.add(ANNdroid.bgPanel);
+					CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
+					c1.show(ANNdroid.cards, ANNdroid.STUDENTPANEL);
+					reinitialize(false);
+				}
 			}
 		}
 	}

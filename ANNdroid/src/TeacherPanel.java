@@ -73,51 +73,12 @@ public class TeacherPanel extends JPanel{
 		setBounds(0, 0, ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT);
 
 		// Left Side Pane Layout Initialization //
-		leftSidePane = new JPanel(null);
+		String labels[] = {"Create Student Account", "Delete Student Account", "Manage Subjects", "Statistics", "Account Settings", "Logout"};
+
+		leftSidePane = new LeftSidePane(this, 1, 6, labels);
 		leftSidePane.setPreferredSize(new Dimension(getWidth()/4 + 60, getHeight()));
 		leftSidePane.setBounds(0, 0, getWidth()/4 + 60, getHeight());
-		leftSidePane.setBackground(Color.BLACK);
-
-		buttonPane = new JPanel(null);
-		buttonPane.setPreferredSize(new Dimension(getWidth()/4, getHeight()/2));
-		buttonPane.setBounds(30, getHeight()/8, getWidth()/4, getHeight()/2 + getHeight()/4);
-		leftSidePane.add(buttonPane);
-
-		createAcctBtn = new JButton("Create Student Account");
-		createAcctBtn.setBounds(0, 0, buttonPane.getWidth(), 50);
-		createAcctBtn.addActionListener(new TeacherActionListener(0, 0));
-		buttonPane.add(createAcctBtn);
-
-		deleteAcctBtn = new JButton("Delete Student Account");
-		deleteAcctBtn.setBounds(0, 50, buttonPane.getWidth(), 50);
-		deleteAcctBtn.addActionListener(new TeacherActionListener(0, 1));
-		buttonPane.add(deleteAcctBtn);
-		
-		manageSubjects = new JButton("Manage Subjects");
-		manageSubjects.setBounds(0, 100, buttonPane.getWidth(), 50);
-		manageSubjects.addActionListener(new TeacherActionListener(0, 2));
-		buttonPane.add(manageSubjects);
-
-		viewStats = new JButton("View Student Stats");
-		viewStats.setBounds(0, 150, buttonPane.getWidth(), 50);
-		viewStats.addActionListener(new TeacherActionListener(0, 3));
-		buttonPane.add(viewStats);
-
-		acctSettings = new JButton("Account Settings");
-		acctSettings.setBounds(0, buttonPane.getHeight()-100, buttonPane.getWidth(), 50);
-		acctSettings.addActionListener(new TeacherActionListener(0, 4));
-		buttonPane.add(acctSettings);
-
-		logoutBtn = new JButton("Logout");
-		logoutBtn.setBounds(0, buttonPane.getHeight()-50, buttonPane.getWidth(), 50);
-		buttonPane.add(logoutBtn);
-		logoutBtn.addActionListener(new TeacherActionListener(0, 5));
-		logoutBtn.addFocusListener(new FocusListener(){
-			public void focusGained(FocusEvent e){}
-			public void focusLost(FocusEvent e){
-				createAcctBtn.requestFocus();
-			}
-		});
+		leftSidePane.setBackground(Color.BLACK);		
 
 		// Create Student Pane //
 		createStudentPane = new JPanel(null);
@@ -179,12 +140,12 @@ public class TeacherPanel extends JPanel{
 		createBtn = new JButton("Create");
 		createBtn.setBounds(createStudentPane.getWidth()/16, pwordLabel.getY() + 30, pwordLabel.getWidth() - createStudentPane.getWidth()/16, createStudentPane.getHeight()/7);
 		createStudentPane.add(createBtn);
-		createBtn.addActionListener(new TeacherActionListener(1, 0));
+		createBtn.addActionListener(new TeacherActionListener(0, 0));
 
 		cancelBtn1 = new JButton("Cancel");
 		cancelBtn1.setBounds(createBtn.getX() + createBtn.getWidth(), createBtn.getY(), createBtn.getWidth(), createBtn.getHeight());
 		createStudentPane.add(cancelBtn1);
-		cancelBtn1.addActionListener(new TeacherActionListener(1, 1));
+		cancelBtn1.addActionListener(new TeacherActionListener(0, 1));
 
 		errorLabel1 = new JLabel("");
 		errorLabel1.setBounds(createStudentPane.getWidth()/16, createStudentPane.getHeight()/4 - 25, createStudentPane.getWidth() - (createStudentPane.getWidth()/8), 20);
@@ -212,7 +173,7 @@ public class TeacherPanel extends JPanel{
 		delUnameField.addFocusListener(new FieldsFocusListener(1, 0));
 		delUnameField.addActionListener(event -> {teachPwordField.requestFocus();});
 
-		teachPwordLabel = new JLabel("admin password: ", SwingConstants.RIGHT);
+		teachPwordLabel = new JLabel("teacher password: ", SwingConstants.RIGHT);
 		teachPwordLabel.setBounds(delUnameLabel.getX(), delUnameLabel.getY() + 30, delUnameLabel.getWidth(), 20);
 		teachPwordLabel.setForeground(Color.WHITE);
 		teachPwordLabel.setBackground(Color.BLACK);
@@ -227,12 +188,12 @@ public class TeacherPanel extends JPanel{
 		deleteBtn = new JButton("Confirm");
 		deleteBtn.setBounds(delStudentPane.getWidth()/16, teachPwordLabel.getY() + 30, teachPwordLabel.getWidth() - delStudentPane.getWidth()/16, delStudentPane.getHeight()/7);
 		delStudentPane.add(deleteBtn);
-		deleteBtn.addActionListener(new TeacherActionListener(2, 0));
+		deleteBtn.addActionListener(new TeacherActionListener(1, 0));
 
 		cancelBtn2 = new JButton("Cancel");
 		cancelBtn2.setBounds(deleteBtn.getX() + deleteBtn.getWidth(), deleteBtn.getY(), deleteBtn.getWidth(), deleteBtn.getHeight());
 		delStudentPane.add(cancelBtn2);
-		cancelBtn2.addActionListener(new TeacherActionListener(2, 1));		
+		cancelBtn2.addActionListener(new TeacherActionListener(1, 1));		
 
 		errorLabel2 = new JLabel("");
 		errorLabel2.setBounds(delStudentPane.getWidth()/16, delStudentPane.getHeight()/3 - 25, deleteBtn.getWidth() + cancelBtn2.getWidth(), 20);
@@ -247,15 +208,9 @@ public class TeacherPanel extends JPanel{
 	}
 
 	public void resize(){
-		// Resizing Left Side Pane //
+		// Resize Left Side Pane //
 		leftSidePane.setBounds(0, 0, getWidth()/4 + 60, getHeight());
-		buttonPane.setBounds(30, getHeight()/8, getWidth()/4, getHeight()/2 + getHeight()/4);
-		createAcctBtn.setBounds(0, 0, buttonPane.getWidth(), 50);
-		deleteAcctBtn.setBounds(0, 50, buttonPane.getWidth(), 50);
-		manageSubjects.setBounds(0, 100, buttonPane.getWidth(), 50);
-		viewStats.setBounds(0, 150, buttonPane.getWidth(), 50);
-		acctSettings.setBounds(0, buttonPane.getHeight()-100, buttonPane.getWidth(), 50);
-		logoutBtn.setBounds(0, buttonPane.getHeight()-50, buttonPane.getWidth(), 50);
+		((LeftSidePane)leftSidePane).resize();
 
 		// Resizing Create Account //
 		createStudentPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/4, getWidth() - leftSidePane.getWidth() - 200, createStudentPane.getHeight());
@@ -287,7 +242,7 @@ public class TeacherPanel extends JPanel{
 		// state: 1 - Delete Account //
 		// state: 2 - Change Password //
 		if(state == 0){
-			if(changeMode || !error) errorLabel2.setText("");
+			if(changeMode || !error) errorLabel1.setText("");
 
 			fname = "";
 			lname = "";
@@ -305,8 +260,6 @@ public class TeacherPanel extends JPanel{
 			delPword = "";				
 			delUnameField.setText("");
 			teachPwordField.setText("");
-		}
-		else if(state == 2){
 		}
 	}
 
@@ -345,16 +298,10 @@ public class TeacherPanel extends JPanel{
 
 	private class TeacherActionListener implements ActionListener{
 
-		// state: 0 - Left Side Pane //
-			// mode: 0 - Create Student Account//
-			// mode: 1 - Delete Student Account//
-			// mode: 2 - Manage Subjects//
-			// mode: 3 - View Students //
-			// mode: 4 - Account Settings //
-			// mode: 5 - Logout //
-		// state: 1 - Create Student Pane//
+		// state: 0 - Create Student Pane//
 			// mode: 0 - create btn//
 			// mode: 1 - cancel btn//
+		// state: 1 - Delete Student Pane //
 
 		int state;
 		int mode;
@@ -367,90 +314,41 @@ public class TeacherPanel extends JPanel{
 		public void actionPerformed(ActionEvent e){
 			if(this.state == 0){
 				if(this.mode == 0){
-					createStudentPane.setVisible(true);
-
-					delStudentPane.setVisible(false);
-					reinitialize(false, true, 1);
-				}
-				else if(this.mode == 1){
-					createStudentPane.setVisible(false);
-					reinitialize(false, true, 0);
-
-					delStudentPane.setVisible(true);
-				}
-				else if(this.mode == 2){
-					createStudentPane.setVisible(false);
-					reinitialize(false, true, 0);
-
-					delStudentPane.setVisible(false);
-					reinitialize(false, true, 1);					
-				}
-				else if(this.mode == 3){
-					createStudentPane.setVisible(false);
-					reinitialize(false, true, 0);
-					
-					delStudentPane.setVisible(false);
-					reinitialize(false, true, 1);
-				}
-				else if(this.mode == 4){
-					createStudentPane.setVisible(false);
-					reinitialize(false, true, 0);
-					
-					delStudentPane.setVisible(false);
-					reinitialize(false, true, 1);
-				}
-				else if(this.mode == 5){
-					createStudentPane.setVisible(false);
-					reinitialize(false, true, 0);
-
-					delStudentPane.setVisible(false);
-					reinitialize(false, true, 1);
-
-					ANNdroid.simulator.active = null;
-					ANNdroid.loginPanel.add(ANNdroid.bgPanel);
-					remove(ANNdroid.bgPanel);
-			
-					CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
-					c1.show(ANNdroid.cards, ANNdroid.LOGINPANEL);								
-				}
-			}
-			else if(this.state == 1){
-				if(this.mode == 0){
 					if(fname.equals("")){
-						errorLabel2.setText("* first name must not be blank");
-						errorLabel2.setForeground(Color.RED);
+						errorLabel1.setText("* first name must not be blank");
+						errorLabel1.setForeground(Color.RED);
 					}
 					else if(!Utilities.isAlpha(fname)){
-						errorLabel2.setText("* first name must only contain letters or space");
-						errorLabel2.setForeground(Color.RED);
+						errorLabel1.setText("* first name must only contain letters or space");
+						errorLabel1.setForeground(Color.RED);
 					}
 					else if(lname.equals("")){
-						errorLabel2.setText("* last name must not be blank");
-						errorLabel2.setForeground(Color.RED);
+						errorLabel1.setText("* last name must not be blank");
+						errorLabel1.setForeground(Color.RED);
 					}
 					else if(!Utilities.isAlpha(lname)){
-						errorLabel2.setText("* last name must only contain letters or space");
-						errorLabel2.setForeground(Color.RED);
+						errorLabel1.setText("* last name must only contain letters or space");
+						errorLabel1.setForeground(Color.RED);
 					}
 					else if(uname.equals("")){
-						errorLabel2.setText("* username must not be blank");
-						errorLabel2.setForeground(Color.RED);
+						errorLabel1.setText("* username must not be blank");
+						errorLabel1.setForeground(Color.RED);
 					}
 					else if(!Utilities.isAlphaNumeric(uname)){
-						errorLabel2.setText("* username must only contain letters or digits");
-						errorLabel2.setForeground(Color.RED);
+						errorLabel1.setText("* username must only contain letters or digits");
+						errorLabel1.setForeground(Color.RED);
 					}
 					else if(pword.length() < 6){
-						errorLabel2.setText("* password needs to be atleast 6 characters");
-						errorLabel2.setForeground(Color.RED);
+						errorLabel1.setText("* password needs to be atleast 6 characters");
+						errorLabel1.setForeground(Color.RED);
 					}
 					else if(Utilities.exists(uname) != -1){
-						errorLabel2.setText("* username already exists");
-						errorLabel2.setForeground(Color.RED);
+						errorLabel1.setText("* username already exists");
+						errorLabel1.setForeground(Color.RED);
 					}
 					else{
-						errorLabel2.setText("* successfully created student account");
-						errorLabel2.setForeground(Color.YELLOW);
+						errorLabel1.setText("* successfully created student account");
+						errorLabel1.setForeground(Color.YELLOW);
 						((Teacher)ANNdroid.simulator.active).createAcct(new Student(uname, Utilities.hashPassword(pword), fname, lname));
 					}
 					reinitialize(true, false, 0);
@@ -460,7 +358,7 @@ public class TeacherPanel extends JPanel{
 					createStudentPane.setVisible(false);
 				}
 			}
-			else if(this.state == 2){
+			else if(this.state == 1){
 				if(this.mode == 1){
 					reinitialize(false, true, 1);
 					delStudentPane.setVisible(false);

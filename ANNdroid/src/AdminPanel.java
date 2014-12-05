@@ -20,12 +20,6 @@ public class AdminPanel extends JPanel{
 
 	// Left Side Pane Layout //
 	JPanel leftSidePane;
-	JPanel buttonPane;
-
-	JButton createAcctBtn;
-	JButton deleteAcctBtn;
-	JButton changePwordBtn;
-	JButton logoutBtn;
 
 	// Create Teacher Account Layout //
 	JPanel createTeachPane;
@@ -83,48 +77,20 @@ public class AdminPanel extends JPanel{
 
 
 
-	public AdminPanel(JPanel bgPanel){
+	public AdminPanel(){
 
 		setLayout(null);
 		setPreferredSize(new Dimension(ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT));
 		setBounds(0, 0, ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT);
 
-		// Left Side Pane Layout Initialization //
-		leftSidePane = new JPanel(null);
+
+		// Left Side Pane Layout //
+		String labels[] = {"Create Teacher Account", "Delete Teacher Account", "Account Settings", "Options", "Logout"};
+
+		leftSidePane = new LeftSidePane(this, 0, 5, labels);
 		leftSidePane.setPreferredSize(new Dimension(getWidth()/4 + 60, getHeight()));
 		leftSidePane.setBounds(0, 0, getWidth()/4 + 60, getHeight());
 		leftSidePane.setBackground(Color.BLACK);
-
-		buttonPane = new JPanel(null);
-		buttonPane.setPreferredSize(new Dimension(getWidth()/4, getHeight()/2));
-		buttonPane.setBounds(30, getHeight()/8, getWidth()/4, getHeight()/2 + getHeight()/4);
-		leftSidePane.add(buttonPane);
-
-		createAcctBtn = new JButton("Create Teacher Account");
-		createAcctBtn.setBounds(0, 0, buttonPane.getWidth(), 50);
-		buttonPane.add(createAcctBtn);
-		createAcctBtn.addActionListener(new AdminActionListener(0, 0));
-
-		deleteAcctBtn = new JButton("Delete Teacher Account");
-		deleteAcctBtn.setBounds(0, 50, buttonPane.getWidth(), 50);
-		buttonPane.add(deleteAcctBtn);
-		deleteAcctBtn.addActionListener(new AdminActionListener(0, 1));
-
-		changePwordBtn = new JButton("Change Password");
-		changePwordBtn.setBounds(0, 100, buttonPane.getWidth(), 50);
-		buttonPane.add(changePwordBtn);
-		changePwordBtn.addActionListener(new AdminActionListener(0, 2));
-
-		logoutBtn = new JButton("Logout");
-		logoutBtn.setBounds(0, buttonPane.getHeight()-50, buttonPane.getWidth(), 50);
-		buttonPane.add(logoutBtn);
-		logoutBtn.addActionListener(new AdminActionListener(0, 3));
-		logoutBtn.addFocusListener(new FocusListener(){
-			public void focusGained(FocusEvent e){}
-			public void focusLost(FocusEvent e){
-				createAcctBtn.requestFocus();
-			}
-		});
 
 		// Create Teach Pane Initialization //
 		createTeachPane = new JPanel(null);
@@ -186,12 +152,12 @@ public class AdminPanel extends JPanel{
 		createBtn = new JButton("Create");
 		createBtn.setBounds(createTeachPane.getWidth()/16, pwordLabel.getY() + 30, pwordLabel.getWidth() - createTeachPane.getWidth()/16, createTeachPane.getHeight()/7);
 		createTeachPane.add(createBtn);
-		createBtn.addActionListener(new AdminActionListener(1, 0));
+		createBtn.addActionListener(new AdminActionListener(0, 0));
 
 		cancelBtn1 = new JButton("Cancel");
 		cancelBtn1.setBounds(createBtn.getX() + createBtn.getWidth(), createBtn.getY(), createBtn.getWidth(), createBtn.getHeight());
 		createTeachPane.add(cancelBtn1);
-		cancelBtn1.addActionListener(new AdminActionListener(1, 1));
+		cancelBtn1.addActionListener(new AdminActionListener(0, 1));
 
 		errorLabel1 = new JLabel("");
 		errorLabel1.setBounds(createTeachPane.getWidth()/16, createTeachPane.getHeight()/4 - 25, createTeachPane.getWidth() - (createTeachPane.getWidth()/8), 20);
@@ -234,12 +200,12 @@ public class AdminPanel extends JPanel{
 		deleteBtn = new JButton("Confirm");
 		deleteBtn.setBounds(delTeachPane.getWidth()/16, adminPwordLabel.getY() + 30, adminPwordLabel.getWidth() - delTeachPane.getWidth()/16, delTeachPane.getHeight()/7);
 		delTeachPane.add(deleteBtn);
-		deleteBtn.addActionListener(new AdminActionListener(2, 0));
+		deleteBtn.addActionListener(new AdminActionListener(1, 0));
 
 		cancelBtn2 = new JButton("Cancel");
 		cancelBtn2.setBounds(deleteBtn.getX() + deleteBtn.getWidth(), deleteBtn.getY(), deleteBtn.getWidth(), deleteBtn.getHeight());
 		delTeachPane.add(cancelBtn2);
-		cancelBtn2.addActionListener(new AdminActionListener(2, 1));		
+		cancelBtn2.addActionListener(new AdminActionListener(1, 1));		
 
 		errorLabel2 = new JLabel("");
 		errorLabel2.setBounds(delTeachPane.getWidth()/16, delTeachPane.getHeight()/3 - 25, deleteBtn.getWidth() + cancelBtn2.getWidth(), 20);
@@ -291,17 +257,16 @@ public class AdminPanel extends JPanel{
 		conPwordField.setBounds(oldPwordField.getX(), newPwordField.getY() + 30, oldPwordField.getWidth(), 20);
 		changePwordPane.add(conPwordField);
 		conPwordField.addFocusListener(new FieldsFocusListener(2, 2));
-		conPwordField.addActionListener(new AdminActionListener(3, 0));
 
 		confirmBtn = new JButton("Confirm");
 		confirmBtn.setBounds(changePwordPane.getWidth()/16, conPwordLabel.getY() + 30, conPwordLabel.getWidth() - changePwordPane.getWidth()/16,changePwordPane.getHeight()/7);
 		changePwordPane.add(confirmBtn);
-		confirmBtn.addActionListener(new AdminActionListener(3, 1));
+		confirmBtn.addActionListener(new AdminActionListener(2, 1));
 
 		cancelBtn3 = new JButton("Cancel");
 		cancelBtn3.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());
 		changePwordPane.add(cancelBtn3);
-		cancelBtn3.addActionListener(new AdminActionListener(3, 2));
+		cancelBtn3.addActionListener(new AdminActionListener(2, 2));
 
 		errorLabel3 = new JLabel("");
 		errorLabel3.setBounds(changePwordPane.getWidth()/16, changePwordPane.getHeight()/4 - 25, confirmBtn.getWidth() + cancelBtn3.getWidth(), 20);
@@ -319,11 +284,7 @@ public class AdminPanel extends JPanel{
 	public void resize(){
 		// Resize Left Side Pane //
 		leftSidePane.setBounds(0, 0, getWidth()/4 + 60, getHeight());
-		buttonPane.setBounds(30, getHeight()/8, getWidth()/4, getHeight()/2 + getHeight()/4);
-		createAcctBtn.setBounds(0, 0, buttonPane.getWidth(), 50);
-		deleteAcctBtn.setBounds(0, 50, buttonPane.getWidth(), 50);
-		changePwordBtn.setBounds(0, 100, buttonPane.getWidth(), 50);
-		logoutBtn.setBounds(0, buttonPane.getHeight()-50, buttonPane.getWidth(), 50);
+		((LeftSidePane)leftSidePane).resize();
 
 		// Resize CreateTeach Pane //
 		createTeachPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, createTeachPane.getHeight());
@@ -443,11 +404,6 @@ public class AdminPanel extends JPanel{
 	}
 
 	private class AdminActionListener implements ActionListener{
-		// state: 0 - Left Side Pane Buttons //
-			// mode: 0 - Create Teacher Account Pane //
-			// mode: 1 - Delete Teacher Account Pane //
-			// mode: 2 - Change Password Pane //
-			// mode: otherwise - Logout //
 		// state: 1 - Create Teacher Account //
 			// mode: 0 - create button //
 			// mode: 1 - cancel button //
@@ -469,55 +425,6 @@ public class AdminPanel extends JPanel{
 
 		public void actionPerformed(ActionEvent e){
 			if(this.state == 0){
-				if(this.mode == 0){
-					createTeachPane.setVisible(true);
-					
-					delTeachPane.setVisible(false);
-					reinitialize(false, true, 1);
-
-					changePwordPane.setVisible(false);
-					reinitialize(false, true, 2);
-				}
-				else if(this.mode == 1){
-					createTeachPane.setVisible(false);
-					reinitialize(false, true, 0);
-
-					delTeachPane.setVisible(true);
-
-					changePwordPane.setVisible(false);
-					reinitialize(false, true, 2);
-
-
-				}
-				else if(this.mode == 2){
-					createTeachPane.setVisible(false);
-					reinitialize(false, true, 0);
-
-					delTeachPane.setVisible(false);
-					reinitialize(false, true, 1);
-
-					changePwordPane.setVisible(true);
-
-				}
-				else{
-					createTeachPane.setVisible(false);
-					reinitialize(false, true, 0);
-
-					delTeachPane.setVisible(false);
-					reinitialize(false, true, 1);					
-
-					changePwordPane.setVisible(false);
-					reinitialize(false, true, 2);
-
-					ANNdroid.simulator.active = null;
-					ANNdroid.loginPanel.add(ANNdroid.bgPanel);
-					remove(ANNdroid.bgPanel);
-			
-					CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
-					c1.show(ANNdroid.cards, ANNdroid.LOGINPANEL);				
-				}				
-			}
-			else if(this.state == 1){
 				if(this.mode == 0){
 					if(fname.equals("")){
 						errorLabel1.setText("* first name must not be blank");
@@ -563,7 +470,7 @@ public class AdminPanel extends JPanel{
 					createTeachPane.setVisible(false);
 				}
 			}
-			else if(this.state == 2){
+			else if(this.state == 1){
 				if(this.mode == 1){
 					reinitialize(false, true, 1);
 					delTeachPane.setVisible(false);
@@ -586,7 +493,7 @@ public class AdminPanel extends JPanel{
 					reinitialize(true, false, 1);
 				}
 			}
-			else if(this.state == 3){
+			else if(this.state == 2){
 				if(this.mode == 2){
 					reinitialize(false, true, 2);
 					changePwordPane.setVisible(false);
