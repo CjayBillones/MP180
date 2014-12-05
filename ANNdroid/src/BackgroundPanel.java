@@ -24,7 +24,7 @@ public class BackgroundPanel extends JPanel{
 		setBackground(Color.BLACK);
 
 		try{
-			originalBGImage = ImageIO.read(new File("ANNdroid/resources/img/mainbg.jpg"));
+			originalBGImage = ImageIO.read(new File("ANNdroid/resources/img/bg.png"));
 		}catch(Exception e){	e.printStackTrace();	}
 
 	}

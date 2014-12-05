@@ -1,0 +1,84 @@
+How far are two peopl having displacements dx=4km and dy=6km?
+7.2km
+70.9km
+7km
+2.7km
+0
+HARD
+Frictions increases with what?
+weight
+increased surface area
+both a and b
+speed
+1
+EASY
+When is water considered supercooled?
+freezes below 0 deg Celsius
+freezes above 0 deg Celsius
+does not freeze at all
+cooled below 0 deg Celsius and still remains as liquid
+3
+INTERMEDIATE
+A change in position specified by size and direction is called?
+density
+force
+speed
+displacement
+3
+EASY
+Vector quantities measure what?
+magnitude
+direction
+both a and b
+distance
+2
+EASY
+What equation represents the relationship between matter and energy?
+E = mc^2
+K = mv^2/2
+P = Fd/t
+W = Fd
+0
+EASY
+What do you call light waves which vibrate only in one plane?
+polarized light
+refracted light
+interference
+diffracted light
+0
+EASY
+What is the centripetal force acting on a 1,100-kg car that travels around a highway curve of radius 150m at 27m/s?
+5346N
+53.46N
+600N
+800N
+0
+HARD
+What is the temperature in deg Celsius of dry ice having a temp of -112 deg Fahrenheit?
+-55 deg Celsius
+-112 deg Celsius
+-90 deg Celsius
+-80 deg Celsius
+3
+INTERMEDIATE
+What is the absolute zero temperature?
+273 deg Kelvin
+0 deg Celsius
+-32 deg Fahrenheit
+-273 deg Celsius
+3
+EASY
+What is the amount of heat needed to raise temperature of 1g of water by 1 deg Celsius?
+Kelvin
+calorie
+joule
+Fahrenheit
+1
+EASY
+A force of 2.8N acts on a beach ball producind an acceleration of 22.4m/s^2. What is the mass?
+0.125kg
+22.4g
+62.7kg
+0.125g
+0
+INTERMEDIATE

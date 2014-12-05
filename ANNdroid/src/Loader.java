@@ -33,7 +33,7 @@ public class Loader{
 				}
 				ois.close();
 			}catch(IOException e){	e.printStackTrace();
-			}catch(ClassNotFoundException e){	e.printStackTrace();	}
+			}catch(ClassNotFoundException e){	e.printStackTrace();}
 		}
 		else{
 			User u = new Admin("admin", Utilities.hashPassword("password"));
@@ -42,4 +42,35 @@ public class Loader{
 		}
 		return userList;
 	}
+	
+	public LinkedList<Subject> loadSubjects(String fileName) throws IOException{
+		
+		File file = new File(fileName);
+		LinkedList<Subject> subjectList = new LinkedList<Subject>();
+
+		if(file.exists()){
+			try{
+				FileInputStream fis = new FileInputStream(file);
+				ObjectInputStream ois = new ObjectInputStream(fis);
+
+				int size = ois.readInt();
+
+				for(int ac = 0; ac < size; ac++){
+					Subject s = (Subject)ois.readObject();
+
+					subjectList.add(s);
+
+					System.out.println(s.getName() + " " + Integer.toString(s.getQuestions().size()));
+				}
+				ois.close();
+			}catch(IOException e){	e.printStackTrace();
+			}catch(ClassNotFoundException e){	e.printStackTrace();}
+		}
+		else
+			throw new FileNotFoundException(fileName);
+		return subjectList;
+	}
+	
+
+	
 }

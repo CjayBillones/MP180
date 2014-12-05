@@ -42,6 +42,7 @@ public class ANNdroid extends JFrame{
 		simulator = new Simulator();
 
 		// Frame Properties //
+		//setUndecorated(true);
 		setResizable(true);
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		setMinimumSize(new Dimension(800, 600));
