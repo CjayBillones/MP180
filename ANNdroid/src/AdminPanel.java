@@ -554,7 +554,7 @@ public class AdminPanel extends JPanel{
 					else{
 						errorLabel1.setText("* successfully created teacher account");
 						errorLabel1.setForeground(Color.YELLOW);
-						((Admin)ANNdroid.simulator.active).createAcct(uname, Utilities.hashPassword(pword), fname, lname);
+						((Admin)ANNdroid.simulator.active).createAcct(new Teacher(uname, Utilities.hashPassword(pword), fname, lname));
 					}
 					reinitialize(true, false, 0);
 				}

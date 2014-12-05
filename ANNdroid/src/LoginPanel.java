@@ -40,14 +40,14 @@ public class LoginPanel extends JPanel{
 		loginPane.setBounds(getWidth()/4, getHeight()/3, getWidth()/2, getHeight()/4);
 
 		errorLabel = new JLabel("");
-		errorLabel.setBounds(loginPane.getWidth()/4, loginPane.getHeight()/3 - 10, loginPane.getWidth()/2, 20);
+		errorLabel.setBounds(loginPane.getWidth()/4, loginPane.getHeight()/3 - 30, loginPane.getWidth()/2, 20);
 		errorLabel.setForeground(Color.RED);
 		errorLabel.setBackground(Color.BLACK);
 		errorLabel.setOpaque(true);
 		loginPane.add(errorLabel);
 
 		unameLabel = new JLabel("username: ", SwingConstants.CENTER);
-		unameLabel.setBounds(errorLabel.getX(), loginPane.getHeight()/3 + 15, loginPane.getWidth()/5, 20);
+		unameLabel.setBounds(errorLabel.getX(), loginPane.getHeight()/3, loginPane.getWidth()/5, 20);
 		unameLabel.setForeground(Color.WHITE);
 		unameLabel.setBackground(Color.BLACK);
 		unameLabel.setOpaque(true);
@@ -89,8 +89,8 @@ public class LoginPanel extends JPanel{
 
 	public void resize(){
 		loginPane.setBounds(getWidth()/4, getHeight()/3, getWidth()/2, getHeight()/4);
-		errorLabel.setBounds(loginPane.getWidth()/4, loginPane.getHeight()/3 - 10, loginPane.getWidth()/2, 20);
-		unameLabel.setBounds(errorLabel.getX(), loginPane.getHeight()/3 + 15, loginPane.getWidth()/5, 20);
+		errorLabel.setBounds(loginPane.getWidth()/4, loginPane.getHeight()/3 - 30, loginPane.getWidth()/2, 20);
+		unameLabel.setBounds(errorLabel.getX(), loginPane.getHeight()/3 , loginPane.getWidth()/5, 20);
 		unameField.setBounds(unameLabel.getX() + unameLabel.getWidth(), unameLabel.getY(), errorLabel.getWidth()-unameLabel.getWidth(), 20);
 		pwordLabel.setBounds(loginPane.getWidth()/4, unameLabel.getY() + 30, loginPane.getWidth()/5, 20);
 		pwordField.setBounds(pwordLabel.getX() + pwordLabel.getWidth(), pwordLabel.getY(), errorLabel.getWidth()-pwordLabel.getWidth(), 20);

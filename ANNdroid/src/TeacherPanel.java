@@ -330,10 +330,10 @@ public class TeacherPanel extends JPanel{
 
 		public void focusLost(FocusEvent e){
 			if(this.state == 0){
-				if(this.mode == 0){ fname = String.valueOf(fnameField.getText()); System.out.println(fname);}
-				else if(this.mode == 1){ lname = String.valueOf(lnameField.getText()); System.out.println(lname);}
-				else if(this.mode == 2){ uname = String.valueOf(unameField.getText()); System.out.println(uname);}
-				else {pword = String.valueOf(pwordField.getPassword()); System.out.println(pword);}				
+				if(this.mode == 0) fname = String.valueOf(fnameField.getText());
+				else if(this.mode == 1) lname = String.valueOf(lnameField.getText());
+				else if(this.mode == 2) uname = String.valueOf(unameField.getText());
+				else pword = String.valueOf(pwordField.getPassword());				
 			}
 			else if(this.state == 1){
 				if(this.mode == 0) delUname = String.valueOf(delUnameField.getText());
@@ -451,7 +451,7 @@ public class TeacherPanel extends JPanel{
 					else{
 						errorLabel2.setText("* successfully created student account");
 						errorLabel2.setForeground(Color.YELLOW);
-						((Teacher)ANNdroid.simulator.active).createAcct(uname, Utilities.hashPassword(pword), fname, lname);
+						((Teacher)ANNdroid.simulator.active).createAcct(new Student(uname, Utilities.hashPassword(pword), fname, lname));
 					}
 					reinitialize(true, false, 0);
 				}
