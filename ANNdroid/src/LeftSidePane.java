@@ -1,18 +1,28 @@
 package ANNdroid.src;
 
+import java.io.File;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.imageio.ImageIO;
 
+import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 
 public class LeftSidePane extends JPanel{
 
 	// source: 0 - Admin Panel //
 	// source: 1 - Teacher Panel //
 	// source: 2 - Student Panel //
+
+	public BufferedImage originalBGImage;
+	public BufferedImage scaledBGImage;
 
 	int source;
 	JPanel sourcePanel;
@@ -32,6 +42,7 @@ public class LeftSidePane extends JPanel{
 		btnPane_wdt = sourcePanel.getWidth();
 
 		buttonPane = new JPanel(null);
+		buttonPane.setOpaque(false);
 		buttonPane.setPreferredSize(new Dimension(btnPane_wdt/4, btnPane_ht/2));
 		buttonPane.setBounds(30, btnPane_ht/8, btnPane_wdt/4, btnPane_ht/2 + btnPane_ht/4);
 	
@@ -41,16 +52,37 @@ public class LeftSidePane extends JPanel{
 
 			if(buttons-2 == ac) bc = buttonPane.getHeight()-100;
 
-			btns[ac] = new JButton(labels[ac]);
+			btns[ac] = new CustomButton(labels[ac], btnPane_wdt/4, 50);
 			btns[ac].setBounds(0, bc, btnPane_wdt/4, 50);
+			btns[ac].setContentAreaFilled(false);
 			btns[ac].addActionListener(new ButtonActions(ac));
 			buttonPane.add(btns[ac]);
 		}
 	
 		add(buttonPane);
+	
+		try{
+			originalBGImage = ImageIO.read(new File("ANNdroid/resources/img/left.png"));
+		}catch(Exception e){	e.printStackTrace();	}
+	}
+
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		g.drawImage(scaledBGImage, 0, 0, getWidth(), getHeight(), null);
 	}
 
 	public void resize(){
+
+		double widthScaleFactor = getWidth() / (double)originalBGImage.getWidth();
+		double heightScaleFactor = getHeight() / (double)originalBGImage.getHeight();
+		double scaleFactor = (widthScaleFactor > heightScaleFactor)? heightScaleFactor : widthScaleFactor;
+
+		AffineTransform at = new AffineTransform();
+		at.scale(scaleFactor, scaleFactor);
+
+		AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+		scaledBGImage = scaleOp.filter(originalBGImage, null);		
+
 		btnPane_ht = sourcePanel.getHeight();
 		btnPane_wdt = sourcePanel.getWidth();		
 		buttonPane.setBounds(30, btnPane_ht/8, btnPane_wdt/4, btnPane_ht/2 + btnPane_ht/4);
@@ -58,7 +90,10 @@ public class LeftSidePane extends JPanel{
 		for(int ac = 0, bc = 0; ac < btns.length; ac++, bc+=50){
 			if(btns.length-2 == ac) bc = buttonPane.getHeight()-100;
 			btns[ac].setBounds(0, bc, btnPane_wdt/4, 50);
-		}		
+			((CustomButton)btns[ac]).resize();
+		}
+
+		repaint();
 	}
 
 	private class ButtonActions implements ActionListener{

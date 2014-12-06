@@ -12,12 +12,12 @@ import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 
-public class LoginPane extends JPanel{
+public class GenericPane extends JPanel{
 
 	public BufferedImage originalBGImage;
 	public BufferedImage scaledBGImage;
 
-	public LoginPane(int width, int height){
+	public GenericPane(int width, int height){
 		
 		super(null);
 

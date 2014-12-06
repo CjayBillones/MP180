@@ -24,6 +24,9 @@ public class CustomLabel extends JLabel{
 		
 		super(text);
 
+		if(mode == 1) setForeground(Color.WHITE);
+		else setForeground(Color.RED);
+		
 		setPreferredSize(new Dimension(width, height));
 		setOpaque(false);
 

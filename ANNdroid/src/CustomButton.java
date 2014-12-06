@@ -26,6 +26,7 @@ public class CustomButton extends JButton{
 
 		setLayout(null);
 		setPreferredSize(new Dimension(width, height));
+		setForeground(Color.WHITE);
 		setOpaque(false);
 
 		try{

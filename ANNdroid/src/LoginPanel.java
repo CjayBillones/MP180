@@ -36,7 +36,7 @@ public class LoginPanel extends JPanel{
 		setPreferredSize(new Dimension(ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT));
 		setBounds(0, 0, ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT);
 
-		loginPane = new LoginPane(getWidth()/2, getHeight()/4);
+		loginPane = new GenericPane(getWidth()/2, getHeight()/4);
 		loginPane.setBounds(getWidth()/4, getHeight()/3, getWidth()/2, getHeight()/4);		
 		
 		errorLabel = new CustomLabel("", loginPane.getWidth()/2, 20, 0);
@@ -85,7 +85,7 @@ public class LoginPanel extends JPanel{
 
 	public void resize(){
 		loginPane.setBounds(getWidth()/4, getHeight()/3, getWidth()/2, getHeight()/4);
-		((LoginPane)loginPane).resize();
+		((GenericPane)loginPane).resize();
 
 		errorLabel.setBounds(loginPane.getWidth()/4, loginPane.getHeight()/3 - 30, loginPane.getWidth()/2, 20);
 		((CustomLabel)errorLabel).resize();
