@@ -122,7 +122,7 @@ public class AdminPanel extends JPanel{
 		lnameField.addActionListener(event -> {unameField.requestFocus();});
 
 		unameLabel = new CustomLabel("Username: ", lnameLabel.getWidth(), 20, 1);
-		unameLabel.setBounds(unameLabel.getX(), lnameLabel.getY()+30, lnameLabel.getWidth(), 20);
+		unameLabel.setBounds(lnameLabel.getX(), lnameLabel.getY()+30, lnameLabel.getWidth(), 20);
 		createTeachPane.add(unameLabel);
 
 		unameField = new JTextField();
@@ -141,7 +141,7 @@ public class AdminPanel extends JPanel{
 		pwordField.addFocusListener(new FieldsFocusListener(0, 3));
 
 		createBtn = new CustomButton("Create", pwordLabel.getWidth() - createTeachPane.getWidth()/16, createTeachPane.getHeight()/7);
-		createBtn.setBounds(createTeachPane.getWidth()/2-createBtn.getWidth(), pwordLabel.getY() + 30, pwordLabel.getWidth() - createTeachPane.getWidth()/16, createTeachPane.getHeight()/7);
+		createBtn.setBounds(createTeachPane.getWidth()/2-(pwordLabel.getWidth() - createTeachPane.getWidth()/16), pwordLabel.getY() + 30, pwordLabel.getWidth() - createTeachPane.getWidth()/16, createTeachPane.getHeight()/7);
 		createTeachPane.add(createBtn);
 		createBtn.addActionListener(new AdminActionListener(0, 0));
 
