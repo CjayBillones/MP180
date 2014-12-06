@@ -59,4 +59,11 @@ public class Utilities{
 		}
 		return -1;
 	}
+
+	public static int subjectExists(String subject){
+		for(Subject s : ANNdroid.simulator.subjectList){
+			if(s.getName().equalsIgnoreCase(subject)) return ANNdroid.simulator.subjectList.indexOf(s);
+		}
+		return -1;
+	}
 }

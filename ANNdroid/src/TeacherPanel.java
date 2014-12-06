@@ -1,11 +1,16 @@
 package ANNdroid.src;
 
+import java.util.LinkedList;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JScrollPane;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
+import javax.swing.text.DefaultCaret;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -67,10 +72,39 @@ public class TeacherPanel extends JPanel{
 
 	// Manage Subjects //
 	JPanel manageSubjectsButtonPane;
-	JLabel errorLabel3;
 	JButton addQuestion;
 	JButton viewQuestions;
 	JButton deleteQuestion;
+
+	JPanel manageSubjectPane;
+	JLabel errorLabel3;
+
+	JPanel addQuestionPane;
+
+	JLabel subjectLabel;
+	JTextField subjectField;
+
+	JLabel qLabel;
+	JScrollPane jp;
+	JTextArea qField;
+
+	JLabel fchoiceLabel;
+	JLabel schoiceLabel;
+	JLabel tchoiceLabel;
+	JLabel fthchoiceLabel;
+
+	JTextField fchoiceField;
+	JTextField schoiceField;
+	JTextField tchoiceField;
+	JTextField fthchoiceField;
+
+	JLabel diffLabel;
+	JTextField diffField;
+	JLabel answerLabel;
+	JTextField answerField;
+
+	JButton addBtn;
+	JButton cancelBtn3;
 
 	public TeacherPanel(){
 		setLayout(null);
@@ -184,26 +218,190 @@ public class TeacherPanel extends JPanel{
 		cancelBtn2.addActionListener(new TeacherActionListener(1, 1));	
 
 		// Manage Subjects Pane //
-		manageSubjectsButtonPane = new GenericPane(getWidth()-leftSidePane.getWidth(), getHeight() - 180);
+		manageSubjectsButtonPane = new GenericPane(getWidth()-leftSidePane.getWidth()-30, getHeight() - 180);
 		manageSubjectsButtonPane.setBounds(leftSidePane.getWidth(), getHeight()/8, getWidth()-leftSidePane.getWidth()-30, getHeight()/10);
 		manageSubjectsButtonPane.setVisible(false);
 
+		manageSubjectPane = new GenericPane(getWidth()-leftSidePane.getWidth()-30, getHeight()-(manageSubjectsButtonPane.getHeight())*3);
+		manageSubjectPane.setBounds(manageSubjectsButtonPane.getX(), manageSubjectsButtonPane.getY()+ manageSubjectsButtonPane.getHeight(), getWidth()-leftSidePane.getWidth()-30, getHeight()-(manageSubjectsButtonPane.getHeight())*3);
+		manageSubjectPane.setVisible(false);
+
+		errorLabel3 = new CustomLabel("", manageSubjectPane.getWidth() - (manageSubjectPane.getWidth()/8), 20, 0);
+		errorLabel3.setBounds(manageSubjectPane.getWidth()/16, manageSubjectPane.getHeight()/10, manageSubjectPane.getWidth() - (manageSubjectPane.getWidth()/8), 20);
+		manageSubjectPane.add(errorLabel3);		
+
+		addQuestionPane = new JPanel(null);
+		addQuestionPane.setBounds(manageSubjectPane.getWidth()/16+5, manageSubjectPane.getHeight()/5, manageSubjectPane.getWidth() - manageSubjectPane.getWidth()/7, manageSubjectPane.getHeight()-manageSubjectPane.getHeight()/4-5);
+		addQuestionPane.setOpaque(false);
+		addQuestionPane.setVisible(false);
+		manageSubjectPane.add(addQuestionPane);
+
+		subjectLabel = new CustomLabel("Subject: ", addQuestionPane.getWidth()/6, 20, 1);
+		subjectLabel.setBounds(0, 0, addQuestionPane.getWidth()/6, 20);
+		addQuestionPane.add(subjectLabel);
+
+		subjectField = new JTextField();
+		subjectField.setBounds(subjectLabel.getX()+subjectLabel.getWidth(), subjectLabel.getY(), addQuestionPane.getWidth()/4, 20);
+		addQuestionPane.add(subjectField);
+
+		qLabel = new CustomLabel("Question: ", subjectLabel.getWidth()/4, 20, 1);
+		qLabel.setBounds(subjectLabel.getX(), subjectLabel.getY() + 40, subjectLabel.getWidth()/4, 20);
+		addQuestionPane.add(qLabel);
+
+		qField = new JTextArea("", 10, 100);
+		qField.setBounds(0, 0, subjectField.getWidth()*3+15, 40);
+		qField.setLineWrap(true);
+		jp = new JScrollPane(qField);
+		jp.setBounds(subjectField.getX(), subjectField.getY()+30, subjectField.getWidth()*3+15, 40);
+		jp.createVerticalScrollBar();
+		addQuestionPane.add(jp);
+
+		DefaultCaret caret = (DefaultCaret)qField.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+
+		fchoiceLabel = new CustomLabel("Choice A: ", qLabel.getWidth(), 20, 1);
+		fchoiceLabel.setBounds(qLabel.getX(), qLabel.getY() + 40, qLabel.getWidth(), 20);
+		addQuestionPane.add(fchoiceLabel);
+
+		fchoiceField = new JTextField();
+		fchoiceField.setBounds(subjectField.getX(), fchoiceLabel.getY(), subjectField.getWidth(), 20);
+		addQuestionPane.add(fchoiceField);
+
+		schoiceLabel = new CustomLabel("Choice B: ", fchoiceLabel.getWidth(), 20, 1);
+		schoiceLabel.setBounds(fchoiceLabel.getX(), fchoiceLabel.getY() + 30, fchoiceLabel.getWidth(), 20);
+		addQuestionPane.add(schoiceLabel);
+
+		schoiceField = new JTextField();
+		schoiceField.setBounds(fchoiceField.getX(), schoiceLabel.getY(), fchoiceField.getWidth(), 20);
+		addQuestionPane.add(schoiceField);
+
+		tchoiceLabel = new CustomLabel("Choice C: ", schoiceLabel.getWidth(), 20, 1);
+		tchoiceLabel.setBounds(addQuestionPane.getWidth()/2, fchoiceLabel.getY(), schoiceLabel.getWidth(), 20);
+		addQuestionPane.add(tchoiceLabel);
+
+		tchoiceField = new JTextField();
+		tchoiceField.setBounds(tchoiceLabel.getX()+tchoiceLabel.getWidth(), tchoiceLabel.getY(), tchoiceLabel.getWidth(), 20);
+		addQuestionPane.add(tchoiceField);
+
+		fthchoiceLabel = new CustomLabel("Choice D: ", tchoiceLabel.getWidth(), 20, 1);
+		fthchoiceLabel.setBounds(tchoiceLabel.getX(), schoiceLabel.getY(), tchoiceLabel.getWidth(), 20);
+		addQuestionPane.add(fthchoiceLabel);
+
+		fthchoiceField = new JTextField();
+		fthchoiceField.setBounds(tchoiceField.getX(), fthchoiceLabel.getY(), tchoiceField.getWidth(), 20);
+		addQuestionPane.add(fthchoiceField);
+
+		answerLabel = new CustomLabel("Answer: ", subjectLabel.getWidth(), 20, 1);
+		answerLabel.setBounds(schoiceLabel.getX(), schoiceLabel.getY()+30, subjectLabel.getWidth(), 20);
+		addQuestionPane.add(answerLabel);
+
+		answerField = new JTextField();
+		answerField.setBounds(answerLabel.getX()+answerLabel.getWidth(), answerLabel.getY(), answerLabel.getWidth(), 20);
+		addQuestionPane.add(answerField);
+
+		diffLabel = new CustomLabel("Difficulty: ", answerLabel.getWidth(), 20, 1);
+		diffLabel.setBounds(addQuestionPane.getWidth()/2, answerLabel.getY(), answerLabel.getWidth(), 20);
+		addQuestionPane.add(diffLabel);
+
+		diffField = new JTextField();
+		diffField.setBounds(diffLabel.getX()+diffLabel.getWidth(), diffLabel.getY(), diffLabel.getWidth(), 20);
+		addQuestionPane.add(diffField);
+
+		addBtn = new CustomButton("Add", addQuestionPane.getWidth()/2, 30);
+		addBtn.setBounds(answerLabel.getX(), answerLabel.getY()+30, addQuestionPane.getWidth()/2, 30);
+		addBtn.addActionListener(e->{			
+			if(Utilities.subjectExists(subjectField.getText()) == -1){
+				errorLabel3.setText("* subject does not exist");
+				errorLabel3.setForeground(Color.RED);
+			}
+			else if(qField.getText().length() < 10){
+				errorLabel3.setText("* question must at least be 10 characters");
+				errorLabel3.setForeground(Color.RED);
+			}
+			else if(qField.getText().contains("\n")){
+				errorLabel3.setText("* do not press enter in the question field");
+				errorLabel3.setForeground(Color.RED);
+			}
+			else if(fchoiceField.getText().equals("") || schoiceField.getText().equals("") || tchoiceField.getText().equals("") || fthchoiceField.getText().equals("")){
+				errorLabel3.setText("* all field choices must be filled out");
+				errorLabel3.setForeground(Color.RED);
+			}
+			else if(!answerField.getText().equalsIgnoreCase("A") && !answerField.getText().equalsIgnoreCase("B") && !answerField.getText().equalsIgnoreCase("C") && !answerField.getText().equalsIgnoreCase("D")){
+				errorLabel3.setText("* answer must only be from a to d");
+				errorLabel3.setForeground(Color.RED);
+			}
+			else if(!diffField.getText().equalsIgnoreCase("EASY") && !diffField.getText().equalsIgnoreCase("INTERMEDIATE") && !diffField.getText().equalsIgnoreCase("HARD")){
+				errorLabel3.setText("* difficulty must be EASY, INTERMEDIATE or HARD");
+				errorLabel3.setForeground(Color.RED);
+			}			
+			else{
+
+				Subject s = Simulator.subjectList.get(Utilities.subjectExists(subjectField.getText()));
+
+				LinkedList<String> choices = new LinkedList<String>();
+					choices.add(fchoiceField.getText());
+					choices.add(schoiceField.getText());
+					choices.add(tchoiceField.getText());
+					choices.add(fthchoiceField.getText());
+
+				int answer = -1;
+
+				if(answerField.getText().equalsIgnoreCase("A")) answer = 0;
+				else if(answerField.getText().equalsIgnoreCase("B")) answer = 1;
+				else if(answerField.getText().equalsIgnoreCase("C")) answer = 2;
+				else if(answerField.getText().equalsIgnoreCase("D")) answer = 3;
+
+				String difficulty = diffField.getText().toUpperCase();
+
+				Question q = new Question(qField.getText(), choices, answer, difficulty);
+				LinkedList<Question> questionList = s.getQuestions();
+				questionList.add(q);
+				s.setQuestions(questionList);
+
+				errorLabel3.setText("* successfully added the question!");
+				errorLabel3.setForeground(Color.YELLOW);
+				Simulator.saver.saveSubjects(Simulator.subjectList, "ANNdroid/bin/subjects.bin");
+			}
+			reinitialize(true, false, 2);
+		});
+		addQuestionPane.add(addBtn);
+
+		cancelBtn3 = new CustomButton("Cancel", addQuestionPane.getWidth()/2, 30);
+		cancelBtn3.setBounds(diffLabel.getX(), diffLabel.getY()+30, addQuestionPane.getWidth()/2, 30);
+		cancelBtn3.addActionListener(e->{
+			reinitialize(false, true, 2);
+			addQuestionPane.setVisible(false);
+		});
+		addQuestionPane.add(cancelBtn3);
+
+		// Manage Subjects Buttons
 		addQuestion = new CustomButton("Add Question", manageSubjectsButtonPane.getWidth()/3-20, manageSubjectsButtonPane.getHeight()/2);
 		addQuestion.setBounds(manageSubjectsButtonPane.getWidth()/14, 20, manageSubjectsButtonPane.getWidth()/3-25, manageSubjectsButtonPane.getHeight()/2);
+		addQuestion.addActionListener(e -> {
+			addQuestionPane.setVisible(true);
+		});
 		manageSubjectsButtonPane.add(addQuestion);
 
 		viewQuestions = new CustomButton("View Questions", addQuestion.getWidth(), addQuestion.getHeight());
 		viewQuestions.setBounds(addQuestion.getX() + addQuestion.getWidth(), addQuestion.getY(), addQuestion.getWidth(), addQuestion.getHeight());
+		viewQuestions.addActionListener(e->{
+			addQuestionPane.setVisible(false);
+		});
 		manageSubjectsButtonPane.add(viewQuestions);
 
 		deleteQuestion = new CustomButton("Delete Question", addQuestion.getWidth(), addQuestion.getHeight());
 		deleteQuestion.setBounds(viewQuestions.getX() + viewQuestions.getWidth(), viewQuestions.getY(), viewQuestions.getWidth(), viewQuestions.getHeight());
+		deleteQuestion.addActionListener(e->{
+			addQuestionPane.setVisible(false);
+		});		
 		manageSubjectsButtonPane.add(deleteQuestion);
+
 
 		add(leftSidePane);
 		add(createStudentPane);
 		add(delStudentPane);
 		add(manageSubjectsButtonPane);
+		add(manageSubjectPane);
 	}
 
 	public void resize(){
@@ -271,20 +469,73 @@ public class TeacherPanel extends JPanel{
 		manageSubjectsButtonPane.setBounds(leftSidePane.getWidth(), getHeight()/8, getWidth()-leftSidePane.getWidth()-30, getHeight()/10);
 		((GenericPane)manageSubjectsButtonPane).resize();
 
-		addQuestion.setBounds(manageSubjectsButtonPane.getWidth()/14, 20, manageSubjectsButtonPane.getWidth()/3-24, manageSubjectsButtonPane.getHeight()/2);
+		addQuestion.setBounds(manageSubjectsButtonPane.getWidth()/8, 20, manageSubjectsButtonPane.getWidth()/4, manageSubjectsButtonPane.getHeight()/2);
 		((CustomButton)addQuestion).resize();
 
 		viewQuestions.setBounds(addQuestion.getX() + addQuestion.getWidth(), addQuestion.getY(), addQuestion.getWidth(), addQuestion.getHeight());
 		((CustomButton)viewQuestions).resize();		
 
 		deleteQuestion.setBounds(viewQuestions.getX() + viewQuestions.getWidth(), viewQuestions.getY(), viewQuestions.getWidth(), viewQuestions.getHeight());
-		((CustomButton)deleteQuestion).resize();		
+		((CustomButton)deleteQuestion).resize();
+
+		manageSubjectPane.setBounds(manageSubjectsButtonPane.getX(), manageSubjectsButtonPane.getY()+ manageSubjectsButtonPane.getHeight(), getWidth()-leftSidePane.getWidth()-30, getHeight()-(manageSubjectsButtonPane.getHeight())*3);
+		((GenericPane)manageSubjectPane).resize();
+
+		errorLabel3.setBounds(manageSubjectPane.getWidth()/16, manageSubjectPane.getHeight()/7, manageSubjectPane.getWidth() - (manageSubjectPane.getWidth()/8), 20);
+		((CustomLabel)errorLabel3).resize();
+
+		addQuestionPane.setBounds(manageSubjectPane.getWidth()/16+5, manageSubjectPane.getHeight()/5, manageSubjectPane.getWidth() - manageSubjectPane.getWidth()/7, manageSubjectPane.getHeight()-manageSubjectPane.getHeight()/4-5);
+
+		subjectLabel.setBounds(0, addQuestionPane.getHeight()/6, addQuestionPane.getWidth()/4, 20);
+		((CustomLabel)subjectLabel).resize();
+
+		subjectField.setBounds(subjectLabel.getX()+subjectLabel.getWidth(), subjectLabel.getY(), addQuestionPane.getWidth()/4, 20);		
+
+		answerLabel.setBounds(schoiceLabel.getX(), schoiceLabel.getY()+30, subjectLabel.getWidth(), 20);
+		((CustomLabel)answerLabel).resize();
+
+		answerField.setBounds(answerLabel.getX()+answerLabel.getWidth(), answerLabel.getY(), answerLabel.getWidth(), 20);
+
+		qLabel.setBounds(subjectLabel.getX(), subjectLabel.getY() + 40, subjectLabel.getWidth(), 20);
+		((CustomLabel)qLabel).resize();
+
+		qField.setBounds(0, 0, subjectField.getWidth()*3+15, 40);
+		jp.setBounds(subjectField.getX(), subjectField.getY()+30, subjectField.getWidth()*3, 40);
+
+		fchoiceLabel.setBounds(qLabel.getX(), qLabel.getY() + 40, qLabel.getWidth(), 20);
+		((CustomLabel)fchoiceLabel).resize();
+
+		fchoiceField.setBounds(subjectField.getX(), fchoiceLabel.getY(), subjectField.getWidth(), 20);
+
+		schoiceLabel.setBounds(fchoiceLabel.getX(), fchoiceLabel.getY() + 30, fchoiceLabel.getWidth(), 20);
+		((CustomLabel)schoiceLabel).resize();
+
+		schoiceField.setBounds(fchoiceField.getX(), schoiceLabel.getY(), fchoiceField.getWidth(), 20);
+
+		tchoiceLabel.setBounds(addQuestionPane.getWidth()/2, fchoiceLabel.getY(), schoiceLabel.getWidth(), 20);
+		((CustomLabel)tchoiceLabel).resize();
+
+		tchoiceField.setBounds(tchoiceLabel.getX()+tchoiceLabel.getWidth(), tchoiceLabel.getY(), tchoiceLabel.getWidth(), 20);
+
+		fthchoiceLabel.setBounds(tchoiceLabel.getX(), schoiceLabel.getY(), tchoiceLabel.getWidth(), 20);
+		((CustomLabel)fthchoiceLabel).resize();
+
+		fthchoiceField.setBounds(tchoiceField.getX(), fthchoiceLabel.getY(), tchoiceField.getWidth(), 20);
+
+		diffLabel.setBounds(addQuestionPane.getWidth()/2, answerLabel.getY(), answerLabel.getWidth(), 20);
+		((CustomLabel)diffLabel).resize();
+
+		diffField.setBounds(diffLabel.getX()+diffLabel.getWidth(), diffLabel.getY(), diffLabel.getWidth(), 20);
+
+		addBtn.setBounds(answerLabel.getX(), answerLabel.getY()+30, addQuestionPane.getWidth()/2, 30);
+		((CustomButton)addBtn).resize();
+
+		cancelBtn3.setBounds(diffLabel.getX(), diffLabel.getY()+30, addQuestionPane.getWidth()/2, 30);
+		((CustomButton)cancelBtn3).resize();
 	}
 
 	public void reinitialize(boolean error, boolean changeMode, int state){
-		// state: 0 - Create Account //
-		// state: 1 - Delete Account //
-		// state: 2 - Change Password //
+
 		if(state == 0){
 			if(changeMode || !error) errorLabel1.setText("");
 
@@ -306,7 +557,16 @@ public class TeacherPanel extends JPanel{
 			teachPwordField.setText("");
 		}
 		else if(state == 2){
-			//if(changeMode || !error) errorLabel3.setText("");
+			if(changeMode || !error) errorLabel3.setText("");
+
+			subjectField.setText("");
+			answerField.setText("");
+			diffField.setText("");
+			qField.setText("");
+			fchoiceField.setText("");
+			schoiceField.setText("");
+			tchoiceField.setText("");
+			fthchoiceField.setText("");
 		}
 	}
 

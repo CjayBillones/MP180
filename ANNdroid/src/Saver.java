@@ -32,4 +32,28 @@ public class Saver{
 		}catch(IOException e){	e.printStackTrace();	}
 
 	}
+
+	public void saveSubjects(LinkedList<Subject> subjectList, String fileName) throws NullPointerException{
+
+		if(subjectList.size() == 0)
+				throw new NullPointerException(fileName);
+
+		File file = new File(fileName);
+
+		try{
+			
+			FileOutputStream fos = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			if(!file.exists()) file.createNewFile();
+
+			oos.writeInt(subjectList.size());
+
+			for(int ac = 0; ac < subjectList.size(); ac++){
+				oos.writeObject(subjectList.get(ac));
+			}
+			oos.close();
+		}catch(IOException e){	e.printStackTrace();	}		
+
+	}
 }
