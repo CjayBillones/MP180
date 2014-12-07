@@ -55,6 +55,8 @@ public class LoginPanel extends JPanel{
 		unameField.addFocusListener(new FieldFocusListener(0));
 		unameField.addActionListener(event -> {pwordField.requestFocus();});
 		unameField.setOpaque(false);
+		unameField.setForeground(Color.WHITE);
+		unameField.setCaretColor(new Color(0, 29, 60, 0));
 
 		pwordLabel = new CustomLabel("password: ", loginPane.getWidth()/5, 20, 1);
 		pwordLabel.setBounds(loginPane.getWidth()/4, unameLabel.getY() + 30, loginPane.getWidth()/5, 20);
@@ -67,6 +69,7 @@ public class LoginPanel extends JPanel{
 		pwordField.addFocusListener(new FieldFocusListener(1));
 		pwordField.addActionListener(new LoginAction(0));
 		pwordField.setOpaque(false);
+		pwordField.setForeground(Color.WHITE);
 
 		loginBtn = new CustomButton("login", errorLabel.getWidth()/2, loginPane.getHeight()/7);
 		loginBtn.setBounds(errorLabel.getX(), pwordLabel.getY() + 30, errorLabel.getWidth()/2, loginPane.getHeight()/7);
