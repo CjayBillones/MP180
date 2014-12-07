@@ -70,6 +70,7 @@ public class LoginPanel extends JPanel{
 		pwordField.addActionListener(new LoginAction(0));
 		pwordField.setOpaque(false);
 		pwordField.setForeground(Color.WHITE);
+		pwordField.setCaretColor(new Color(0, 29, 60, 0));
 
 		loginBtn = new CustomButton("login", errorLabel.getWidth()/2, loginPane.getHeight()/7);
 		loginBtn.setBounds(errorLabel.getX(), pwordLabel.getY() + 30, errorLabel.getWidth()/2, loginPane.getHeight()/7);
