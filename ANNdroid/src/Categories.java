@@ -1,3 +1,5 @@
+package ANNdroid.src;
+
 public enum Categories{
 
 	AGE,GENDER,PROVINCE,INCOME_BRACKET,BIOLOGY,PHYSICS,CHEMISTRY

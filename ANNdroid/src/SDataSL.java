@@ -7,7 +7,7 @@ class SDataSL{
 	public static StudentData load(){
 		StudentData ret = null;
 		try{
-			FileInputStream file =  new FileInputStream("ANNdroid/bin/students.sdata");
+			FileInputStream file =  new FileInputStream("ANNdroid/bin/students.bin");
 			ObjectInputStream in = new ObjectInputStream(file);
 
 			ret = (StudentData) in.readObject();
