@@ -2,6 +2,7 @@ package ANNdroid.src;
 
 import ANNdroid.src.ai.aimaker.King;
 import ANNdroid.src.ai.aimaker.King.*;
+import ANNdroid.src.objects.*;
 
 import java.util.LinkedList;
 
