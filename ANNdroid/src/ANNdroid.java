@@ -1,5 +1,7 @@
 package ANNdroid.src;
 
+import ANNdroid.src.panels.*;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
