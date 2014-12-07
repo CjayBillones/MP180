@@ -1,5 +1,7 @@
 package ANNdroid.src;
 
+import ANNdroid.src.ai.aimaker.*;
+
 import java.util.LinkedList;
 import java.lang.ClassNotFoundException;
 
@@ -71,6 +73,32 @@ public class Loader{
 		return subjectList;
 	}
 	
+	public LinkedList<King> loadKings(String fileName) throws IOException{
+		
+		File file = new File(fileName);
+		LinkedList<King> kingList = new LinkedList<King>();
 
+		if(file.exists()){
+			try{
+				FileInputStream fis = new FileInputStream(file);
+				ObjectInputStream ois = new ObjectInputStream(fis);
+
+				int size = ois.readInt();
+
+				for(int ac = 0; ac < size; ac++){
+					King s = (King)ois.readObject();
+
+					kingList.add(s);
+					System.out.println(s.name);
+
+				}
+				ois.close();
+			}catch(IOException e){	e.printStackTrace();
+			}catch(ClassNotFoundException e){	e.printStackTrace();}
+		}
+		else
+			throw new FileNotFoundException(fileName);
+		return kingList;
+	}
 	
 }

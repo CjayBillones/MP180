@@ -1,5 +1,7 @@
 package ANNdroid.src;
 
+import ANNdroid.src.ai.aimaker.*;
+
 import java.util.LinkedList;
 import java.lang.NullPointerException;
 
@@ -27,6 +29,30 @@ public class Saver{
 
 			for(int ac = 0; ac < userList.size(); ac++){
 				oos.writeObject(userList.get(ac));
+			}
+			oos.close();
+		}catch(IOException e){	e.printStackTrace();	}
+
+	}
+
+	public void saveKings(LinkedList<King> kingList, String fileName)throws NullPointerException{
+
+		if(kingList.size() == 0)
+			throw new NullPointerException(fileName);
+
+		File file = new File(fileName);
+
+		try{
+			
+			FileOutputStream fos = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			if(!file.exists()) file.createNewFile();
+
+			oos.writeInt(kingList.size());
+
+			for(int ac = 0; ac < kingList.size(); ac++){
+				oos.writeObject(kingList.get(ac));
 			}
 			oos.close();
 		}catch(IOException e){	e.printStackTrace();	}
