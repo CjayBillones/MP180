@@ -1,2 +1,8 @@
-/ANNdroid/bin/users.bin
 /ANNdroid/src/*.class
+/ANNdroid/src/custom_swing/*.class
+/ANNdroid/src/objects/*.class
+/ANNdroid/src/panels/*.class
+/ANNdroid/src/util/*.class
+/ANNdroid/src/ai/aimaker/*.class
+/ANNdroid/src/ai/ann/*.class
+/ANNdroid/src/ai/search/*.class
