@@ -1,6 +1,7 @@
 package ANNdroid.src.panels;
 
 import ANNdroid.src.custom_swing.*;
+import ANNdroid.src.objects.*;
 import ANNdroid.src.*;
 
 import java.io.File;
@@ -152,7 +153,8 @@ public class LeftSidePane extends JPanel{
 					((AdminPanel)ANNdroid.adminPanel).changePwordPane.setVisible(false);
 					((AdminPanel)ANNdroid.adminPanel).reinitialize(false, true, 2);
 
-					ANNdroid.simulator.active = null;
+					//System.out.println(ANNdroid.simulator.getActiveUser().getUsername());
+					ANNdroid.simulator.setActiveUser(null);
 					ANNdroid.loginPanel.add(ANNdroid.bgPanel);
 					((AdminPanel)ANNdroid.adminPanel).remove(ANNdroid.bgPanel);
 			

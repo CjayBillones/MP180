@@ -1,21 +1,17 @@
 package ANNdroid.src.custom_swing;
 
 import ANNdroid.src.*;
+import ANNdroid.src.events.*;
 
 import java.io.File;
 
-import javax.swing.JButton;
-import javax.imageio.ImageIO;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import javax.imageio.*;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.FontMetrics;
-import java.awt.image.BufferedImage;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
+import java.awt.*;
+import java.awt.image.*;
+import java.awt.geom.*;
+import java.awt.event.*;
 
 public class CustomButton extends JButton{
 
@@ -29,8 +25,11 @@ public class CustomButton extends JButton{
 		setLayout(null);
 		setPreferredSize(new Dimension(width, height));
 		setForeground(Color.WHITE);
+		setBorder(null);
+		setContentAreaFilled(false);
 		setOpaque(false);
-
+		addMouseListener(new CustomButtonMouseListener(this));		
+		
 		try{
 			originalBGImage = ImageIO.read(new File("ANNdroid/resources/img/button.png"));
 		}catch(Exception e){	e.printStackTrace();	}
@@ -65,5 +64,4 @@ public class CustomButton extends JButton{
 
 		repaint();
 	}
-
 }

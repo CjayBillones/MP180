@@ -2,16 +2,10 @@ package ANNdroid.src;
 
 import ANNdroid.src.panels.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
-import java.awt.Toolkit;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.CardLayout;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentAdapter;
+import java.awt.*;
+import java.awt.event.*;
 
 public class ANNdroid extends JFrame{
 
@@ -21,6 +15,8 @@ public class ANNdroid extends JFrame{
 	public static final int SCREEN_HEIGHT = 600;
 	public static final int SCREEN_XPOS = TK.getScreenSize().width/4;
 	public static final int SCREEN_YPOS = TK.getScreenSize().height/8;
+
+	public static Cursor cursor;
 
 	public static Simulator simulator;
 
@@ -40,10 +36,12 @@ public class ANNdroid extends JFrame{
 
 	public ANNdroid(){
 
-		super("ANNdroid");
+		super("ANNdroid Invasion");
 		simulator = new Simulator();
+		cursor = TK.createCustomCursor(TK.getImage("ANNdroid/resources/img/cursor.png"), new Point(getX(), getY()), "Cursor");
 
 		// Frame Properties //
+		setCursor(cursor);
 		//setUndecorated(true);
 		setResizable(true);
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);

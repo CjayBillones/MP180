@@ -1,8 +1,8 @@
 package ANNdroid.src;
 
 import ANNdroid.src.ai.aimaker.*;
-import ANNdroid.src.util.*;
 import ANNdroid.src.objects.*;
+import ANNdroid.src.util.*;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -41,4 +41,11 @@ public class Simulator{
 
 	}
 
+	public void setActiveUser(User u){
+		this.active = u;
+	}
+
+	public User getActiveUser(){
+		return this.active;
+	}
 }

@@ -1,0 +1,9 @@
+javac ANNdroid/src/util/*.java
+javac ANNdroid/src/objects/*.java
+javac ANNdroid/src/ai/aimaker/*.java
+javac ANNdroid/src/ai/ann/*.java
+javac ANNdroid/src/ai/search/*.java
+javac ANNdroid/src/events/*.java
+javac ANNdroid/src/custom_swing/*.java
+javac ANNdroid/src/panels/*.java
+javac ANNdroid/src/*.java
