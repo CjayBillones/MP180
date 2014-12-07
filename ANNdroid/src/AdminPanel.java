@@ -93,7 +93,7 @@ public class AdminPanel extends JPanel{
 		leftSidePane.setBackground(Color.BLACK);
 
 		// Create Teach Pane Initialization //
-		createTeachPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/3+10);
+		createTeachPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/3+10, 1);
 		createTeachPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/4, getWidth() - leftSidePane.getWidth() - 200, getHeight()/3+10);
 		createTeachPane.setVisible(false);
 
@@ -151,7 +151,7 @@ public class AdminPanel extends JPanel{
 		cancelBtn1.addActionListener(new AdminActionListener(0, 1));
 
 		// Delete Teacher Pane Initialization //
-		delTeachPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/4);
+		delTeachPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/4, 1);
 		delTeachPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, getHeight()/4);
 		delTeachPane.setVisible(false);	
 
@@ -189,7 +189,7 @@ public class AdminPanel extends JPanel{
 		cancelBtn2.addActionListener(new AdminActionListener(1, 1));			
 
 		// Change Password Pane Initialization //
-		changePwordPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/3);
+		changePwordPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/3, 1);
 		changePwordPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3-50, getWidth() - leftSidePane.getWidth() - 200, getHeight()/3);
 		changePwordPane.setVisible(false);
 

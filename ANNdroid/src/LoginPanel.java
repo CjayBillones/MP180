@@ -36,8 +36,8 @@ public class LoginPanel extends JPanel{
 		setPreferredSize(new Dimension(ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT));
 		setBounds(0, 0, ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT);
 
-		loginPane = new GenericPane(getWidth()/2, getHeight()/4);
-		loginPane.setBounds(getWidth()/4, getHeight()/3, getWidth()/2, getHeight()/4);		
+		loginPane = new GenericPane(getWidth()/2, getHeight()/4, 0);
+		loginPane.setBounds(getWidth()/4, getHeight()/3, getWidth()/2, getHeight()/4);
 		
 		errorLabel = new CustomLabel("", loginPane.getWidth()/2, 20, 0);
 		errorLabel.setBounds(loginPane.getWidth()/4, loginPane.getHeight()/3 - 30, loginPane.getWidth()/2, 20);
@@ -54,6 +54,7 @@ public class LoginPanel extends JPanel{
 		loginPane.add(unameField);
 		unameField.addFocusListener(new FieldFocusListener(0));
 		unameField.addActionListener(event -> {pwordField.requestFocus();});
+		unameField.setOpaque(false);
 
 		pwordLabel = new CustomLabel("password: ", loginPane.getWidth()/5, 20, 1);
 		pwordLabel.setBounds(loginPane.getWidth()/4, unameLabel.getY() + 30, loginPane.getWidth()/5, 20);
@@ -65,6 +66,7 @@ public class LoginPanel extends JPanel{
 		loginPane.add(pwordField);
 		pwordField.addFocusListener(new FieldFocusListener(1));
 		pwordField.addActionListener(new LoginAction(0));
+		pwordField.setOpaque(false);
 
 		loginBtn = new CustomButton("login", errorLabel.getWidth()/2, loginPane.getHeight()/7);
 		loginBtn.setBounds(errorLabel.getX(), pwordLabel.getY() + 30, errorLabel.getWidth()/2, loginPane.getHeight()/7);

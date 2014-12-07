@@ -121,7 +121,7 @@ public class TeacherPanel extends JPanel{
 		leftSidePane.setBackground(Color.BLACK);		
 
 		// Create Student Pane //
-		createStudentPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/3+10);
+		createStudentPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/3+10, 1);
 		createStudentPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/4, getWidth() - leftSidePane.getWidth() - 200, getHeight()/3+10);
 		createStudentPane.setVisible(false);
 
@@ -179,7 +179,7 @@ public class TeacherPanel extends JPanel{
 		cancelBtn1.addActionListener(new TeacherActionListener(0, 1));
 
 		// Delete Teacher Pane Initialization //
-		delStudentPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/4);
+		delStudentPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/4, 1);
 		delStudentPane.setBounds(leftSidePane.getWidth() + 100, getHeight()/3, getWidth() - leftSidePane.getWidth() - 200, getHeight()/4);
 		delStudentPane.setVisible(false);	
 
@@ -218,11 +218,11 @@ public class TeacherPanel extends JPanel{
 		cancelBtn2.addActionListener(new TeacherActionListener(1, 1));	
 
 		// Manage Subjects Pane //
-		manageSubjectsButtonPane = new GenericPane(getWidth()-leftSidePane.getWidth()-30, getHeight() - 180);
+		manageSubjectsButtonPane = new GenericPane(getWidth()-leftSidePane.getWidth()-30, getHeight() - 180, 1);
 		manageSubjectsButtonPane.setBounds(leftSidePane.getWidth(), getHeight()/8, getWidth()-leftSidePane.getWidth()-30, getHeight()/10);
 		manageSubjectsButtonPane.setVisible(false);
 
-		manageSubjectPane = new GenericPane(getWidth()-leftSidePane.getWidth()-30, getHeight()-(manageSubjectsButtonPane.getHeight())*3);
+		manageSubjectPane = new GenericPane(getWidth()-leftSidePane.getWidth()-30, getHeight()-(manageSubjectsButtonPane.getHeight())*3, 1);
 		manageSubjectPane.setBounds(manageSubjectsButtonPane.getX(), manageSubjectsButtonPane.getY()+ manageSubjectsButtonPane.getHeight(), getWidth()-leftSidePane.getWidth()-30, getHeight()-(manageSubjectsButtonPane.getHeight())*3);
 		manageSubjectPane.setVisible(false);
 

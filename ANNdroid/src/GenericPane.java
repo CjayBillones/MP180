@@ -17,7 +17,7 @@ public class GenericPane extends JPanel{
 	public BufferedImage originalBGImage;
 	public BufferedImage scaledBGImage;
 
-	public GenericPane(int width, int height){
+	public GenericPane(int width, int height, int mode){
 		
 		super(null);
 
@@ -25,7 +25,8 @@ public class GenericPane extends JPanel{
 		setOpaque(false);
 
 		try{
-			originalBGImage = ImageIO.read(new File("ANNdroid/resources/img/login.png"));
+			if(mode == 0) originalBGImage = ImageIO.read(new File("ANNdroid/resources/img/login2.png"));
+			else originalBGImage = ImageIO.read(new File("ANNdroid/resources/img/panel.png"));
 		}catch(Exception e){	e.printStackTrace();	}
 
 	}
