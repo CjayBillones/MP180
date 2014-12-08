@@ -170,7 +170,9 @@ public class LeftSidePane extends JPanel{
 
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectsButtonPane.setVisible(false);
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectPane.setVisible(false);
-					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);					
+					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);	
+
+					((TeacherPanel)ANNdroid.teacherPanel).fnameField.requestFocus();				
 				}
 				else if(this.mode == 1){
 					((TeacherPanel)ANNdroid.teacherPanel).createStudentPane.setVisible(false);
@@ -180,7 +182,9 @@ public class LeftSidePane extends JPanel{
 
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectsButtonPane.setVisible(false);
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectPane.setVisible(false);
-					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);					
+					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);
+
+					((TeacherPanel)ANNdroid.teacherPanel).delUnameField.requestFocus();		
 				}
 				else if(this.mode == 2){
 					((TeacherPanel)ANNdroid.teacherPanel).createStudentPane.setVisible(false);
