@@ -1,4 +1,4 @@
-package ANNdroid.src;
+package ANNdroid.src.ai.search;
 
 import java.io.File;
 
