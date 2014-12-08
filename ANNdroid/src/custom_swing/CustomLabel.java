@@ -4,18 +4,11 @@ import ANNdroid.src.*;
 
 import java.io.File;
 
-import javax.swing.JLabel;
-import javax.imageio.ImageIO;
-import javax.swing.SwingConstants;
-
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.FontMetrics;
-import java.awt.image.BufferedImage;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
+import javax.swing.*;
+import javax.imageio.*;
+import java.awt.*;
+import java.awt.image.*;
+import java.awt.geom.*;
 
 public class CustomLabel extends JLabel{
 
@@ -24,7 +17,7 @@ public class CustomLabel extends JLabel{
 
 	public CustomLabel(String text, int width, int height, int mode){
 		
-		super(text);
+		super(text, SwingConstants.CENTER);
 
 		if(mode == 1) setForeground(Color.WHITE);
 		else setForeground(Color.RED);

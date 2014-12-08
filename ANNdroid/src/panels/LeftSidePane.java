@@ -118,6 +118,8 @@ public class LeftSidePane extends JPanel{
 
 					((AdminPanel)ANNdroid.adminPanel).changePwordPane.setVisible(false);
 					((AdminPanel)ANNdroid.adminPanel).reinitialize(false, true, 2);
+
+					((AdminPanel)ANNdroid.adminPanel).fnameField.requestFocus();
 				}
 				else if(this.mode == 1){
 					((AdminPanel)ANNdroid.adminPanel).createTeachPane.setVisible(false);
@@ -128,7 +130,7 @@ public class LeftSidePane extends JPanel{
 					((AdminPanel)ANNdroid.adminPanel).changePwordPane.setVisible(false);
 					((AdminPanel)ANNdroid.adminPanel).reinitialize(false, true, 2);
 
-
+					((AdminPanel)ANNdroid.adminPanel).delUnameField.requestFocus();
 				}
 				else if(this.mode == 2){
 					((AdminPanel)ANNdroid.adminPanel).createTeachPane.setVisible(false);
@@ -138,6 +140,8 @@ public class LeftSidePane extends JPanel{
 					((AdminPanel)ANNdroid.adminPanel).reinitialize(false, true, 1);
 
 					((AdminPanel)ANNdroid.adminPanel).changePwordPane.setVisible(true);
+
+					((AdminPanel)ANNdroid.adminPanel).oldPwordField.requestFocus();
 
 				}
 				else if(this.mode == 3){
