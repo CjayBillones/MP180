@@ -1,7 +1,6 @@
-package ANNdroid.arc.maps;
+package ANNdroid.src;
 
 import ANNdroid.src.ai.search.*;
-import ANNdroid.src.ai.search.Search.*;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -65,12 +64,12 @@ public class LayoutEx extends JFrame implements ActionListener{
 		pan.setLayout(new GridLayout(row,col,2,2));
 
 		try{
-			wall = ImageIO.read(new File("reso/harang2.png"));
+			wall = ImageIO.read(new File("ANNdroid/resources/img/map/harang2.png"));
 			//space = ImageIO.read(new File("reso/space.png"));
-			bio = ImageIO.read(new File("reso/bio_node2.png"));
-			chem = ImageIO.read(new File("reso/chem_node2.png"));
-			phys = ImageIO.read(new File("reso/physics_node2.png"));
-			start = ImageIO.read(new File("reso/start_node2.png"));
+			bio = ImageIO.read(new File("ANNdroid/resources/img/map/bio_node2.png"));
+			chem = ImageIO.read(new File("ANNdroid/resources/img/map/chem_node2.png"));
+			phys = ImageIO.read(new File("ANNdroid/resources/img/map/physics_node2.png"));
+			start = ImageIO.read(new File("ANNdroid/resources/img/map/start_node2.png"));
 			//bg = ImageIO.read(new File("reso/neuromancer1.jpg"));
 		}catch(Exception e){	e.printStackTrace();	}
 

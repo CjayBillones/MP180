@@ -1,4 +1,4 @@
-package ANNdroid.arc.maps;
+package ANNdroid.src;
 
 import java.io.File;
 
@@ -19,7 +19,7 @@ public class MapPanel extends JPanel{
 
 	public MapPanel(){
 		try{
-			bg = ImageIO.read(new File("reso/bg1.jpg"));
+			bg = ImageIO.read(new File("ANNdroid/resources/img/map/bg1.jpg"));
 		}catch(Exception e){	e.printStackTrace();	}	
 	}
 
