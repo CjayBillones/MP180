@@ -35,13 +35,14 @@ public class LayoutEx extends JFrame implements ActionListener{
 	BufferedImage chem;
 	BufferedImage start;
 
+	JLabel player = new JLabel("P");
 	JButton kingdom = new JButton();
 	JButton physics = new JButton();
 	JButton biology = new JButton();
 	JButton chemistry = new JButton();
 
 	PlayerGlassPanel pGlass;
-//	JPanel pan = new JPanel();
+//JPanel pan = new JPanel();
 
 	File map;
 	Search s;
@@ -83,9 +84,8 @@ public class LayoutEx extends JFrame implements ActionListener{
 		for(int i = 0; i < (row * col); i++){			
 			pan.add(comps[i]);
 		}
-
 		add(pan);
-
+		
 		kingdom.setContentAreaFilled(false);
 		physics.setContentAreaFilled(false);
 		biology.setContentAreaFilled(false);
@@ -227,6 +227,7 @@ public class LayoutEx extends JFrame implements ActionListener{
 		public int yPos = 550;
 
 		public PlayerGlassPanel(int x, int y ){
+			setLayout(null);
 			xPos = x;
 			yPos = y;
 		}
@@ -253,13 +254,15 @@ public class LayoutEx extends JFrame implements ActionListener{
 					initX++;
 				}
 
-		
-				h.setColor(Color.RED);
-				h.fillOval(initX,initY,20,20);
-				xPos = initX;
-				repaint();
-				timer = new Timer(30,new LayoutEx());
-				timer.start();
+				try{
+					h.setColor(Color.RED);
+					h.fillOval(initX,initY,20,20);
+					xPos = initX;
+					Thread.sleep(3);
+					repaint();
+					timer = new Timer(30,new LayoutEx());
+					timer.start();
+				}catch(InterruptedException e){}
 	
 			}
 
@@ -269,17 +272,16 @@ public class LayoutEx extends JFrame implements ActionListener{
 				}else if(y > 0){
 					initY++;
 				}
-
-				h.setColor(Color.RED);
-				h.fillOval(initX,initY,20,20);
-				yPos = initY;
-				repaint();
-				timer = new Timer(30,new LayoutEx());
-				timer.start();
-
-
-		
-
+				
+				try{
+					h.setColor(Color.RED);
+					h.fillOval(initX,initY,20,20);
+					yPos = initY;
+					Thread.sleep(3);
+					repaint();
+					timer = new Timer(30,new LayoutEx());
+					timer.start();
+				}catch(InterruptedException e){}
 			}
 
 			Point ret = new Point(initX,initY);
