@@ -218,39 +218,33 @@ public class LayoutEx extends JFrame implements ActionListener{
 			y *= 720/row;
 
 			for(int i = 0; i < Math.abs(x); i++){
-				if(x < 0){
-					initX--;
-				}else if(x > 0){
-					initX++;
-				}
-
-		
-				h.setColor(Color.RED);
-				h.fillOval(initX,initY,20,20);
-				xPos = initX;
-				repaint();
-				timer = new Timer(30,new LayoutEx());
-				timer.start();
-	
+				if(x < 0)	initX--;
+				else if(x > 0)	initX++;
+			
+				try{
+					h.setColor(Color.RED);
+					h.fillOval(initX,initY,20,20);
+					xPos = initX;
+					Thread.sleep(5);
+					repaint();
+					timer = new Timer(30,new LayoutEx());
+					timer.start();
+				}catch(InterruptedException e){}
 			}
 
 			for(int i = 0; i < Math.abs(y); i++){
-				if(y < 0){
-					initY--;
-				}else if(y > 0){
-					initY++;
-				}
-
-				h.setColor(Color.RED);
-				h.fillOval(initX,initY,20,20);
-				yPos = initY;
-				repaint();
-				timer = new Timer(30,new LayoutEx());
-				timer.start();
-
-
-		
-
+				if(y < 0) initY--;
+				else if(y > 0) initY++;
+				
+				try{
+					h.setColor(Color.RED);
+					h.fillOval(initX,initY,20,20);
+					yPos = initY;
+					Thread.sleep(5);
+					repaint();
+					timer = new Timer(30,new LayoutEx());
+					timer.start();
+				}catch(InterruptedException e){}
 			}
 
 			Point ret = new Point(initX,initY);
