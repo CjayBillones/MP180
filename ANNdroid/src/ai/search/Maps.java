@@ -1,4 +1,4 @@
-package ANNdroid.src.ai.search;
+package ANNdroid.src.ai.search;	
 
 import javax.swing.*;
 import java.awt.GridLayout;
