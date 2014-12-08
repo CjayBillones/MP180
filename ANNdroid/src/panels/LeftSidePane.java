@@ -6,18 +6,13 @@ import ANNdroid.src.*;
 
 import java.io.File;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.imageio.*;
 
-import java.awt.Graphics;
-import java.awt.Dimension;
-import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
-import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.*;
+import java.awt.geom.*;
 
 public class LeftSidePane extends JPanel{
 
