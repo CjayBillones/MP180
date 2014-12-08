@@ -19,7 +19,7 @@ public class MapPanel extends JPanel{
 
 	public MapPanel(){
 		try{
-			bg = ImageIO.read(new File("ANNdroid/resources/img/map/bg1.jpg"));
+			bg = ImageIO.read(new File("ANNdroid/resources/img/map/bg1.png"));
 		}catch(Exception e){	e.printStackTrace();	}	
 	}
 
