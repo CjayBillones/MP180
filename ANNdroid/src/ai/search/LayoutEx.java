@@ -25,6 +25,8 @@ public class LayoutEx extends JFrame implements ActionListener{
 	private String cur = "K"; 
 	private int col;
 	private int row;
+	private int width;
+	private int height;
 
 	BufferedImage wall;
 	BufferedImage space;
@@ -48,7 +50,10 @@ public class LayoutEx extends JFrame implements ActionListener{
 
 	}
 
-	public LayoutEx(File file,int row, int col, int x, int y){
+	public LayoutEx(File file,int row, int col, int x, int y, int width, int height){
+		
+		this.width = width;
+		this.height = height;
 		this.x = x;
 		this.y = y;
 		this.row = row;
@@ -93,10 +98,16 @@ public class LayoutEx extends JFrame implements ActionListener{
 
 		glass.setVisible(true);
 		
-		setSize(1240,720);
+		setMinimumSize(new Dimension(800, 600));
+		addComponentListener(new ResizeListener());
+		setSize(width,height);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
+	}
+
+	public LayoutEx(File file,int row, int col, int x, int y){
+		this(file,row,col,x,y,800,600);
 	}
 
 	public JComponent[] generateMap(File map,int x, int y){
@@ -133,8 +144,8 @@ public class LayoutEx extends JFrame implements ActionListener{
 	}
 
 	public JComponent initImage(JComponent yey, BufferedImage vanilla, boolean isSpace){
-		double widthScaleFactor = 1240/this.row / (double)vanilla.getWidth();
-		double heightScaleFactor = 720/this.row  / (double)vanilla.getHeight();
+		double widthScaleFactor = width/this.row / (double)vanilla.getWidth();
+		double heightScaleFactor = height/this.row  / (double)vanilla.getHeight();
 		double scaleFactor = (widthScaleFactor > heightScaleFactor)? heightScaleFactor : widthScaleFactor;
 
 		AffineTransform at = new AffineTransform();
@@ -190,12 +201,30 @@ public class LayoutEx extends JFrame implements ActionListener{
 		}
 	}
 
+	private class ResizeListener extends ComponentAdapter{
+		public void componentResized(ComponentEvent e){
+			PlayerGlassPanel glass = (PlayerGlassPanel)getGlassPane();
+			Graphics2D h = (Graphics2D)glass.getGraphics();
+			int oldW = width;
+			int oldH = height;
+			width = getWidth();
+			height = getHeight();
+			double newX = (double)width * ((double)glass.xPos/(double)oldW);
+			double newY = (double)height * ((double)glass.yPos/(double)oldH);
+			glass.xPos = (int)newX;
+			glass.yPos = (int)newY;
+			x = glass.xPos;
+			y = glass.yPos;
+			glass.repaint();
+		}
+	}
+
 
 	public class PlayerGlassPanel extends JPanel{
 
 		Timer timer;
-		int xPos = 600;
-		int yPos = 550;
+		public int xPos = 600;
+		public int yPos = 550;
 
 		public PlayerGlassPanel(int x, int y ){
 			xPos = x;
@@ -214,8 +243,8 @@ public class LayoutEx extends JFrame implements ActionListener{
 			int y = (int)s.dir_vectors.get(d).getY();
 			Graphics2D h = (Graphics2D)g;
 
-			x *= 1240/col;
-			y *= 720/row;
+			x *= width/col;
+			y *= height/row;
 
 			for(int i = 0; i < Math.abs(x); i++){
 				if(x < 0){
