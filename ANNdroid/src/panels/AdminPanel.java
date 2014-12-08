@@ -101,7 +101,7 @@ public class AdminPanel extends JPanel{
 		fnameLabel.setBounds(createTeachPane.getWidth()/16, errorLabel1.getY() + 30, createTeachPane.getWidth()/2 - createTeachPane.getWidth()/16, 20);
 		createTeachPane.add(fnameLabel);
 
-		fnameField = new CustomTextField(new Color(0, 29, 60, 0));
+		fnameField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		fnameField.setBounds(fnameLabel.getWidth()+createTeachPane.getWidth()/16, fnameLabel.getY(), (7*createTeachPane.getWidth())/16, 20);
 		createTeachPane.add(fnameField);
 		fnameField.addFocusListener(new FieldsFocusListener(0, 0));
@@ -111,7 +111,7 @@ public class AdminPanel extends JPanel{
 		lnameLabel.setBounds(fnameLabel.getX(), fnameLabel.getY()+30, fnameLabel.getWidth(), 20);
 		createTeachPane.add(lnameLabel);
 
-		lnameField = new CustomTextField(new Color(0, 29, 60, 0));
+		lnameField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		lnameField.setBounds(fnameField.getX(), lnameLabel.getY(), fnameField.getWidth(), 20);
 		createTeachPane.add(lnameField);
 		lnameField.addFocusListener(new FieldsFocusListener(0, 1));
@@ -121,7 +121,7 @@ public class AdminPanel extends JPanel{
 		unameLabel.setBounds(lnameLabel.getX(), lnameLabel.getY()+30, lnameLabel.getWidth(), 20);
 		createTeachPane.add(unameLabel);
 
-		unameField = new CustomTextField(new Color(0, 29, 60, 0));
+		unameField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		unameField.setBounds(lnameField.getX(), unameLabel.getY(), fnameField.getWidth(), 20);
 		createTeachPane.add(unameField);
 		unameField.addFocusListener(new FieldsFocusListener(0, 2));
@@ -170,7 +170,7 @@ public class AdminPanel extends JPanel{
 		delUnameLabel.setBounds(errorLabel2.getX(), errorLabel2.getY()+30, delTeachPane.getWidth()/2 - delTeachPane.getWidth()/16, 20);
 		delTeachPane.add(delUnameLabel);
 
-		delUnameField = new CustomTextField(new Color(0, 29, 60, 0));
+		delUnameField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		delUnameField.setBounds(delUnameLabel.getWidth()+delTeachPane.getWidth()/16, delUnameLabel.getY(), (7*delTeachPane.getWidth())/16, 20);
 		delTeachPane.add(delUnameField);
 		delUnameField.addFocusListener(new FieldsFocusListener(1, 0));

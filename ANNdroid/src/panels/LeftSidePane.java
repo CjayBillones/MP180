@@ -246,25 +246,38 @@ public class LeftSidePane extends JPanel{
 					((TeacherPanel)ANNdroid.teacherPanel).remove(ANNdroid.bgPanel);
 			
 					CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
-					c1.show(ANNdroid.cards, ANNdroid.LOGINPANEL);								
+					c1.show(ANNdroid.cards, ANNdroid.LOGINPANEL);					
 				}
 			}else if(source == 2){
 				if(mode == 0){
 
+					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
 				}
 				else if(mode == 1){
 
+					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
 				}
 				else if(mode == 2){
 
+					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
 				}
 				else if(mode == 3){
-
+					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(true);
 				}
 				else if(mode == 4){
-
+					
+					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
 				}
 				else{
+
+
+					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
+
 					ANNdroid.simulator.active = null;
 					ANNdroid.loginPanel.add(ANNdroid.bgPanel);
 					((StudentPanel)ANNdroid.studentPanel).remove(ANNdroid.bgPanel);

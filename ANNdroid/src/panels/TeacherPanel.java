@@ -134,7 +134,7 @@ public class TeacherPanel extends JPanel{
 		fnameLabel.setBounds(createStudentPane.getWidth()/16, errorLabel1.getY() + 30, createStudentPane.getWidth()/2 - createStudentPane.getWidth()/16, 20);
 		createStudentPane.add(fnameLabel);		
 
-		fnameField = new CustomTextField(new Color(0, 29, 60, 0));
+		fnameField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		fnameField.setBounds(fnameLabel.getWidth()+createStudentPane.getWidth()/16, fnameLabel.getY(), (7*createStudentPane.getWidth())/16, 20);
 		createStudentPane.add(fnameField);
 		fnameField.addFocusListener(new FieldsFocusListener(0, 0));
@@ -144,7 +144,7 @@ public class TeacherPanel extends JPanel{
 		lnameLabel.setBounds(fnameLabel.getX(), fnameLabel.getY()+30, fnameLabel.getWidth(), 20);
 		createStudentPane.add(lnameLabel);		
 
-		lnameField = new CustomTextField(new Color(0, 29, 60, 0));
+		lnameField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		lnameField.setBounds(fnameField.getX(), fnameField.getY()+30, fnameField.getWidth(), 20);
 		createStudentPane.add(lnameField);
 		lnameField.addFocusListener(new FieldsFocusListener(0, 1));
@@ -154,7 +154,7 @@ public class TeacherPanel extends JPanel{
 		unameLabel.setBounds(lnameLabel.getX(), lnameLabel.getY()+30, lnameLabel.getWidth(), 20);
 		createStudentPane.add(unameLabel);
 
-		unameField = new CustomTextField(new Color(0, 29, 60, 0));
+		unameField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		unameField.setBounds(lnameField.getX(), lnameField.getY()+30, lnameField.getWidth(), 20);
 		createStudentPane.add(unameField);
 		unameField.addFocusListener(new FieldsFocusListener(0, 2));
@@ -203,7 +203,7 @@ public class TeacherPanel extends JPanel{
 		delUnameLabel.setBounds(errorLabel2.getX(), errorLabel2.getY()+30, delStudentPane.getWidth()/2 - delStudentPane.getWidth()/16, 20);
 		delStudentPane.add(delUnameLabel);
 
-		delUnameField = new CustomTextField(new Color(0, 29, 60, 0));
+		delUnameField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		delUnameField.setBounds(delUnameLabel.getWidth()+delStudentPane.getWidth()/16, delUnameLabel.getY(), (7*delStudentPane.getWidth())/16, 20);
 		delStudentPane.add(delUnameField);
 		delUnameField.addFocusListener(new FieldsFocusListener(1, 0));
@@ -263,7 +263,7 @@ public class TeacherPanel extends JPanel{
 		subjectLabel.setBounds(0, 0, addQuestionPane.getWidth()/6, 20);
 		addQuestionPane.add(subjectLabel);
 
-		subjectField = new CustomTextField(new Color(0, 29, 60, 0));
+		subjectField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		subjectField.setBounds(subjectLabel.getX()+subjectLabel.getWidth(), subjectLabel.getY(), addQuestionPane.getWidth()/4, 20);
 		addQuestionPane.add(subjectField);
 
@@ -297,7 +297,7 @@ public class TeacherPanel extends JPanel{
 		fchoiceLabel.setBounds(qLabel.getX(), qLabel.getY() + 40, qLabel.getWidth(), 20);
 		addQuestionPane.add(fchoiceLabel);
 
-		fchoiceField = new CustomTextField(new Color(0, 29, 60, 0));
+		fchoiceField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		fchoiceField.setBounds(subjectField.getX(), fchoiceLabel.getY(), subjectField.getWidth(), 20);
 		addQuestionPane.add(fchoiceField);
 		fchoiceField.setFocusTraversalKeysEnabled(false);
@@ -316,7 +316,7 @@ public class TeacherPanel extends JPanel{
 		schoiceLabel.setBounds(fchoiceLabel.getX(), fchoiceLabel.getY() + 30, fchoiceLabel.getWidth(), 20);
 		addQuestionPane.add(schoiceLabel);
 
-		schoiceField = new CustomTextField(new Color(0, 29, 60, 0));
+		schoiceField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		schoiceField.setBounds(fchoiceField.getX(), schoiceLabel.getY(), fchoiceField.getWidth(), 20);
 		addQuestionPane.add(schoiceField);
 		schoiceField.setFocusTraversalKeysEnabled(false);
@@ -335,7 +335,7 @@ public class TeacherPanel extends JPanel{
 		tchoiceLabel.setBounds(addQuestionPane.getWidth()/2, fchoiceLabel.getY(), schoiceLabel.getWidth(), 20);
 		addQuestionPane.add(tchoiceLabel);
 
-		tchoiceField = new CustomTextField(new Color(0, 29, 60, 0));
+		tchoiceField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		tchoiceField.setBounds(tchoiceLabel.getX()+tchoiceLabel.getWidth(), tchoiceLabel.getY(), tchoiceLabel.getWidth(), 20);
 		addQuestionPane.add(tchoiceField);
 		tchoiceField.setFocusTraversalKeysEnabled(false);
@@ -354,7 +354,7 @@ public class TeacherPanel extends JPanel{
 		fthchoiceLabel.setBounds(tchoiceLabel.getX(), schoiceLabel.getY(), tchoiceLabel.getWidth(), 20);
 		addQuestionPane.add(fthchoiceLabel);		
 
-		fthchoiceField = new CustomTextField(new Color(0, 29, 60, 0));
+		fthchoiceField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		fthchoiceField.setBounds(tchoiceField.getX(), fthchoiceLabel.getY(), tchoiceField.getWidth(), 20);
 		addQuestionPane.add(fthchoiceField);
 		fthchoiceField.setFocusTraversalKeysEnabled(false);

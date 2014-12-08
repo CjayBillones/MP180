@@ -19,7 +19,7 @@ public class CustomLabel extends JLabel{
 		
 		super(text, SwingConstants.CENTER);
 
-		if(mode == 1) setForeground(Color.WHITE);
+		if(mode != 0) setForeground(Color.WHITE);
 		else setForeground(Color.RED);
 		
 		setPreferredSize(new Dimension(width, height));
@@ -28,7 +28,7 @@ public class CustomLabel extends JLabel{
 		try{
 			if(mode == 0)	originalBGImage = ImageIO.read(new File("ANNdroid/resources/img/full.png"));
 			else if(mode == 1) originalBGImage = ImageIO.read(new File("ANNdroid/resources/img/label.png"));
-			else originalBGImage = ImageIO.read(new File("ANNdroid/resources/img/field.png"));
+			else originalBGImage = ImageIO.read(new File("ANNdroid/resources/img/header.png"));
 		}catch(Exception e){	e.printStackTrace();	}
 
 	}

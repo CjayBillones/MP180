@@ -9,7 +9,8 @@ import java.awt.event.*;
 
 public class CustomTextField extends JTextField{
 
-	public CustomTextField(Color caretColor){
+	public CustomTextField(Color caretColor, boolean editable){
+
 		setForeground(Color.WHITE);
 		setOpaque(false);
 		setCaretColor(caretColor);
@@ -23,6 +24,12 @@ public class CustomTextField extends JTextField{
 				setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
 			}
 		});
+
+		if(!editable){
+			setFocusable(false);
+			setEditable(false);
+			setBorder(BorderFactory.createEmptyBorder());
+		}
 	}
 
 }

@@ -46,7 +46,7 @@ public class LoginPanel extends JPanel{
 		unameLabel.setForeground(Color.WHITE);
 		loginPane.add(unameLabel);
 
-		unameField = new CustomTextField(new Color(0, 29, 60, 0));
+		unameField = new CustomTextField(new Color(0, 29, 60, 0), true);
 		unameField.setBounds(unameLabel.getX() + unameLabel.getWidth(), unameLabel.getY(), errorLabel.getWidth()-unameLabel.getWidth(), 20);
 		loginPane.add(unameField);
 		unameField.addFocusListener(new FieldFocusListener(0));
@@ -162,7 +162,6 @@ public class LoginPanel extends JPanel{
 				unameField.requestFocus();
 			}
 			else{
-
 				errorLabel.setVisible(false);
 				remove(ANNdroid.bgPanel);
 
@@ -184,6 +183,14 @@ public class LoginPanel extends JPanel{
 					CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
 					c1.show(ANNdroid.cards, ANNdroid.STUDENTPANEL);
 					reinitialize(false);
+
+					((StudentPanel)ANNdroid.studentPanel).nameField.setText(u.getFullname());
+					((StudentPanel)ANNdroid.studentPanel).usernameField.setText(u.getUsername());
+					((StudentPanel)ANNdroid.studentPanel).nickNameField.setText(((Student)u).getNickname());
+					((StudentPanel)ANNdroid.studentPanel).birthdayField.setText(((Student)u).getBirthday());
+					if(((Student)u).getAge() != -1) ((StudentPanel)ANNdroid.studentPanel).ageField.setText(Integer.toString(((Student)u).getAge()));
+					((StudentPanel)ANNdroid.studentPanel).genderField.setText(((Student)u).getGender());
+					((StudentPanel)ANNdroid.studentPanel).regionField.setText(((Student)u).getRegion());
 				}
 			}
 		}
