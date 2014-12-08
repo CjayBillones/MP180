@@ -1,5 +1,7 @@
 package ANNdroid.src.ai.search;
 
+import ANNdroid.src.ai.search.Search.*;
+
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.GridLayout;
