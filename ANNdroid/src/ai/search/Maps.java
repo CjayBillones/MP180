@@ -1,8 +1,5 @@
 package ANNdroid.src.ai.search;
 
-import ANNdroid.src.ai.search.*;
-import ANNdroid.src.ai.search.Search.*;
-
 import javax.swing.*;
 import java.awt.GridLayout;
 import java.util.*;
