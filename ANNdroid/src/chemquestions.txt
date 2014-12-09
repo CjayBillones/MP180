@@ -103,3 +103,38 @@ temp decreases and pressure decreases
 temp decreases and pressure increases
 2
 INTERMEDIATE
+Ordinary table salt is sodium chloride. What is baking soda?
+Potassium chloride
+Potassium carbonate
+Potassium hydroxide
+Sodium bicarbonate
+3
+INTERMEDIATE
+The nucleus of an atom consists of
+electrons and neutrons
+electrons and protons
+protons and neutrons
+All of the above
+2
+EASY
+The number of moles of solute present in 1 kg of a solvent is called its
+molality
+molarity
+normality
+formality
+0
+INTERMEDIATE
+The metal used to recover copper from a solution of copper sulphate is
+Na
+Ag
+Hg
+Fe
+3
+INTERMEDIATE
+The metallurgical process in which a metal is obtained in a fused state is called
+smelting
+roasting
+calcinations
+froth floatation
+0
+INTERMEDIATE
