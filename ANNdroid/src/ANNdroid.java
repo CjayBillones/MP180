@@ -42,6 +42,7 @@ public class ANNdroid extends JFrame{
 
 		// Frame Properties //
 		setCursor(cursor);
+		setIconImage(TK.getImage("ANNdroid/resources/img/large_logo.png"));
 		//setUndecorated(true);
 		setResizable(true);
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);

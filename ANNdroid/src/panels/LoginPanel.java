@@ -186,6 +186,14 @@ public class LoginPanel extends JPanel{
 
 					((StudentPanel)ANNdroid.studentPanel).nameField.setText(u.getFullname());
 					((StudentPanel)ANNdroid.studentPanel).usernameField.setText(u.getUsername());
+	
+					if(!((Student)u).isProfileComplete()){
+						((LeftSidePane)((StudentPanel)ANNdroid.studentPanel).leftSidePane).btns[0].setEnabled(false);
+						((LeftSidePane)((StudentPanel)ANNdroid.studentPanel).leftSidePane).btns[0].setFocusable(false);
+						System.out.println(((Student)u).isProfileComplete());
+					}
+					else ((LeftSidePane)((StudentPanel)ANNdroid.studentPanel).leftSidePane).btns[0].setEnabled(true);
+
 					if(!((Student)u).getNickname().equals("")){
 						((StudentPanel)ANNdroid.studentPanel).nickNameField.setText(((Student)u).getNickname());
 						((StudentPanel)ANNdroid.studentPanel).nickNameField.setForeground(Color.WHITE);

@@ -2,6 +2,11 @@ package ANNdroid.src.objects;
 
 public class Student extends User{
 
+	private int gamesPlayed;
+	private int gamesWon;
+	private int gamesLost;
+	private int gamesDraw;
+
 	private String nickname;
 	private String month;
 	private String day;
@@ -14,6 +19,12 @@ public class Student extends User{
 
 	public Student(String username, String password, String fname, String lname){
 		super(username, password, fname, lname);
+		
+		gamesPlayed = 0;
+		gamesWon = 0;
+		gamesLost = 0;
+		gamesDraw = 0;
+
 		nickname = "";
 		month = "";
 		day = "";
@@ -23,6 +34,22 @@ public class Student extends User{
 		chemistry = -1;
 		physics = -1;
 		biology = -1;
+	}
+
+	public void setGamesPlayed(int num){
+		this.gamesPlayed = num;
+	}
+
+	public void setGamesWon(int num){
+		this.gamesWon = num;
+	}
+
+	public void setGamesLost(int num){
+		this.gamesLost = num;
+	}
+
+	public void gamesDraw(int num){
+		this.gamesDraw = num;
 	}
 
 	public void setNickname(String nickname){
@@ -59,6 +86,22 @@ public class Student extends User{
 
 	public void setBiology(int biology){
 		this.biology = biology;
+	}
+
+	public int getGamesPlayed(){
+		return this.gamesPlayed;
+	}
+
+	public int getGamesWon(){
+		return this.gamesWon;
+	}
+
+	public int getGamesLost(){
+		return this.gamesLost;
+	}
+
+	public int getGamesDraw(){
+		return this.gamesDraw;
 	}
 
 	public String getNickname(){
@@ -99,6 +142,11 @@ public class Student extends User{
 
 	public int getBiology(){
 		return this.biology;
+	}
+
+	public boolean isProfileComplete(){
+		return (!this.nickname.equals("") && !this.month.equals("") && !this.day.equals("") && !this.gender.equals("")
+		&& !this.region.equals("") && this.age != -1 && this.chemistry != -1 && this.physics != -1 && this.biology != -1);
 	}
 
 

@@ -448,6 +448,15 @@ public class StudentPanel extends JPanel{
 						if(selectedBioStr != -1) ((Student)u).setBiology(selectedBioStr-1);
 						errorLabel2.setForeground(Color.YELLOW);
 						errorLabel2.setText("Successfully Edited Profile");
+
+						if(!((Student)u).isProfileComplete()){
+							((LeftSidePane)leftSidePane).btns[0].setEnabled(false);
+							((LeftSidePane)leftSidePane).btns[0].setFocusable(false);
+						}
+						else ((LeftSidePane)leftSidePane).btns[0].setEnabled(true);
+
+
+
 						ANNdroid.simulator.saver.saveUsers(ANNdroid.simulator.userList, "ANNdroid/bin/users.bin");
 						reinitialize(true, false, 1);		
 					}

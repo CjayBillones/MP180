@@ -15,7 +15,8 @@ public class CustomButtonMouseListener extends MouseAdapter{
 	}
 
 	public void mouseEntered(MouseEvent e){
-		button.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
+		if(button.isEnabled())
+			button.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
 	}
 
 	public void mouseExited(MouseEvent e){

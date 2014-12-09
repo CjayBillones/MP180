@@ -253,6 +253,8 @@ public class LeftSidePane extends JPanel{
 
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
+
+					System.out.println("Play");
 				}
 				else if(mode == 1){
 
