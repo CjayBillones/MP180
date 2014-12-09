@@ -74,7 +74,7 @@ public class Student extends User{
 	}
 
 	public String getBirthday(){
-		return this.month + this.day;
+		return this.month + " " + this.day;
 	}
 
 	public int getAge(){

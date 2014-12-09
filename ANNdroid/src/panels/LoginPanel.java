@@ -46,7 +46,7 @@ public class LoginPanel extends JPanel{
 		unameLabel.setForeground(Color.WHITE);
 		loginPane.add(unameLabel);
 
-		unameField = new CustomTextField(new Color(0, 29, 60, 0), true);
+		unameField = new CustomTextField(new Color(0, 29, 60, 0), true, "");
 		unameField.setBounds(unameLabel.getX() + unameLabel.getWidth(), unameLabel.getY(), errorLabel.getWidth()-unameLabel.getWidth(), 20);
 		loginPane.add(unameField);
 		unameField.addFocusListener(new FieldFocusListener(0));
@@ -186,11 +186,51 @@ public class LoginPanel extends JPanel{
 
 					((StudentPanel)ANNdroid.studentPanel).nameField.setText(u.getFullname());
 					((StudentPanel)ANNdroid.studentPanel).usernameField.setText(u.getUsername());
-					((StudentPanel)ANNdroid.studentPanel).nickNameField.setText(((Student)u).getNickname());
-					((StudentPanel)ANNdroid.studentPanel).birthdayField.setText(((Student)u).getBirthday());
-					if(((Student)u).getAge() != -1) ((StudentPanel)ANNdroid.studentPanel).ageField.setText(Integer.toString(((Student)u).getAge()));
-					((StudentPanel)ANNdroid.studentPanel).genderField.setText(((Student)u).getGender());
-					((StudentPanel)ANNdroid.studentPanel).regionField.setText(((Student)u).getRegion());
+					if(!((Student)u).getNickname().equals("")){
+						((StudentPanel)ANNdroid.studentPanel).nickNameField.setText(((Student)u).getNickname());
+						((StudentPanel)ANNdroid.studentPanel).nickNameField.setForeground(Color.WHITE);
+					}
+					if(!((Student)u).getBirthday().equals("")){
+						((StudentPanel)ANNdroid.studentPanel).birthdayField.setText(((Student)u).getBirthday());
+						((StudentPanel)ANNdroid.studentPanel).birthdayField.setForeground(Color.WHITE);
+					}
+					if(((Student)u).getAge() != -1){
+						((StudentPanel)ANNdroid.studentPanel).ageField.setText(Integer.toString(((Student)u).getAge()));
+						((StudentPanel)ANNdroid.studentPanel).ageField.setForeground(Color.WHITE);
+					}
+					if(!((Student)u).getGender().equals("")){
+						((StudentPanel)ANNdroid.studentPanel).genderField.setText(((Student)u).getGender());
+						((StudentPanel)ANNdroid.studentPanel).genderField.setForeground(Color.WHITE);
+					}
+					if(!((Student)u).getRegion().equals("")){
+						((StudentPanel)ANNdroid.studentPanel).regionField.setText(((Student)u).getRegion());
+						((StudentPanel)ANNdroid.studentPanel).regionField.setForeground(Color.WHITE);
+					}
+
+					if(((Student)ANNdroid.simulator.getActiveUser()).getChemistry() != -1){
+						((StudentPanel)ANNdroid.studentPanel).chemStr.setSelectedItem(((Student)ANNdroid.simulator.getActiveUser()).getChemistry()+1);
+						((StudentPanel)ANNdroid.studentPanel).chemStr.setEnabled(false);
+					}
+					else{
+						((StudentPanel)ANNdroid.studentPanel).chemStr.setSelectedItem(null);
+						((StudentPanel)ANNdroid.studentPanel).chemStr.setEnabled(true);
+					}
+					if(((Student)ANNdroid.simulator.getActiveUser()).getPhysics() != -1){
+						((StudentPanel)ANNdroid.studentPanel).physStr.setSelectedItem(((Student)ANNdroid.simulator.getActiveUser()).getPhysics()+1);
+						((StudentPanel)ANNdroid.studentPanel).physStr.setEnabled(false);
+					}
+					else{
+						((StudentPanel)ANNdroid.studentPanel).physStr.setSelectedItem(null);
+						((StudentPanel)ANNdroid.studentPanel).physStr.setEnabled(true);
+					}
+					if(((Student)ANNdroid.simulator.getActiveUser()).getBiology() != -1){
+						((StudentPanel)ANNdroid.studentPanel).bioStr.setSelectedItem(((Student)ANNdroid.simulator.getActiveUser()).getBiology()+1);
+						((StudentPanel)ANNdroid.studentPanel).bioStr.setEnabled(false);
+					}
+					else{
+						((StudentPanel)ANNdroid.studentPanel).bioStr.setSelectedItem(null);
+						((StudentPanel)ANNdroid.studentPanel).bioStr.setEnabled(true);
+					}					
 				}
 			}
 		}

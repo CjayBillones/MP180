@@ -9,7 +9,9 @@ import java.awt.event.*;
 
 public class CustomTextField extends JTextField{
 
-	public CustomTextField(Color caretColor, boolean editable){
+	public CustomTextField(Color caretColor, boolean editable, String text){
+
+		super(text);
 
 		setForeground(Color.WHITE);
 		setOpaque(false);
@@ -26,6 +28,9 @@ public class CustomTextField extends JTextField{
 		});
 
 		if(!editable){
+
+			if(getText().equals("n/a")) setForeground(Color.RED);
+
 			setFocusable(false);
 			setEditable(false);
 			setBorder(BorderFactory.createEmptyBorder());
