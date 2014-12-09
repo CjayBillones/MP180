@@ -60,9 +60,7 @@ public class LayoutEx extends JFrame implements ActionListener{
 		this.row = row;
 		this.col = col;
 		JPanel pan = new MapPanel();
-		pGlass =  new PlayerGlassPanel(x,y);
-		this.setGlassPane(pGlass);
-		JPanel glass = (JPanel) this.getGlassPane();
+		
 		map = file;
 		s = new Search(map,row,col);
 
@@ -77,7 +75,14 @@ public class LayoutEx extends JFrame implements ActionListener{
 			start = ImageIO.read(new File("ANNdroid/resources/img/map/start_node2.png"));
 		}catch(Exception e){	e.printStackTrace();	}
 
+		
+		setMinimumSize(new Dimension(800, 600));
+		setSize(width,height);
 		JComponent[] comps = generateMap(map,row,col);
+		System.out.println(this.x + " " + this.y);
+		pGlass =  new PlayerGlassPanel(this.x,this.y);
+		this.setGlassPane(pGlass);
+		JPanel glass = (JPanel) this.getGlassPane();
 
 		for(int i = 0; i < (row * col); i++){			
 			pan.add(comps[i]);
@@ -95,10 +100,8 @@ public class LayoutEx extends JFrame implements ActionListener{
 		chemistry.addActionListener(this);
 
 		glass.setVisible(true);
-		
-		setMinimumSize(new Dimension(800, 600));
+
 		addComponentListener(new ResizeListener());
-		setSize(width,height);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -116,22 +119,32 @@ public class LayoutEx extends JFrame implements ActionListener{
 				String str = scan.nextLine();
 
 				for(int j = 0; j < y; j++){
-					System.out.println((i * y) + j);
 					switch(str.charAt(j)){
 						case '%':{ret[(i * y) + j] = initImage(new JLabel(), wall, false);} break;
 						case 'P':{ret[(i * y) + j] = initImage(physics, phys, false);}break;
 						case 'C':{ret[(i * y) + j] = initImage(chemistry, chem, false);}break;
 						case 'B':{ret[(i * y) + j] = initImage(biology, bio, false);}break;
-						case 'K':{ret[(i * y) + j] = initImage(kingdom, start, false);}break;
+						case 'K':{
+							ret[(i * y) + j] = initImage(kingdom, start, false);
+							System.out.println(j);
+							double cell_w = (double)this.getWidth() / (double)this.col;
+							double cell_h = (double)this.getHeight() / (double)this.row;
+							this.x = (int)(((double)j * cell_w) + (cell_w * 0.5));
+							this.y = (int)((double)i * cell_h); 
+						}break;
 						default:{ret[(i * y) + j] = new JLabel();} break;
 					}
 				}
+
 				i++;
+
 			}
+
 		}catch(FileNotFoundException f){
 			System.out.println("File Not Found!");
 		}
 
+		//initImage(ret);
 		return ret;
 	}
 
