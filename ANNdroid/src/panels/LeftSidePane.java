@@ -254,28 +254,37 @@ public class LeftSidePane extends JPanel{
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
 
-					System.out.println("Play");
+					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(true);
 				}
 				else if(mode == 1){
+
+					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(false);
 
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
 				}
 				else if(mode == 2){
 
+					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(false);
+
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
 				}
 				else if(mode == 3){
+
+					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(true);
 				}
 				else if(mode == 4){
+
+					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(false);
 					
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
 				}
 				else{
 
+					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(false);
 
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);

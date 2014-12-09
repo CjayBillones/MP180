@@ -2,7 +2,7 @@ package ANNdroid.src;
 
 import java.io.*;
 
-class SDataSL{
+public class SDataSL{
 	
 	public static StudentData load(){
 		StudentData ret = null;

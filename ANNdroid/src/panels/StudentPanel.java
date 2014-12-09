@@ -1,6 +1,7 @@
 package ANNdroid.src.panels;
 
 import ANNdroid.src.custom_swing.*;
+import ANNdroid.src.ai.search.*;
 import ANNdroid.src.objects.*;
 import ANNdroid.src.util.*;
 import ANNdroid.src.*;
@@ -26,6 +27,7 @@ public class StudentPanel extends JPanel{
 	public static Integer[] STRENGTH = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
 	JPanel leftSidePane;
+	JPanel mapPane;
 	JPanel profilePane;
 
 	// Edit Profile Pane //
@@ -109,6 +111,13 @@ public class StudentPanel extends JPanel{
 		leftSidePane.setPreferredSize(new Dimension(getWidth()/4 + 60, getHeight()));
 		leftSidePane.setBounds(0, 0, getWidth()/4 + 60, getHeight());
 		leftSidePane.setBackground(Color.BLACK);
+
+		// Map Pane //
+		mapPane = new MapBGPanel(getWidth()-leftSidePane.getWidth(), getHeight(), 10, 12);
+		mapPane.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+		mapPane.setLayout(new GridLayout(10,12,2,2));
+		mapPane.setBounds(leftSidePane.getX()+leftSidePane.getWidth(), 0, getWidth()-leftSidePane.getWidth(), getHeight());
+		mapPane.setVisible(false);
 
 		// Profile Pane //
 		profilePane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/3, 1);
@@ -479,6 +488,7 @@ public class StudentPanel extends JPanel{
 			profilePane.setVisible(false);
 		});
 
+		add(mapPane);
 		add(profilePane);
 		add(leftSidePane);
 	}
@@ -487,6 +497,10 @@ public class StudentPanel extends JPanel{
 		leftSidePane.setBounds(0, 0, getWidth()/4 + 60, getHeight());
 		((LeftSidePane)leftSidePane).resize();
 
+		mapPane.setBounds(leftSidePane.getX()+leftSidePane.getWidth(), 0, getWidth()-leftSidePane.getWidth(), getHeight());
+		((MapBGPanel)mapPane).resize();
+
+		// Profile Pane //
 		profilePane.revalidate();
 		profilePane.setBounds(leftSidePane.getWidth(), getHeight()/6, getWidth()-leftSidePane.getWidth()-30, getHeight()/2 + getHeight()/4);
 		((GenericPane)profilePane).resize();	

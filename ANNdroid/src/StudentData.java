@@ -5,7 +5,7 @@ import ANNdroid.src.objects.*;
 import java.util.*;
 import java.io.*;
 
-class StudentData implements Serializable {
+public class StudentData implements Serializable {
 	
 	public Map<Student,Map<? extends Enum, Object>> studentData;
 

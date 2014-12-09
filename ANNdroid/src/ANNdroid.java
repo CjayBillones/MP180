@@ -20,6 +20,8 @@ public class ANNdroid extends JFrame{
 
 	public static Simulator simulator;
 
+	public static JPanel glass;
+
 	// Card Layout //
 	public static JPanel cards;
 	public final static String LOGINPANEL = "login";
@@ -40,9 +42,12 @@ public class ANNdroid extends JFrame{
 		simulator = new Simulator();
 		cursor = TK.createCustomCursor(TK.getImage("ANNdroid/resources/img/cursor.png"), new Point(getX(), getY()), "Cursor");
 
+		glass = (JPanel)this.getGlassPane();
+
 		// Frame Properties //
 		setCursor(cursor);
 		setIconImage(TK.getImage("ANNdroid/resources/img/large_logo.png"));
+		glass.setVisible(true);
 		//setUndecorated(true);
 		setResizable(true);
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);

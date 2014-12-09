@@ -71,12 +71,10 @@ public class LayoutEx extends JFrame implements ActionListener{
 
 		try{
 			wall = ImageIO.read(new File("ANNdroid/resources/img/map/harang2.png"));
-			//space = ImageIO.read(new File("reso/space.png"));
 			bio = ImageIO.read(new File("ANNdroid/resources/img/map/bio_node2.png"));
 			chem = ImageIO.read(new File("ANNdroid/resources/img/map/chem_node2.png"));
 			phys = ImageIO.read(new File("ANNdroid/resources/img/map/physics_node2.png"));
 			start = ImageIO.read(new File("ANNdroid/resources/img/map/start_node2.png"));
-			//bg = ImageIO.read(new File("reso/neuromancer1.jpg"));
 		}catch(Exception e){	e.printStackTrace();	}
 
 		JComponent[] comps = generateMap(map,row,col);
@@ -102,8 +100,6 @@ public class LayoutEx extends JFrame implements ActionListener{
 		addComponentListener(new ResizeListener());
 		setSize(width,height);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
 	}
 
 	public LayoutEx(File file,int row, int col, int x, int y){
@@ -130,16 +126,12 @@ public class LayoutEx extends JFrame implements ActionListener{
 						default:{ret[(i * y) + j] = new JLabel();} break;
 					}
 				}
-
 				i++;
-
 			}
-
 		}catch(FileNotFoundException f){
 			System.out.println("File Not Found!");
 		}
 
-		//initImage(ret);
 		return ret;
 	}
 
