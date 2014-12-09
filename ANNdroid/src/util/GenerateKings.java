@@ -25,8 +25,8 @@ public class GenerateKings{
 		chem.train();
 
 		kings.add(bio);
-		kings.add(phy);
 		kings.add(chem);
+		kings.add(phy);
 
 		Saver s = new Saver();
 

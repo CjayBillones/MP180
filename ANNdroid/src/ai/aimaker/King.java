@@ -31,7 +31,7 @@ import java.util.*;
 public class King implements java.io.Serializable{
 
 	public enum Domain {
-		BIOLOGY,PHYSICS,CHEMISTRY
+		BIOLOGY,CHEMISTRY,PHYSICS
 	}
 
 	public enum Difficulty {
