@@ -116,7 +116,7 @@ distance
 light
 intensity of light
 1
-EASY	
+EASY
 Mirage is due to
 unequal heating of different parts of the atmosphere
 magnetic disturbances in the atmosphere
@@ -201,11 +201,6 @@ zero
 minimum or maximum
 2
 INTERMEDIATE
-It is more difficult to walk on a sandy road than on a concrete road because
-sand is soft and concreter is hard
-the friction between sand and feet is less than that between concrete and feet
-the friction between sand and feet is more than that between concrete and feet
-the sand is grainy but concrete is smooth
 Find the maximum velocity for the overturn of a car moving on a circular track of radius 100 m. The co-efficient of friction between the road and tyre is 0.2
 0.14 m/s
 140 m/s
