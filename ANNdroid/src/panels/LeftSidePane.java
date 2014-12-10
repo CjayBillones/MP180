@@ -301,6 +301,11 @@ public class LeftSidePane extends JPanel{
 			}else if(source == 2){
 				if(mode == 0){
 					((StudentPanel)ANNdroid.studentPanel).header_acct.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).header_inst.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).header_stat.setVisible(false);
+
+					((StudentPanel)ANNdroid.studentPanel).instructionPane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).statPane.setVisible(false);
 
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
@@ -316,8 +321,12 @@ public class LeftSidePane extends JPanel{
 				}
 				else if(mode == 1){
 					((StudentPanel)ANNdroid.studentPanel).header_acct.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).header_stat.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).header_inst.setVisible(true);
 
 					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).instructionPane.setVisible(true);
+					((StudentPanel)ANNdroid.studentPanel).statPane.setVisible(false);
 
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
@@ -332,8 +341,12 @@ public class LeftSidePane extends JPanel{
 				}
 				else if(mode == 2){
 					((StudentPanel)ANNdroid.studentPanel).header_acct.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).header_stat.setVisible(true);
+					((StudentPanel)ANNdroid.studentPanel).header_inst.setVisible(false);
 
+					((StudentPanel)ANNdroid.studentPanel).instructionPane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).statPane.setVisible(true);
 
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
@@ -349,8 +362,12 @@ public class LeftSidePane extends JPanel{
 				}
 				else if(mode == 3){
 					((StudentPanel)ANNdroid.studentPanel).header_acct.setVisible(true);
+					((StudentPanel)ANNdroid.studentPanel).header_stat.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).header_inst.setVisible(false);
 
 					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).instructionPane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).statPane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(true);
 					MapBGPanel map = (MapBGPanel)((StudentPanel)ANNdroid.studentPanel).mapPane;
 					map.resetGlassPane();
@@ -364,7 +381,11 @@ public class LeftSidePane extends JPanel{
 				}
 				else if(mode == 4){
 					((StudentPanel)ANNdroid.studentPanel).header_acct.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).header_stat.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).header_inst.setVisible(false);
 
+					((StudentPanel)ANNdroid.studentPanel).instructionPane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).statPane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(false);
 					
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
@@ -385,8 +406,12 @@ public class LeftSidePane extends JPanel{
 					click.playSound();
 
 					((StudentPanel)ANNdroid.studentPanel).header_acct.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).header_stat.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).header_inst.setVisible(false);
 
 					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).instructionPane.setVisible(false);
+					((StudentPanel)ANNdroid.studentPanel).statPane.setVisible(false);
 
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
