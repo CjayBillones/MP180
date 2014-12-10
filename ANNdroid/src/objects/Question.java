@@ -29,6 +29,14 @@ public class Question implements Serializable{
 		return this.answer;
 	}
 
+	public String getAnswerLetter(){
+		if(this.answer == 0) return "A";
+		else if(this.answer == 1) return "B";
+		else if(this.answer == 2) return "C";
+		else if(this.answer == 3) return "D";
+		else return null;
+	}
+
 	public String getDifficulty(){
 		return this.difficulty;
 	}
