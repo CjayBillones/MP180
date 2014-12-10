@@ -225,6 +225,11 @@ public class MapBGPanel extends JPanel{
 				gpc.setKing(ANNdroid.simulator.kingList.get(2));
 				gpc.getQuestion();
 				pGlass.setVisible(false);
+
+				((StudentPanel)ANNdroid.studentPanel).mapBgmx.play.suspend();
+				((StudentPanel)ANNdroid.studentPanel).gameBgmx.playSound();
+
+
 				((StudentPanel)ANNdroid.studentPanel).remove(ANNdroid.bgPanel);
 				((GamePane)ANNdroid.gamePanel).add(ANNdroid.bgPanel);
 				c1.show(ANNdroid.cards,ANNdroid.GAMEPANEL);
@@ -239,6 +244,11 @@ public class MapBGPanel extends JPanel{
 				gpc.setKing(ANNdroid.simulator.kingList.get(0));
 				gpc.getQuestion();
 				pGlass.setVisible(false);
+
+				((StudentPanel)ANNdroid.studentPanel).mapBgmx.play.suspend();
+				((StudentPanel)ANNdroid.studentPanel).gameBgmx.playSound();
+
+
 				((StudentPanel)ANNdroid.studentPanel).remove(ANNdroid.bgPanel);
 				((GamePane)ANNdroid.gamePanel).add(ANNdroid.bgPanel);				
 				c1.show(ANNdroid.cards,ANNdroid.GAMEPANEL);
@@ -253,6 +263,11 @@ public class MapBGPanel extends JPanel{
 				gpc.setKing(ANNdroid.simulator.kingList.get(1));
 				gpc.getQuestion();
 				pGlass.setVisible(false);
+
+				((StudentPanel)ANNdroid.studentPanel).mapBgmx.play.suspend();
+				((StudentPanel)ANNdroid.studentPanel).gameBgmx.playSound();
+
+
 				((StudentPanel)ANNdroid.studentPanel).remove(ANNdroid.bgPanel);
 				((GamePane)ANNdroid.gamePanel).add(ANNdroid.bgPanel);								
 				c1.show(ANNdroid.cards,ANNdroid.GAMEPANEL);

@@ -17,7 +17,7 @@ public class CustomTextArea extends JTextArea{
 
 	BufferedImage bgImage = null;
 	BufferedImage scaledImage = null;
-	public String text = null;
+	String text = null;
 
 	public CustomTextArea(String text, int rows, int columns){
 		super(text, rows, columns);
@@ -61,7 +61,7 @@ public class CustomTextArea extends JTextArea{
 		scaledImage = scaleOp.filter(bgImage, null);
 
 		repaint();
-	}
+	}	
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);

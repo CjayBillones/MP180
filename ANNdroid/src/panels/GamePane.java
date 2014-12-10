@@ -41,6 +41,9 @@ public class GamePane extends JPanel{
 			((StudentPanel)ANNdroid.studentPanel).add(ANNdroid.bgPanel);
 			((MapBGPanel)((StudentPanel)ANNdroid.studentPanel).mapPane).pGlass.setVisible(true);
 
+			((StudentPanel)ANNdroid.studentPanel).mapBgmx.play.resume();
+			((StudentPanel)ANNdroid.studentPanel).gameBgmx.play.stop();
+
 			CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
 			c1.show(ANNdroid.cards, ANNdroid.STUDENTPANEL);			
 		});

@@ -27,7 +27,8 @@ public class StudentPanel extends JPanel{
 	};
 	public static Integer[] STRENGTH = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-	SoundPlayer mapBgmx;
+	public SoundPlayer mapBgmx;
+	public SoundPlayer gameBgmx;
 	JPanel leftSidePane;
 	JPanel mapPane;
 
@@ -116,6 +117,7 @@ public class StudentPanel extends JPanel{
 	public StudentPanel(JFrame parent){
 
 		mapBgmx = new SoundPlayer("darkalley.mp3", true, 500);
+		gameBgmx = new SoundPlayer("battle.mp3", true, 0);
 
 		setLayout(null);
 		setPreferredSize(new Dimension(ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT));
