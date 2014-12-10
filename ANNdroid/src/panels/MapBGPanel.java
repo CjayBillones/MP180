@@ -69,7 +69,7 @@ public class MapBGPanel extends JPanel{
 		//gamePanel = (GamePanel)(((ANNdroid)parent).gamePanel);
 		gamePanel = (GamePane)ANNdroid.gamePanel;
 
-		gpc = new GamePanelController(gamePanel,ANNdroid.simulator.kingList.get(0),"NULL",10,10,15); 
+		gpc = new GamePanelController(gamePanel,ANNdroid.simulator.kingList.get(0),"NULL",10,10,15,this); 
 
 		kingdom.addActionListener(new MapActionListener());
 		physics.addActionListener(new MapActionListener());
@@ -223,8 +223,7 @@ public class MapBGPanel extends JPanel{
 				y = (int)p.getY();
 				gpc.setSubject("Physics");
 				gpc.setKing(ANNdroid.simulator.kingList.get(2));
-				//gpc.getQuestion();
-				//resetGlassPane();
+				gpc.getQuestion();
 				pGlass.setVisible(false);
 				((StudentPanel)ANNdroid.studentPanel).remove(ANNdroid.bgPanel);
 				((GamePane)ANNdroid.gamePanel).add(ANNdroid.bgPanel);
@@ -238,8 +237,7 @@ public class MapBGPanel extends JPanel{
 				y = (int)p.getY();
 				gpc.setSubject("Biology");
 				gpc.setKing(ANNdroid.simulator.kingList.get(0));
-				//gpc.getQuestion();
-				//resetGlassPane();
+				gpc.getQuestion();
 				pGlass.setVisible(false);
 				((StudentPanel)ANNdroid.studentPanel).remove(ANNdroid.bgPanel);
 				((GamePane)ANNdroid.gamePanel).add(ANNdroid.bgPanel);				
@@ -253,8 +251,7 @@ public class MapBGPanel extends JPanel{
 				y = (int)p.getY();
 				gpc.setSubject("Chemistry");
 				gpc.setKing(ANNdroid.simulator.kingList.get(1));
-				//gpc.getQuestion();
-				//resetGlassPane();
+				gpc.getQuestion();
 				pGlass.setVisible(false);
 				((StudentPanel)ANNdroid.studentPanel).remove(ANNdroid.bgPanel);
 				((GamePane)ANNdroid.gamePanel).add(ANNdroid.bgPanel);								

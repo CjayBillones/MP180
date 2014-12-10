@@ -5,6 +5,7 @@ import java.util.*;
 import ANNdroid.src.*;
 import ANNdroid.src.ANNdroid;
 import ANNdroid.src.panels.GamePane;
+import ANNdroid.src.panels.MapBGPanel;
 import ANNdroid.src.ai.aimaker.King.*;
 import ANNdroid.src.ai.aimaker.King;
 
@@ -18,6 +19,7 @@ public class GamePanelController{
 
 	private Simulator sim;
 	private GameMaster gm;
+	private MapBGPanel map;
 	private JPanel gPanel;
 	private King king;
 	private Question curQuestion;
@@ -37,12 +39,13 @@ public class GamePanelController{
 	private double n_questions;
 	private double n_answered;
 
-	public GamePanelController(JPanel panel,King k ,String sub, int p_hp, int k_hp, int n_rounds){
+	public GamePanelController(JPanel panel,King k ,String sub, int p_hp, int k_hp, int n_rounds,MapBGPanel map ){
 
 		subject = sub.toUpperCase();
 		def_hp = p_hp;
 		sim = ANNdroid.simulator;
 		gm = new GameMaster(sim.subjectList);
+		this.map = map;
 
 		sD = SDataSL.load();
 		p_bracket = (sim.active == null)?5:(int)sD.studentData.get(((Student)sim.active).getUsername()).get(Categories.valueOf(subject));
@@ -59,25 +62,20 @@ public class GamePanelController{
 		n_questions = 0;
 		n_answered = 0;
 
-//	for(int i = 0; i < 4; i++)
-//			((GamePane)gPanel).choiceButtons[i].addActionListener(new ChoiceButtonActionListener());		
-	}
-
-	public GamePanelController(JPanel panel,King k, String sub,int p_hp, int k_hp){
-		this(panel,k,sub,p_hp,k_hp,DEFAULT_ROUNDS);
-	}
-
-	public GamePanelController(JPanel panel,King k, String sub){
-		this(panel,k,sub,DEFAULT_HP,DEFAULT_HP);			
+	for(int i = 0; i < 4; i++)
+			((GamePane)gPanel).choiceButtons[i].addActionListener(new ChoiceButtonActionListener());		
 	}
 
 	public void getQuestion(){
+		System.out.println(subject);
 		((GamePane)gPanel).kHP.setText("King HP:" + king_hp);
 		((GamePane)gPanel).pHP.setText("Player HP:" + player_hp);
 		if(king_hp <= 0 || player_hp <= 0 || rounds < 0){
 			if(king_hp == player_hp){
 				((GamePane)gPanel).choicesPanel.setVisible(false);
 				((GamePane)gPanel).question.setText("Draw!");
+
+				updateStudent();
 				reset();
 			}
 			else{
@@ -87,12 +85,13 @@ public class GamePanelController{
 		} 
 		else
 			try{
-				((GamePane)gPanel).choicesPanel.setVisible(true);
+				System.out.println(gPanel);
 				n_questions++;
 				curQuestion = gm.getRandomQuestion(Domain.valueOf(subject).ordinal());
 				displayQuestion(curQuestion);
 				rounds--;
 				}catch(NullPointerException n){
+				n.printStackTrace();
 				System.out.println("Here");
 				((GamePane)gPanel).question.setText("No More Questions");
 			}
@@ -149,6 +148,7 @@ public class GamePanelController{
 		else
 			((GamePane)gPanel).question.setText("The King won!");
 
+		updateStudent();
 		reset();
 		
 	}
@@ -184,7 +184,6 @@ public class GamePanelController{
 	}
 
 	public void reset(){
-		updateStudent();
 		king_hp = def_hp;
 		player_hp = def_hp;
 		rounds = def_round;
@@ -227,7 +226,16 @@ public class GamePanelController{
 			newBracket = 9;
 		}
 
+		if(subject.equals("BIOLOGY")){
+			student.setBiology(newBracket);
+		}else if(subject.equals("CHEMISTRY")){
+			student.setChemistry(newBracket);
+		}else if(subject.equals("PHYSICS")){
+			student.setPhysics(newBracket);
+		}
+
 		sim.studentData.update((Student)sim.active,Categories.valueOf(subject),newBracket);
+		ANNdroid.simulator.saver.saveUsers(ANNdroid.simulator.userList, "ANNdroid/bin/users.bin");
 		System.out.println(sim.studentData.studentData.get(username).get(Categories.valueOf(subject)));
 	}
 
