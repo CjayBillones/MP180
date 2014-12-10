@@ -3,6 +3,7 @@ package ANNdroid.src.objects;
 import java.util.*;
 
 import ANNdroid.src.*;
+import ANNdroid.src.ANNdroid;
 import ANNdroid.src.panels.GamePanel;
 import ANNdroid.src.ai.aimaker.King.*;
 import ANNdroid.src.ai.aimaker.King;
@@ -20,6 +21,7 @@ public class GamePanelController{
 	private King king;
 	private Question curQuestion;
 	private StudentData sD;
+	private Student student;
 
 	private String subject;
 
@@ -32,13 +34,15 @@ public class GamePanelController{
 
 		subject = sub.toUpperCase();
 
-		sim = new Simulator();
+		sim = ANNdroid.simulator;
 		gm = new GameMaster(sim.subjectList);
 
-		sD = sim.studentData;
+		sD = SDataSL.load();
+		System.out.println(sD.studentData);
+		System.out.println((Student)sim.active);
 		p_bracket = (sim.active == null)?5:(int)sD.studentData.get((Student)sim.active).get(Categories.valueOf(subject));
 		king = k;
-		System.out.println(k.name);
+		student = (Student)sim.active;
 		gPanel = panel;
 		player_hp = p_hp;
 		king_hp = k_hp;
@@ -161,16 +165,8 @@ public class GamePanelController{
 
 	}
 
-	public static void main(String args[]){
+	public void updateStudent(){
 
-		Simulator s = new Simulator();
-		GamePanel g = new GamePanel();
-		King k = s.kingList.get(0);
-
-		GamePanelController gpc = new GamePanelController(g,k,"Biology");
-
-		g.setVisible(true);
-		gpc.getQuestion();
 	}
 
 }

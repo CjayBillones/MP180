@@ -22,7 +22,12 @@ public class GamePanel extends JFrame{
 
 	public JButton[] choiceButtons;
 
-	public GamePanel(){
+	JFrame parent;
+
+
+	public GamePanel(JFrame parent){
+
+		this.parent = parent;
 
 		setLayout(new BorderLayout());
 
@@ -75,8 +80,6 @@ public class GamePanel extends JFrame{
 
 		question.setEditable(false);
 
-		setSize(1240,700);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 

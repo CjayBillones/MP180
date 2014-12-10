@@ -1,7 +1,6 @@
 package ANNdroid.src;
 
 import ANNdroid.src.panels.*;
-
 import javax.swing.*;
 
 import java.awt.*;
@@ -70,7 +69,7 @@ public class ANNdroid extends JFrame{
 		loginPanel = new LoginPanel(bgPanel);
 		adminPanel = new AdminPanel();
 		teacherPanel = new TeacherPanel();
-		studentPanel = new StudentPanel();
+		studentPanel = new StudentPanel(this);
 
 		// Add Cards/Panel to Cards Container //
 		cards = new JPanel(new CardLayout());

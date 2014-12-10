@@ -7,11 +7,11 @@ import java.io.*;
 
 public class StudentData implements Serializable {
 	
-	public Map<Student,Map<? extends Enum, Object>> studentData;
+	public Map<String,Map<? extends Enum, Object>> studentData;
 
 	public StudentData(){
 
-		studentData = new HashMap<Student,Map<? extends Enum,Object>>();
+		studentData = new HashMap<String,Map<? extends Enum,Object>>();
 
 	}
 
@@ -112,18 +112,19 @@ public class StudentData implements Serializable {
 	}
 
 	public void put(Student key, Map<? extends Enum, Object> value){
-		studentData.put(key,value);
+		studentData.put(key.getUsername(),value);
 		SDataSL.save(this);
 	}
 
 	public void update(Student key, Enum e, Object value){
 		Map<Enum, Object> map;
 		try{
-			map = new HashMap<Enum, Object>(studentData.get(key));
+			map = new HashMap<Enum, Object>(studentData.get(key.getUsername()));
 		}catch(NullPointerException NP){
 			map = new HashMap<Enum, Object>();
 		}
 		map.put(e,value);
+		studentData.put(key.getUsername(),map);
 		SDataSL.save(this);
 
 	}

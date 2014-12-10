@@ -42,7 +42,7 @@ public class SDataSL{
 
 			FileOutputStream file = new FileOutputStream(sd_file);
 			ObjectOutputStream out = new ObjectOutputStream(file);
-
+			System.out.println(sd);
 			out.writeObject(sd);
 			out.close();
 			file.close();
