@@ -29,10 +29,6 @@ public class Loader{
 
 				for(int ac = 0; ac < size; ac++){
 					User u = (User)ois.readObject();
-
-					if(u instanceof Admin)	System.out.println(u.getUsername() + " - Admin");
-					else if(u instanceof Teacher)	System.out.println(u.getUsername() + " - Teacher");
-					else if(u instanceof Student) System.out.println(u.getUsername() + " - Student");
 					userList.add(u);
 				}
 				ois.close();
@@ -89,10 +85,7 @@ public class Loader{
 
 				for(int ac = 0; ac < size; ac++){
 					King s = (King)ois.readObject();
-
 					kingList.add(s);
-					System.out.println(s.name);
-
 				}
 				ois.close();
 			}catch(IOException e){	e.printStackTrace();
