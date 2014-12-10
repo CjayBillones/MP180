@@ -107,7 +107,21 @@ public class StudentPanel extends JPanel{
 
 	// Stats Panel //
 	JPanel statPane;
+	JLabel gamesPlayed;
+	JLabel gamesWon;
+	JLabel gamesDraw;
+	JLabel gamesLost;
+	JLabel chemStrLabel;
+	JLabel physStrLabel;
+	JLabel bioStrLabel;
 
+	public JTextField gamesPlayedField;
+	public JTextField gamesWonField;
+	public JTextField gamesDrawField;
+	public JTextField gamesLostField;
+	public JTextField bioStrField;
+	public JTextField chemStrField;
+	public JTextField physStrField;
 	// Headers //
 	int headerheight = 50;
 	JLabel header_inst;
@@ -542,6 +556,63 @@ public class StudentPanel extends JPanel{
 		statPane.setBounds(leftSidePane.getWidth(), getHeight()*3/16, profilePane.getWidth(), getHeight()*2/3);
 		statPane.setVisible(false);
 
+		gamesPlayed = new CustomLabel("Games Played: ", statPane.getWidth()/4, 20, 1);
+		gamesPlayed.setBounds(statPane.getWidth()/26, statPane.getHeight()/14, statPane.getWidth()/4, 20);
+		statPane.add(gamesPlayed);
+
+		gamesWon = new CustomLabel("Games Won: ", statPane.getWidth()/4, 20, 1);
+		gamesWon.setBounds(gamesPlayed.getX(), gamesPlayed.getY()+30, statPane.getWidth()/4, 20);
+		statPane.add(gamesWon);
+
+		gamesDraw = new CustomLabel("Games Draw: ", statPane.getWidth()/4, 20, 1);
+		gamesDraw.setBounds(gamesPlayed.getX(), gamesWon.getY()+30, statPane.getWidth()/4, 20);
+		statPane.add(gamesDraw);
+
+		gamesLost = new CustomLabel("Games Lost:", statPane.getWidth()/4, 20, 1);
+		gamesLost.setBounds(gamesPlayed.getX(), gamesDraw.getY()+30, statPane.getWidth()/4, 20);
+		statPane.add(gamesLost);
+
+		chemStrLabel = new CustomLabel("Chemistry Strength: ", statPane.getWidth()/4, 20, 1);
+		chemStrLabel.setBounds(gamesPlayed.getX(), gamesLost.getY()+30, statPane.getWidth()/4, 20);
+		statPane.add(chemStrLabel);
+
+		physStrLabel = new CustomLabel("Physics Strength: ", statPane.getWidth()/4, 20, 1);
+		physStrLabel.setBounds(gamesPlayed.getX(), chemStrLabel.getY()+30, statPane.getWidth()/4, 20);
+		statPane.add(physStrLabel);
+
+		bioStrLabel = new CustomLabel("Biology Strength: ", statPane.getWidth()/4, 20, 1);
+		bioStrLabel.setBounds(gamesPlayed.getX(), physStrLabel.getY()+30, statPane.getWidth()/4, 20);
+		statPane.add(bioStrLabel);
+
+		gamesPlayedField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		gamesPlayedField.setBounds(gamesPlayed.getX()+gamesPlayed.getWidth(), gamesPlayed.getY(), gamesPlayed.getWidth(), 20);
+		statPane.add(gamesPlayedField);
+
+		gamesWonField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		gamesWonField.setBounds(gamesPlayedField.getX(), gamesWon.getY(), gamesPlayedField.getWidth(), 20);
+		statPane.add(gamesWonField);
+
+		gamesDrawField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		gamesDrawField.setBounds(gamesPlayedField.getX(), gamesDraw.getY(), gamesPlayedField.getWidth(), 20);
+		statPane.add(gamesDrawField);
+
+		gamesLostField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		gamesLostField.setBounds(gamesPlayedField.getX(), gamesLost.getY(), gamesPlayedField.getWidth(), 20);
+		statPane.add(gamesLostField);
+
+		bioStrField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		bioStrField.setBounds(gamesPlayedField.getX(), bioStrLabel.getY(), gamesPlayedField.getWidth(), 20);
+		statPane.add(bioStrField);
+
+		chemStrField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		chemStrField.setBounds(gamesPlayedField.getX(), chemStrLabel.getY(), gamesPlayedField.getWidth(), 20);
+		statPane.add(chemStrField);
+
+		physStrField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		physStrField.setBounds(gamesPlayedField.getX(), physStrLabel.getY(), gamesPlayedField.getWidth(), 20);
+		statPane.add(physStrField);
+
+
 		// Headers //
 		header_inst = new CustomLabel("How to Play", instructionPane.getWidth(), headerheight, 2);
 		header_inst.setBounds(instructionPane.getX(), instructionPane.getY()-headerheight, instructionPane.getWidth(), headerheight);
@@ -696,7 +767,42 @@ public class StudentPanel extends JPanel{
 
 		// Stats Pane Resize //
 		statPane.setBounds(leftSidePane.getWidth(), getHeight()*3/16, profilePane.getWidth(), getHeight()*2/3);
-		((GenericPane)statPane).resize();		
+		((GenericPane)statPane).resize();
+
+		gamesPlayed.setBounds(statPane.getWidth()/26, statPane.getHeight()/7, statPane.getWidth()/4, 20);
+		((CustomLabel)gamesPlayed).resize();
+
+		gamesWon.setBounds(gamesPlayed.getX(), gamesPlayed.getY()+50, statPane.getWidth()/4, 20);
+		((CustomLabel)gamesWon).resize();
+
+		gamesDraw.setBounds(gamesPlayed.getX(), gamesWon.getY()+50, statPane.getWidth()/4, 20);
+		((CustomLabel)gamesDraw).resize();
+
+		gamesLost.setBounds(gamesPlayed.getX(), gamesDraw.getY()+50, statPane.getWidth()/4, 20);
+		((CustomLabel)gamesLost).resize();
+
+		chemStrLabel.setBounds(gamesPlayed.getX(), gamesLost.getY()+50, statPane.getWidth()/4, 20);
+		((CustomLabel)chemStrLabel).resize();
+
+		physStrLabel.setBounds(gamesPlayed.getX(), chemStrLabel.getY()+50, statPane.getWidth()/4, 20);
+		((CustomLabel)physStrLabel).resize();
+
+		bioStrLabel.setBounds(gamesPlayed.getX(), physStrLabel.getY()+50, statPane.getWidth()/4, 20);
+		((CustomLabel)bioStrLabel).resize();
+
+		gamesPlayedField.setBounds(gamesPlayed.getX()+gamesPlayed.getWidth(), gamesPlayed.getY(), gamesPlayed.getWidth(), 20);
+
+		gamesWonField.setBounds(gamesPlayedField.getX(), gamesWon.getY(), gamesPlayedField.getWidth(), 20);
+
+		gamesDrawField.setBounds(gamesPlayedField.getX(), gamesDraw.getY(), gamesPlayedField.getWidth(), 20);
+
+		gamesLostField.setBounds(gamesPlayedField.getX(), gamesLost.getY(), gamesPlayedField.getWidth(), 20);
+
+		bioStrField.setBounds(gamesPlayedField.getX(), bioStrLabel.getY(), gamesPlayedField.getWidth(), 20);
+
+		chemStrField.setBounds(gamesPlayedField.getX(), chemStrLabel.getY(), gamesPlayedField.getWidth(), 20);
+
+		physStrField.setBounds(gamesPlayedField.getX(), physStrLabel.getY(), gamesPlayedField.getWidth(), 20);
 
 		// Header Resize //
 		header_inst.setBounds(instructionPane.getX(), instructionPane.getY()-headerheight, instructionPane.getWidth(), headerheight);

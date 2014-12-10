@@ -59,6 +59,7 @@ public class GamePane extends JPanel{
 
 		//question = new JTextArea(20,255);
 		question = new CustomTextArea("Default String", 20, 255);
+		question.setLineWrap(true);
 		question.setBounds(0, quitButton.getY() + 50, getWidth(), getHeight()/2);
 		add(question);
 

@@ -229,27 +229,38 @@ public class LoginPanel extends JPanel{
 					if(((Student)ANNdroid.simulator.getActiveUser()).getChemistry() != -1){
 						((StudentPanel)ANNdroid.studentPanel).chemStr.setSelectedItem(((Student)ANNdroid.simulator.getActiveUser()).getChemistry()+1);
 						((StudentPanel)ANNdroid.studentPanel).chemStr.setEnabled(false);
+						((StudentPanel)ANNdroid.studentPanel).chemStrField.setText(Integer.toString(((Student)u).getChemistry()));
 					}
 					else{
 						((StudentPanel)ANNdroid.studentPanel).chemStr.setSelectedItem(null);
 						((StudentPanel)ANNdroid.studentPanel).chemStr.setEnabled(true);
+						((StudentPanel)ANNdroid.studentPanel).chemStrField.setText("n/a");
 					}
 					if(((Student)ANNdroid.simulator.getActiveUser()).getPhysics() != -1){
 						((StudentPanel)ANNdroid.studentPanel).physStr.setSelectedItem(((Student)ANNdroid.simulator.getActiveUser()).getPhysics()+1);
 						((StudentPanel)ANNdroid.studentPanel).physStr.setEnabled(false);
+						((StudentPanel)ANNdroid.studentPanel).physStrField.setText(Integer.toString(((Student)u).getPhysics()));										
 					}
 					else{
 						((StudentPanel)ANNdroid.studentPanel).physStr.setSelectedItem(null);
 						((StudentPanel)ANNdroid.studentPanel).physStr.setEnabled(true);
+						((StudentPanel)ANNdroid.studentPanel).physStrField.setText("n/a");				
 					}
 					if(((Student)ANNdroid.simulator.getActiveUser()).getBiology() != -1){
 						((StudentPanel)ANNdroid.studentPanel).bioStr.setSelectedItem(((Student)ANNdroid.simulator.getActiveUser()).getBiology()+1);
 						((StudentPanel)ANNdroid.studentPanel).bioStr.setEnabled(false);
+						((StudentPanel)ANNdroid.studentPanel).bioStrField.setText(Integer.toString(((Student)u).getBiology()));		
 					}
 					else{
 						((StudentPanel)ANNdroid.studentPanel).bioStr.setSelectedItem(null);
 						((StudentPanel)ANNdroid.studentPanel).bioStr.setEnabled(true);
-					}					
+						((StudentPanel)ANNdroid.studentPanel).bioStrField.setText("n/a");
+					}
+
+					((StudentPanel)ANNdroid.studentPanel).gamesPlayedField.setText(Integer.toString(((Student)u).getGamesPlayed()));
+					((StudentPanel)ANNdroid.studentPanel).gamesWonField.setText(Integer.toString(((Student)u).getGamesWon()));
+					((StudentPanel)ANNdroid.studentPanel).gamesDrawField.setText(Integer.toString(((Student)u).getGamesDraw()));
+					((StudentPanel)ANNdroid.studentPanel).gamesLostField.setText(Integer.toString(((Student)u).getGamesLost()));						
 				}
 			}
 		}

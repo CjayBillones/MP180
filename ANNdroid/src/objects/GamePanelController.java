@@ -5,7 +5,7 @@ import java.util.*;
 import ANNdroid.src.*;
 import ANNdroid.src.ANNdroid;
 import ANNdroid.src.panels.GamePane;
-import ANNdroid.src.panels.MapBGPanel;
+import ANNdroid.src.panels.*;
 import ANNdroid.src.ai.aimaker.King.*;
 import ANNdroid.src.ai.aimaker.King;
 import ANNdroid.src.custom_swing.*;
@@ -85,6 +85,14 @@ public class GamePanelController{
 				Boolean winner = (player_hp - king_hp > 0)?true:false;
 				showWinner(winner);
 			}
+			((StudentPanel)ANNdroid.studentPanel).chemStrField.setText(Integer.toString(((Student)student).getChemistry()));
+			((StudentPanel)ANNdroid.studentPanel).physStrField.setText(Integer.toString(((Student)student).getPhysics()));										
+			((StudentPanel)ANNdroid.studentPanel).bioStrField.setText(Integer.toString(((Student)student).getBiology()));					
+			((StudentPanel)ANNdroid.studentPanel).gamesPlayedField.setText(Integer.toString(((Student)student).getGamesPlayed()));
+			((StudentPanel)ANNdroid.studentPanel).gamesWonField.setText(Integer.toString(((Student)student).getGamesWon()));
+			((StudentPanel)ANNdroid.studentPanel).gamesDrawField.setText(Integer.toString(((Student)student).getGamesDraw()));
+			((StudentPanel)ANNdroid.studentPanel).gamesLostField.setText(Integer.toString(((Student)student).getGamesLost()));						
+
 		} 
 		else
 			try{
@@ -94,7 +102,6 @@ public class GamePanelController{
 				rounds--;
 				}catch(NullPointerException n){
 				n.printStackTrace();
-				System.out.println("Here");
 					((CustomTextArea)((GamePane)gPanel).question).setText("No more questions");
 			}
 	}
