@@ -504,12 +504,16 @@ public class AdminPanel extends JPanel{
 					reinitialize(true, false, 0);
 				}
 				else{
+					SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
+					click.playSound();					
 					reinitialize(false, true, 0);
 					createTeachPane.setVisible(false);
 				}
 			}
 			else if(this.state == 1){
 				if(this.mode == 1){
+					SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
+					click.playSound();					
 					reinitialize(false, true, 1);
 					delTeachPane.setVisible(false);
 				}
@@ -532,6 +536,8 @@ public class AdminPanel extends JPanel{
 			}
 			else if(this.state == 2){
 				if(this.mode == 2){
+					SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
+					click.playSound();					
 					reinitialize(false, true, 2);
 					changePwordPane.setVisible(false);
 				}

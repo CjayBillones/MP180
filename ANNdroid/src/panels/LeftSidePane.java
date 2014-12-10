@@ -2,6 +2,7 @@ package ANNdroid.src.panels;
 
 import ANNdroid.src.custom_swing.*;
 import ANNdroid.src.objects.*;
+import ANNdroid.src.util.*;
 import ANNdroid.src.*;
 
 import java.io.File;
@@ -29,6 +30,8 @@ public class LeftSidePane extends JPanel{
 	int btnPane_wdt;
 	JButton[] btns;
 	JPanel buttonPane;
+
+	boolean active = false;
 	
 	public LeftSidePane(JPanel sourcePanel, int source, int buttons, String[] labels){
 		
@@ -143,6 +146,10 @@ public class LeftSidePane extends JPanel{
 
 				}
 				else{
+
+					SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
+					click.playSound();
+
 					((AdminPanel)ANNdroid.adminPanel).createTeachPane.setVisible(false);
 					((AdminPanel)ANNdroid.adminPanel).reinitialize(false, true, 0);
 
@@ -152,7 +159,6 @@ public class LeftSidePane extends JPanel{
 					((AdminPanel)ANNdroid.adminPanel).changePwordPane.setVisible(false);
 					((AdminPanel)ANNdroid.adminPanel).reinitialize(false, true, 2);
 
-					//System.out.println(ANNdroid.simulator.getActiveUser().getUsername());
 					ANNdroid.simulator.setActiveUser(null);
 					ANNdroid.loginPanel.add(ANNdroid.bgPanel);
 					((AdminPanel)ANNdroid.adminPanel).remove(ANNdroid.bgPanel);
@@ -170,7 +176,8 @@ public class LeftSidePane extends JPanel{
 
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectsButtonPane.setVisible(false);
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectPane.setVisible(false);
-					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);	
+					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);
+					((TeacherPanel)ANNdroid.teacherPanel).reinitializeViewQuestionPane();	
 
 					((TeacherPanel)ANNdroid.teacherPanel).fnameField.requestFocus();				
 				}
@@ -183,6 +190,7 @@ public class LeftSidePane extends JPanel{
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectsButtonPane.setVisible(false);
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectPane.setVisible(false);
 					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);
+					((TeacherPanel)ANNdroid.teacherPanel).reinitializeViewQuestionPane();
 
 					((TeacherPanel)ANNdroid.teacherPanel).delUnameField.requestFocus();		
 				}
@@ -195,7 +203,8 @@ public class LeftSidePane extends JPanel{
 				
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectsButtonPane.setVisible(false);
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectPane.setVisible(false);
-					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);				
+					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);
+					((TeacherPanel)ANNdroid.teacherPanel).reinitializeViewQuestionPane();				
 				}
 				else if(this.mode == 3){
 					((TeacherPanel)ANNdroid.teacherPanel).createStudentPane.setVisible(false);
@@ -213,24 +222,18 @@ public class LeftSidePane extends JPanel{
 					
 					((TeacherPanel)ANNdroid.teacherPanel).delStudentPane.setVisible(false);
 					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 1);
-				
-					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectsButtonPane.setVisible(false);
-					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectPane.setVisible(false);
-					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);
-				}
-				else if(this.mode == 5){
-					((TeacherPanel)ANNdroid.teacherPanel).createStudentPane.setVisible(false);
-					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 0);
-					
-					((TeacherPanel)ANNdroid.teacherPanel).delStudentPane.setVisible(false);
-					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 1);
 
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectsButtonPane.setVisible(false);
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectPane.setVisible(false);
-					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);	
+					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);
+					((TeacherPanel)ANNdroid.teacherPanel).reinitializeViewQuestionPane();	
 
 				}
 				else{
+
+					SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
+					click.playSound();
+
 					((TeacherPanel)ANNdroid.teacherPanel).createStudentPane.setVisible(false);
 					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 0);
 
@@ -240,6 +243,7 @@ public class LeftSidePane extends JPanel{
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectsButtonPane.setVisible(false);
 					((TeacherPanel)ANNdroid.teacherPanel).manageSubjectPane.setVisible(false);
 					((TeacherPanel)ANNdroid.teacherPanel).reinitialize(false, true, 2);
+					((TeacherPanel)ANNdroid.teacherPanel).reinitializeViewQuestionPane();
 
 					ANNdroid.simulator.active = null;
 					ANNdroid.loginPanel.add(ANNdroid.bgPanel);
@@ -255,6 +259,12 @@ public class LeftSidePane extends JPanel{
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
 
 					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(true);
+					
+					if(!active){
+						active = true;
+						((StudentPanel)ANNdroid.studentPanel).mapBgmx.playSound();
+						((LoginPanel)ANNdroid.loginPanel).bgmx.play.suspend();
+					}
 				}
 				else if(mode == 1){
 
@@ -262,6 +272,12 @@ public class LeftSidePane extends JPanel{
 
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
+
+					if(active){
+						active = false;
+						((StudentPanel)ANNdroid.studentPanel).mapBgmx.play.stop();
+						((LoginPanel)ANNdroid.loginPanel).bgmx.play.resume();
+					}
 				}
 				else if(mode == 2){
 
@@ -269,11 +285,23 @@ public class LeftSidePane extends JPanel{
 
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
+
+					if(active){
+						active = false;
+						((StudentPanel)ANNdroid.studentPanel).mapBgmx.play.stop();
+						((LoginPanel)ANNdroid.loginPanel).bgmx.play.resume();
+					}
 				}
 				else if(mode == 3){
 
 					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(true);
+
+					if(active){
+						active = false;
+						((StudentPanel)ANNdroid.studentPanel).mapBgmx.play.stop();
+						((LoginPanel)ANNdroid.loginPanel).bgmx.play.resume();
+					}
 				}
 				else if(mode == 4){
 
@@ -281,8 +309,17 @@ public class LeftSidePane extends JPanel{
 					
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
+				
+					if(active){
+						active = false;
+						((StudentPanel)ANNdroid.studentPanel).mapBgmx.play.stop();
+						((LoginPanel)ANNdroid.loginPanel).bgmx.play.resume();
+					}
 				}
 				else{
+
+					SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
+					click.playSound();
 
 					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(false);
 
@@ -295,6 +332,12 @@ public class LeftSidePane extends JPanel{
 			
 					CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
 					c1.show(ANNdroid.cards, ANNdroid.LOGINPANEL);						
+				
+					if(active){
+						active = false;
+						((StudentPanel)ANNdroid.studentPanel).mapBgmx.play.stop();
+						((LoginPanel)ANNdroid.loginPanel).bgmx.play.resume();
+					}
 				}
 			}
 		}

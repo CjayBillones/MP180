@@ -26,8 +26,10 @@ public class StudentPanel extends JPanel{
 	};
 	public static Integer[] STRENGTH = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
+	SoundPlayer mapBgmx;
 	JPanel leftSidePane;
 	JPanel mapPane;
+	JPanel instructionPane;
 	JPanel profilePane;
 
 	// Edit Profile Pane //
@@ -100,8 +102,10 @@ public class StudentPanel extends JPanel{
 
 
 	public StudentPanel(){
-		setLayout(null);
 
+		mapBgmx = new SoundPlayer("darkalley.mp3", true, 500);
+
+		setLayout(null);
 		setPreferredSize(new Dimension(ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT));
 		setBounds(0, 0, ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT);
 	
@@ -484,6 +488,8 @@ public class StudentPanel extends JPanel{
 		cancelbtn.setBounds(change.getX(), change.getY()+27, change.getWidth(), 20);
 		profilePane.add(cancelbtn);
 		cancelbtn.addActionListener(e->{
+			SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
+			click.playSound();			
 			reinitialize(false, true, 1);
 			profilePane.setVisible(false);
 		});

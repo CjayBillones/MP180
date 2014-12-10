@@ -13,6 +13,8 @@ import java.awt.event.*;
 
 public class LoginPanel extends JPanel{
 
+	SoundPlayer bgmx;
+
 	JPanel loginPane;
 
 	JLabel errorLabel;
@@ -27,6 +29,9 @@ public class LoginPanel extends JPanel{
 	String pwordLogin;
 
 	public LoginPanel(JPanel bgPanel){
+
+		bgmx = new SoundPlayer("pso2_1.mp3", true, 1300);
+		bgmx.playSound();
 
 		setLayout(null);
 		setPreferredSize(new Dimension(ANNdroid.SCREEN_WIDTH, ANNdroid.SCREEN_HEIGHT));
@@ -72,7 +77,11 @@ public class LoginPanel extends JPanel{
 		exitBtn = new CustomButton("exit", loginBtn.getWidth(), loginPane.getHeight()/7);
 		exitBtn.setBounds(loginBtn.getX() + loginBtn.getWidth(), loginBtn.getY(), loginBtn.getWidth(), loginPane.getHeight()/7);
 		exitBtn.setContentAreaFilled(false);				
-		exitBtn.addActionListener(event->{System.exit(1);});
+		exitBtn.addActionListener(event->{
+				SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
+				click.playSound();
+			System.exit(1);
+		});
 		loginPane.add(exitBtn);
 
 		add(loginPane);
@@ -164,6 +173,9 @@ public class LoginPanel extends JPanel{
 			else{
 				errorLabel.setVisible(false);
 				remove(ANNdroid.bgPanel);
+
+				SoundPlayer loginSound= new SoundPlayer("click.mp3", false, 0);
+				loginSound.playSound();
 
 				ANNdroid.simulator.setActiveUser(u);
 				if(u instanceof Admin){

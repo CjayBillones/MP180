@@ -16,6 +16,7 @@ import java.awt.event.*;
 
 public class TeacherPanel extends JPanel{
 
+	public static String[] SUBJECTS = {"Chemistry", "Physics", "Biology"};
 	public static String[] CHOICES = {"A", "B", "C", "D"};
 	public static String[] DIFFICULTY = {"EASY", "INTERMEDIATE", "HARD"};
 
@@ -70,15 +71,16 @@ public class TeacherPanel extends JPanel{
 	JPanel manageSubjectsButtonPane;
 	JButton addQuestion;
 	JButton viewQuestions;
-	JButton deleteQuestion;
 
 	JPanel manageSubjectPane;
 	JLabel errorLabel3;
 
+	// Add Question //
 	JPanel addQuestionPane;
 
 	JLabel subjectLabel;
-	JTextField subjectField;
+	JComboBox<String> subjChoices;
+	String selectedSubject = null;
 
 	JLabel qLabel;
 	public JScrollPane jp;
@@ -95,15 +97,47 @@ public class TeacherPanel extends JPanel{
 	JTextField fthchoiceField;
 
 	JLabel diffLabel;
-	JComboBox<Object> diffField;
+	JComboBox<String> diffField;
 	JLabel answerLabel;
-	JComboBox<Object> answerField;
+	JComboBox<String> answerField;
 
-	int selectedChoice = 0;
-	String selectedDifficulty = "EASY";
+	int selectedChoice = -1;
+	String selectedDifficulty = null;
 
 	JButton addBtn;
 	JButton cancelBtn3;
+
+	// View Question //
+	JPanel viewQuestionPane;
+
+	JLabel viewSubjectLabel;
+	JLabel questionNumberLabel;
+	JComboBox<String> viewSubjChoices;
+	JComboBox<Integer> viewQuestionChoices;
+	String viewSelectedSubject = null;
+	int viewSelectedQuestion = -1;
+
+	JLabel viewqLabel;
+	public JScrollPane viewjp;
+	JTextArea viewqField;
+
+	JLabel viewfchoiceLabel;
+	JLabel viewschoiceLabel;
+	JLabel viewtchoiceLabel;
+	JLabel viewfthchoiceLabel;
+
+	JTextField viewfchoiceField;
+	JTextField viewschoiceField;
+	JTextField viewtchoiceField;
+	JTextField viewfthchoiceField;
+
+	JLabel viewdiffLabel;
+	JTextField viewdiffField;
+	JLabel viewanswerLabel;
+	JTextField viewanswerField;
+
+	JButton delQuestionButton;
+	JButton cancelBtn4;
 
 	public TeacherPanel(){
 
@@ -115,9 +149,9 @@ public class TeacherPanel extends JPanel{
 		ActionMap am;
 
 		// Left Side Pane Layout Initialization //
-		String labels[] = {"Create Student Account", "Delete Student Account", "View Students", "Manage Subjects", "Statistics", "Edit Profile", "Logout"};
+		String labels[] = {"Create Student Account", "Delete Student Account", "View Students", "Manage Subjects", "Account Settings", "Logout"};
 
-		leftSidePane = new LeftSidePane(this, 1, 7, labels);
+		leftSidePane = new LeftSidePane(this, 1, 6, labels);
 		leftSidePane.setPreferredSize(new Dimension(getWidth()/4 + 60, getHeight()));
 		leftSidePane.setBounds(0, 0, getWidth()/4 + 60, getHeight());
 		leftSidePane.setBackground(Color.BLACK);		
@@ -264,16 +298,25 @@ public class TeacherPanel extends JPanel{
 		subjectLabel.setBounds(0, 0, addQuestionPane.getWidth()/6, 20);
 		addQuestionPane.add(subjectLabel);
 
-		subjectField = new CustomTextField(new Color(0, 29, 60, 0), true, "");
-		subjectField.setBounds(subjectLabel.getX()+subjectLabel.getWidth(), subjectLabel.getY(), addQuestionPane.getWidth()/4, 20);
-		addQuestionPane.add(subjectField);
+		subjChoices = new CustomComboBox<String>(SUBJECTS);
+		subjChoices.setBounds(subjectLabel.getX()+subjectLabel.getWidth(), subjectLabel.getY(), addQuestionPane.getWidth()/4, 20);
+		subjChoices.setSelectedItem(null);
+		addQuestionPane.add(subjChoices);
+		((JLabel)subjChoices.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);		
+		subjChoices.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				JComboBox<?> cb = (JComboBox<?>)e.getSource();
+				selectedSubject = (String)cb.getSelectedItem();
+				requestFocusInWindow();
+			}
+		});	
 
 		qLabel = new CustomLabel("Question: ", subjectLabel.getWidth()/4, 20, 1);
 		qLabel.setBounds(subjectLabel.getX(), subjectLabel.getY() + 40, subjectLabel.getWidth()/4, 20);
 		addQuestionPane.add(qLabel);
 
 		qField = new CustomTextArea(new Color(0, 29, 60, 0), "", 3, 50);
-		qField.setBounds(0, 0, subjectField.getWidth()*3+15, 40);
+		qField.setBounds(0, 0, subjChoices.getWidth()*3+15, 40);
 		qField.setLineWrap(true);
 		qField.setFocusTraversalKeysEnabled(false);
 
@@ -288,7 +331,7 @@ public class TeacherPanel extends JPanel{
 		});		
 
 		jp = new CustomScrollPane(qField);
-		jp.setBounds(subjectField.getX(), subjectField.getY()+30, subjectField.getWidth()*3+15, 40);
+		jp.setBounds(subjChoices.getX(), subjChoices.getY()+30, subjChoices.getWidth()*3+15, 40);
 		addQuestionPane.add(jp);
 
 		DefaultCaret caret = (DefaultCaret)qField.getCaret();
@@ -299,7 +342,7 @@ public class TeacherPanel extends JPanel{
 		addQuestionPane.add(fchoiceLabel);
 
 		fchoiceField = new CustomTextField(new Color(0, 29, 60, 0), true, "");
-		fchoiceField.setBounds(subjectField.getX(), fchoiceLabel.getY(), subjectField.getWidth(), 20);
+		fchoiceField.setBounds(subjChoices.getX(), fchoiceLabel.getY(), subjChoices.getWidth(), 20);
 		addQuestionPane.add(fchoiceField);
 		fchoiceField.setFocusTraversalKeysEnabled(false);
 
@@ -366,7 +409,7 @@ public class TeacherPanel extends JPanel{
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0), "tab");
 		am.put("tab", new AbstractAction(){
 			public void actionPerformed(ActionEvent e){
-				subjectField.requestFocus();
+				subjChoices.requestFocus();
 			}
 		});		
 
@@ -374,8 +417,9 @@ public class TeacherPanel extends JPanel{
 		answerLabel.setBounds(schoiceLabel.getX(), schoiceLabel.getY()+30, subjectLabel.getWidth(), 20);
 		addQuestionPane.add(answerLabel);
 
-		answerField = new CustomComboBox<Object>(CHOICES);
+		answerField = new CustomComboBox<String>(CHOICES);
 		answerField.setBounds(answerLabel.getX()+answerLabel.getWidth(), answerLabel.getY(), answerLabel.getWidth(), 20);
+		answerField.setSelectedItem(null);
 		addQuestionPane.add(answerField);
 		((JLabel)answerField.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);		
 		answerField.addActionListener(new ActionListener(){
@@ -390,8 +434,9 @@ public class TeacherPanel extends JPanel{
 		diffLabel.setBounds(addQuestionPane.getWidth()/2, answerLabel.getY(), answerLabel.getWidth(), 20);
 		addQuestionPane.add(diffLabel);
 
-		diffField = new CustomComboBox<Object>(DIFFICULTY);
+		diffField = new CustomComboBox<String>(DIFFICULTY);
 		diffField.setBounds(diffLabel.getX()+diffLabel.getWidth(), diffLabel.getY(), diffLabel.getWidth(), 20);
+		diffField.setSelectedItem(null);
 		addQuestionPane.add(diffField);
 		((JLabel)diffField.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);		
 		diffField.addActionListener(new ActionListener(){
@@ -405,8 +450,8 @@ public class TeacherPanel extends JPanel{
 		addBtn = new CustomButton("Add", addQuestionPane.getWidth()/2, 30);
 		addBtn.setBounds(answerLabel.getX(), answerLabel.getY()+30, addQuestionPane.getWidth()/2, 30);
 		addBtn.addActionListener(e->{			
-			if(Utilities.subjectExists(subjectField.getText()) == -1){
-				errorLabel3.setText("* subject does not exist");
+			if(selectedSubject == null){
+				errorLabel3.setText("* choose a subject");
 				errorLabel3.setForeground(Color.RED);
 			}
 			else if(qField.getText().length() < 10){
@@ -420,10 +465,18 @@ public class TeacherPanel extends JPanel{
 			else if(fchoiceField.getText().equals("") || schoiceField.getText().equals("") || tchoiceField.getText().equals("") || fthchoiceField.getText().equals("")){
 				errorLabel3.setText("* all field choices must be filled out");
 				errorLabel3.setForeground(Color.RED);
-			}	
+			}
+			else if(selectedChoice == -1){
+				errorLabel3.setText("* supply answer");
+				errorLabel3.setForeground(Color.RED);				
+			}
+			else if(selectedDifficulty == null){
+				errorLabel3.setText("* choose a difficulty");
+				errorLabel3.setForeground(Color.RED);
+			}
 			else{
 
-				Subject s = Simulator.subjectList.get(Utilities.subjectExists(subjectField.getText()));
+				Subject s = Simulator.subjectList.get(Utilities.subjectExists(selectedSubject));
 
 				LinkedList<String> choices = new LinkedList<String>();
 					choices.add(fchoiceField.getText());
@@ -449,32 +502,212 @@ public class TeacherPanel extends JPanel{
 		cancelBtn3.addActionListener(e->{
 			reinitialize(false, true, 2);
 			addQuestionPane.setVisible(false);
+			SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
+			click.playSound();			
 		});
 		addQuestionPane.add(cancelBtn3);
 
+		// View Subject Question //
+		viewQuestionPane = new JPanel(null);
+		viewQuestionPane.setBounds(manageSubjectPane.getWidth()/16+5, manageSubjectPane.getHeight()/5, manageSubjectPane.getWidth() - manageSubjectPane.getWidth()/7, manageSubjectPane.getHeight()-manageSubjectPane.getHeight()/4-5);
+		viewQuestionPane.setOpaque(false);
+		viewQuestionPane.setVisible(false);
+		manageSubjectPane.add(viewQuestionPane);
+
+		viewSubjectLabel = new CustomLabel("Subject: ", viewQuestionPane.getWidth()/6, 20, 1);
+		viewSubjectLabel.setBounds(0, 0, viewQuestionPane.getWidth()/6, 20);
+		viewQuestionPane.add(viewSubjectLabel);
+
+		viewSubjChoices = new CustomComboBox<String>(SUBJECTS);
+		viewSubjChoices.setBounds(viewSubjectLabel.getX()+viewSubjectLabel.getWidth(), viewSubjectLabel.getY(), viewQuestionPane.getWidth()/4, 20);
+		viewSubjChoices.setSelectedItem(null);
+		viewQuestionPane.add(viewSubjChoices);
+		((JLabel)viewSubjChoices.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);		
+
+		viewqLabel = new CustomLabel("Question: ", viewSubjectLabel.getWidth()/4, 20, 1);
+		viewqLabel.setBounds(viewSubjectLabel.getX(), viewSubjectLabel.getY() + 40, viewSubjectLabel.getWidth()/4, 20);
+		viewQuestionPane.add(viewqLabel);
+
+		viewqField = new CustomTextArea(new Color(0, 29, 60, 0), "", 3, 50);
+		viewqField.setBounds(0, 0, viewSubjChoices.getWidth()*3+15, 40);
+		viewqField.setLineWrap(true);
+		viewqField.setEditable(false);
+		
+		viewjp = new CustomScrollPane(viewqField);
+		viewjp.setBounds(viewSubjChoices.getX(), viewSubjChoices.getY()+30, viewSubjChoices.getWidth()*3+15, 40);
+		viewQuestionPane.add(viewjp);
+
+		questionNumberLabel = new CustomLabel("Question Number: ", viewSubjectLabel.getWidth(), 20, 1);
+		questionNumberLabel.setBounds(viewSubjChoices.getX()+viewSubjChoices.getWidth(), viewSubjChoices.getY(), viewSubjectLabel.getWidth()*2, 20);
+		viewQuestionPane.add(questionNumberLabel);
+
+		viewQuestionChoices = new CustomComboBox<Integer>();
+		viewQuestionChoices.setBounds(questionNumberLabel.getX()+questionNumberLabel.getWidth(), viewSubjectLabel.getY(), viewQuestionPane.getWidth()/4, 20);
+		viewQuestionChoices.setSelectedItem(null);
+		viewQuestionChoices.setEnabled(false);
+		viewQuestionPane.add(viewQuestionChoices);
+		((JLabel)viewQuestionChoices.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+		viewSubjChoices.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				JComboBox<?> cb = (JComboBox<?>)e.getSource();
+				viewSelectedSubject = (String)cb.getSelectedItem();
+				viewQuestionChoices.setEnabled(viewSelectedSubject != null);
+				if(viewSelectedSubject != null){
+					int numOfQuestions=0;
+					switch(viewSelectedSubject){
+						case "Chemistry":
+							numOfQuestions = Simulator.subjectList.get(Utilities.subjectExists(viewSelectedSubject)).getQuestions().size();
+							break;
+						case "Physics":
+							numOfQuestions = Simulator.subjectList.get(Utilities.subjectExists(viewSelectedSubject)).getQuestions().size();
+							break;
+						case "Biology":
+							numOfQuestions = Simulator.subjectList.get(Utilities.subjectExists(viewSelectedSubject)).getQuestions().size();
+							break;
+					}
+					viewQuestionChoices.removeAllItems();
+					int min = 1;
+					int max = numOfQuestions;
+					for(int item = min; item <= max; item++){
+						viewQuestionChoices.addItem(item);
+					}
+					viewSubjChoices.addActionListener(new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+							JComboBox<?> cb = (JComboBox<?>)e.getSource();
+							viewSelectedQuestion = cb.getSelectedIndex();
+							requestFocusInWindow();
+						}
+					});
+				}
+				requestFocusInWindow();
+			}
+		});
+		viewQuestionChoices.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				JComboBox<?> cb = (JComboBox<?>)e.getSource();
+				viewSelectedQuestion = cb.getSelectedIndex();
+				requestFocusInWindow();
+			
+				if(viewSelectedSubject != null){
+					Subject s = Simulator.subjectList.get(Utilities.subjectExists(viewSelectedSubject));
+					Question q;
+					
+					if(viewSelectedQuestion != -1){
+						q = s.getQuestions().get(viewSelectedQuestion);
+						viewqField.setText(q.getQuestion());
+						viewfchoiceField.setText(q.getChoices().get(0));
+						viewschoiceField.setText(q.getChoices().get(1));
+						viewtchoiceField.setText(q.getChoices().get(2));
+						viewfthchoiceField.setText(q.getChoices().get(3));
+						viewanswerField.setText(q.getAnswerLetter());
+						viewdiffField.setText(q.getDifficulty());
+					}
+				}	
+			}			
+		});
+
+		viewfchoiceLabel = new CustomLabel("Choice A: ", viewqLabel.getWidth(), 20, 1);
+		viewfchoiceLabel.setBounds(viewqLabel.getX(), viewqLabel.getY() + 40, viewqLabel.getWidth(), 20);
+		viewQuestionPane.add(viewfchoiceLabel);
+
+		viewfchoiceField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		viewfchoiceField.setBounds(viewSubjChoices.getX(), viewfchoiceLabel.getY(), viewSubjChoices.getWidth(), 20);
+		viewQuestionPane.add(viewfchoiceField);
+
+		viewschoiceLabel = new CustomLabel("Choice B: ", viewfchoiceLabel.getWidth(), 20, 1);
+		viewschoiceLabel.setBounds(viewfchoiceLabel.getX(), viewfchoiceLabel.getY() + 30, viewfchoiceLabel.getWidth(), 20);
+		viewQuestionPane.add(viewschoiceLabel);
+
+		viewschoiceField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		viewschoiceField.setBounds(viewfchoiceField.getX(), viewschoiceLabel.getY(), viewfchoiceField.getWidth(), 20);
+		viewQuestionPane.add(viewschoiceField);
+
+		viewtchoiceLabel = new CustomLabel("Choice C: ", viewschoiceLabel.getWidth(), 20, 1);
+		viewtchoiceLabel.setBounds(viewQuestionPane.getWidth()/2, viewfchoiceLabel.getY(), viewschoiceLabel.getWidth(), 20);
+		viewQuestionPane.add(viewtchoiceLabel);
+
+		viewtchoiceField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		viewtchoiceField.setBounds(viewtchoiceLabel.getX()+viewtchoiceLabel.getWidth(), viewtchoiceLabel.getY(), viewfchoiceField.getWidth(), 20);
+		viewQuestionPane.add(viewtchoiceField);
+
+		viewfthchoiceLabel = new CustomLabel("Choice D: ", viewtchoiceLabel.getWidth(), 20, 1);
+		viewfthchoiceLabel.setBounds(viewtchoiceLabel.getX(), viewschoiceLabel.getY(), viewtchoiceLabel.getWidth(), 20);
+		viewQuestionPane.add(viewfthchoiceLabel);
+
+		viewfthchoiceField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		viewfthchoiceField.setBounds(viewtchoiceField.getX(), viewschoiceLabel.getY(), viewschoiceField.getWidth(), 20);
+		viewQuestionPane.add(viewfthchoiceField);
+
+		viewanswerLabel = new CustomLabel("Answer: ", viewSubjectLabel.getWidth(), 20, 1);
+		viewanswerLabel.setBounds(viewschoiceLabel.getX(), viewschoiceLabel.getY()+30, viewSubjectLabel.getWidth(), 20);
+		viewQuestionPane.add(viewanswerLabel);
+
+		viewanswerField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		viewanswerField.setBounds(viewanswerLabel.getX()+viewanswerLabel.getWidth(), viewanswerLabel.getY(), viewanswerLabel.getWidth(), 20);
+		viewQuestionPane.add(viewanswerField);
+
+		viewdiffLabel = new CustomLabel("Difficulty: ", viewanswerLabel.getWidth(), 20, 1);
+		viewdiffLabel.setBounds(viewQuestionPane.getWidth()/2, viewanswerLabel.getY(), viewanswerLabel.getWidth(), 20);
+		viewQuestionPane.add(viewdiffLabel);
+
+		viewdiffField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		viewdiffField.setBounds(viewdiffLabel.getX()+viewdiffLabel.getWidth(), viewdiffLabel.getY(), viewdiffLabel.getWidth(), 20);
+		viewQuestionPane.add(viewdiffField);
+
+		delQuestionButton = new CustomButton("Delete", viewQuestionPane.getWidth()/2, 30);
+		delQuestionButton.setBounds(viewanswerLabel.getX(), viewanswerLabel.getY()+30, viewQuestionPane.getWidth()/2, 30);
+		delQuestionButton.addActionListener(e->{			
+			if(viewSelectedSubject != null && viewSelectedQuestion != -1){
+					Subject s = Simulator.subjectList.get(Utilities.subjectExists(viewSelectedSubject));
+					Question q = s.getQuestions().get(viewSelectedQuestion);
+					
+					s.getQuestions().remove(q);
+					errorLabel3.setForeground(Color.YELLOW);
+					errorLabel3.setText("* successfully deleted question");
+					Simulator.saver.saveSubjects(Simulator.subjectList, "ANNdroid/bin/subjects.bin");					
+			}
+			else{
+				errorLabel3.setForeground(Color.RED);
+				errorLabel3.setText("* select question to delete");
+			}
+			reinitializeViewQuestionPane();
+			reinitialize(true, false, 2);
+		});
+		viewQuestionPane.add(delQuestionButton);
+
+		cancelBtn4 = new CustomButton("Cancel", viewQuestionPane.getWidth()/2, 30);
+		cancelBtn4.setBounds(viewdiffLabel.getX(), viewdiffLabel.getY()+30, viewQuestionPane.getWidth()/2, 30);
+		cancelBtn4.addActionListener(e->{
+			reinitializeViewQuestionPane();
+			reinitialize(false, true, 2);
+			viewQuestionPane.setVisible(false);
+			SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
+			click.playSound();
+		});
+		viewQuestionPane.add(cancelBtn4);
+
+
 		// Manage Subjects Buttons
-		addQuestion = new CustomButton("Add Question", manageSubjectsButtonPane.getWidth()/3-20, manageSubjectsButtonPane.getHeight()/2);
+		addQuestion = new CustomButton("Add Question", manageSubjectsButtonPane.getWidth()/2, manageSubjectsButtonPane.getHeight()/2);
 		addQuestion.setBounds(manageSubjectsButtonPane.getWidth()/14, 20, manageSubjectsButtonPane.getWidth()/3-25, manageSubjectsButtonPane.getHeight()/2);
 		addQuestion.addActionListener(e -> {
 			addQuestionPane.setVisible(true);
-			subjectField.requestFocus();
+
+			viewQuestionPane.setVisible(false);
+			reinitializeViewQuestionPane();
+			reinitialize(false, true, 2);
 		});
 		manageSubjectsButtonPane.add(addQuestion);
 
-		viewQuestions = new CustomButton("View Questions", addQuestion.getWidth(), addQuestion.getHeight());
+		viewQuestions = new CustomButton("Search/Delete Question", addQuestion.getWidth(), addQuestion.getHeight());
 		viewQuestions.setBounds(addQuestion.getX() + addQuestion.getWidth(), addQuestion.getY(), addQuestion.getWidth(), addQuestion.getHeight());
 		viewQuestions.addActionListener(e->{
 			addQuestionPane.setVisible(false);
+			reinitialize(false, true, 2);
+
+			viewQuestionPane.setVisible(true);
 		});
 		manageSubjectsButtonPane.add(viewQuestions);
-
-		deleteQuestion = new CustomButton("Delete Question", addQuestion.getWidth(), addQuestion.getHeight());
-		deleteQuestion.setBounds(viewQuestions.getX() + viewQuestions.getWidth(), viewQuestions.getY(), viewQuestions.getWidth(), viewQuestions.getHeight());
-		deleteQuestion.addActionListener(e->{
-			addQuestionPane.setVisible(false);
-		});		
-		manageSubjectsButtonPane.add(deleteQuestion);
-
 
 		add(leftSidePane);
 		add(createStudentPane);
@@ -548,28 +781,25 @@ public class TeacherPanel extends JPanel{
 		manageSubjectsButtonPane.setBounds(leftSidePane.getWidth(), getHeight()/8, getWidth()-leftSidePane.getWidth()-30, getHeight()/10);
 		((GenericPane)manageSubjectsButtonPane).resize();
 
-		addQuestion.setBounds(manageSubjectsButtonPane.getWidth()/8, 20, manageSubjectsButtonPane.getWidth()/4, manageSubjectsButtonPane.getHeight()/2);
+		addQuestion.setBounds(manageSubjectsButtonPane.getWidth()/25, 20, manageSubjectsButtonPane.getWidth()/2-20, manageSubjectsButtonPane.getHeight()/2);
 		((CustomButton)addQuestion).resize();
 
 		viewQuestions.setBounds(addQuestion.getX() + addQuestion.getWidth(), addQuestion.getY(), addQuestion.getWidth(), addQuestion.getHeight());
 		((CustomButton)viewQuestions).resize();		
 
-		deleteQuestion.setBounds(viewQuestions.getX() + viewQuestions.getWidth(), viewQuestions.getY(), viewQuestions.getWidth(), viewQuestions.getHeight());
-		((CustomButton)deleteQuestion).resize();
-
-		manageSubjectPane.setBounds(manageSubjectsButtonPane.getX(), manageSubjectsButtonPane.getY()+ manageSubjectsButtonPane.getHeight(), getWidth()-leftSidePane.getWidth()-30, getHeight()-(manageSubjectsButtonPane.getHeight())*3);
+		manageSubjectPane.setBounds(manageSubjectsButtonPane.getX(), manageSubjectsButtonPane.getY()+ manageSubjectsButtonPane.getHeight(), getWidth()-leftSidePane.getWidth()-30, getHeight()/2);
 		((GenericPane)manageSubjectPane).resize();
 
-		errorLabel3.setBounds(manageSubjectPane.getWidth()/26, manageSubjectPane.getHeight()/16, manageSubjectPane.getWidth() - (manageSubjectPane.getWidth()/8), 20);
+		errorLabel3.setBounds(manageSubjectPane.getWidth()/26, manageSubjectPane.getHeight()/16, manageSubjectPane.getWidth() - (manageSubjectPane.getWidth()/8), 30);
 		((CustomLabel)errorLabel3).resize();
 
-		addQuestionPane.setBounds(manageSubjectPane.getWidth()/16+5, manageSubjectPane.getHeight()/5, manageSubjectPane.getWidth() - manageSubjectPane.getWidth()/7, manageSubjectPane.getHeight()-manageSubjectPane.getHeight()/4-5);
+		addQuestionPane.setBounds(manageSubjectPane.getWidth()/16+5, manageSubjectPane.getHeight()/8, manageSubjectPane.getWidth() - manageSubjectPane.getWidth()/7, manageSubjectPane.getHeight()-manageSubjectPane.getHeight()/4-5);
 		addQuestionPane.revalidate();
 		
-		subjectLabel.setBounds(0, addQuestionPane.getHeight()/6, addQuestionPane.getWidth()/4, 20);
+		subjectLabel.setBounds(0, addQuestionPane.getHeight()/6, addQuestionPane.getWidth()/5, 20);
 		((CustomLabel)subjectLabel).resize();
 
-		subjectField.setBounds(subjectLabel.getX()+subjectLabel.getWidth(), subjectLabel.getY(), addQuestionPane.getWidth()/4, 20);		
+		subjChoices.setBounds(subjectLabel.getX()+subjectLabel.getWidth(), subjectLabel.getY(), addQuestionPane.getWidth()/4, 20);
 
 		answerLabel.setBounds(schoiceLabel.getX(), schoiceLabel.getY()+30, subjectLabel.getWidth(), 20);
 		((CustomLabel)answerLabel).resize();
@@ -579,13 +809,13 @@ public class TeacherPanel extends JPanel{
 		qLabel.setBounds(subjectLabel.getX(), subjectLabel.getY() + 40, subjectLabel.getWidth(), 20);
 		((CustomLabel)qLabel).resize();
 
-		qField.setBounds(0, 0, subjectField.getWidth()*3+15, 40);
-		jp.setBounds(subjectField.getX(), subjectField.getY()+30, subjectField.getWidth()*3, 40);
+		qField.setBounds(0, 0, subjChoices.getWidth()*3+15, 40);
+		jp.setBounds(subjChoices.getX(), subjChoices.getY()+30, subjChoices.getWidth()*3, 40);
 
 		fchoiceLabel.setBounds(qLabel.getX(), qLabel.getY() + 40, qLabel.getWidth(), 20);
 		((CustomLabel)fchoiceLabel).resize();
 
-		fchoiceField.setBounds(subjectField.getX(), fchoiceLabel.getY(), subjectField.getWidth(), 20);
+		fchoiceField.setBounds(subjChoices.getX(), fchoiceLabel.getY(), subjChoices.getWidth(), 20);
 
 		schoiceLabel.setBounds(fchoiceLabel.getX(), fchoiceLabel.getY() + 30, fchoiceLabel.getWidth(), 20);
 		((CustomLabel)schoiceLabel).resize();
@@ -595,7 +825,7 @@ public class TeacherPanel extends JPanel{
 		tchoiceLabel.setBounds(addQuestionPane.getWidth()/2, fchoiceLabel.getY(), schoiceLabel.getWidth(), 20);
 		((CustomLabel)tchoiceLabel).resize();
 
-		tchoiceField.setBounds(tchoiceLabel.getX()+tchoiceLabel.getWidth(), tchoiceLabel.getY(), tchoiceLabel.getWidth(), 20);
+		tchoiceField.setBounds(tchoiceLabel.getX()+tchoiceLabel.getWidth(), tchoiceLabel.getY(), fchoiceField.getWidth(), 20);
 
 		fthchoiceLabel.setBounds(tchoiceLabel.getX(), schoiceLabel.getY(), tchoiceLabel.getWidth(), 20);
 		((CustomLabel)fthchoiceLabel).resize();
@@ -612,6 +842,71 @@ public class TeacherPanel extends JPanel{
 
 		cancelBtn3.setBounds(diffLabel.getX(), diffLabel.getY()+30, addQuestionPane.getWidth()/2, 30);
 		((CustomButton)cancelBtn3).resize();
+
+		// View Subject Pane //
+		viewQuestionPane.setBounds(manageSubjectPane.getWidth()/16+5, manageSubjectPane.getHeight()/5, manageSubjectPane.getWidth() - manageSubjectPane.getWidth()/7, manageSubjectPane.getHeight()-manageSubjectPane.getHeight()/4-5);
+
+		viewSubjectLabel.setBounds(0, 0, viewQuestionPane.getWidth()/5, 20);
+		((CustomLabel)viewSubjectLabel).resize();
+
+		viewSubjChoices.setBounds(viewSubjectLabel.getX()+viewSubjectLabel.getWidth(), viewSubjectLabel.getY(), viewQuestionPane.getWidth()/4, 20);
+
+		viewqLabel.setBounds(viewSubjectLabel.getX(), viewSubjectLabel.getY() + 40, viewSubjectLabel.getWidth(), 20);
+		((CustomLabel)viewqLabel).resize();
+
+		viewqField.setBounds(0, 0, viewSubjChoices.getWidth()*3+15, 40);
+		viewjp.setBounds(viewSubjChoices.getX(), viewSubjChoices.getY()+30, viewSubjChoices.getWidth()*3+15, 40);
+		
+		questionNumberLabel.setBounds(viewSubjChoices.getX()+viewSubjChoices.getWidth(), viewSubjChoices.getY(), viewSubjectLabel.getWidth()*2, 20);
+		((CustomLabel)questionNumberLabel).resize();
+
+		viewQuestionChoices.setBounds(questionNumberLabel.getX()+questionNumberLabel.getWidth(), viewSubjectLabel.getY(), questionNumberLabel.getWidth()/3, 20);
+
+		viewfchoiceLabel.setBounds(viewqLabel.getX(), viewqLabel.getY() + 40, viewqLabel.getWidth(), 20);
+		((CustomLabel)viewfchoiceLabel).resize();
+		viewfchoiceField.setBounds(viewSubjChoices.getX(), viewfchoiceLabel.getY(), viewSubjChoices.getWidth(), 20);
+
+		viewschoiceLabel.setBounds(viewfchoiceLabel.getX(), viewfchoiceLabel.getY() + 30, viewfchoiceLabel.getWidth(), 20);
+		((CustomLabel)viewschoiceLabel).resize();
+		viewschoiceField.setBounds(viewfchoiceField.getX(), viewschoiceLabel.getY(), viewfchoiceField.getWidth(), 20);
+
+		viewtchoiceLabel.setBounds(viewQuestionPane.getWidth()/2, viewfchoiceLabel.getY(), viewschoiceLabel.getWidth(), 20);
+		((CustomLabel)viewtchoiceLabel).resize();
+		viewtchoiceField.setBounds(viewtchoiceLabel.getX()+viewtchoiceLabel.getWidth(), viewtchoiceLabel.getY(), viewschoiceField.getWidth(), 20);
+
+		viewfthchoiceLabel.setBounds(viewtchoiceLabel.getX(), viewschoiceLabel.getY(), viewtchoiceLabel.getWidth(), 20);
+		((CustomLabel)viewfthchoiceLabel).resize();
+		viewfthchoiceField.setBounds(viewtchoiceField.getX(), viewschoiceLabel.getY(), viewschoiceField.getWidth(), 20);
+
+		viewanswerLabel.setBounds(viewschoiceLabel.getX(), viewschoiceLabel.getY()+30, viewSubjectLabel.getWidth(), 20);
+		((CustomLabel)viewanswerLabel).resize();
+		viewanswerField.setBounds(viewanswerLabel.getX()+viewanswerLabel.getWidth(), viewanswerLabel.getY(), viewanswerLabel.getWidth(), 20);
+
+		viewdiffLabel.setBounds(viewQuestionPane.getWidth()/2, viewanswerLabel.getY(), viewanswerLabel.getWidth(), 20);
+		((CustomLabel)viewdiffLabel).resize();
+		viewdiffField.setBounds(viewdiffLabel.getX()+viewdiffLabel.getWidth(), viewdiffLabel.getY(), viewdiffLabel.getWidth(), 20);
+
+		delQuestionButton.setBounds(viewanswerLabel.getX(), viewanswerLabel.getY()+30, viewQuestionPane.getWidth()/2, 30);
+		((CustomButton)delQuestionButton).resize();
+		
+		cancelBtn4.setBounds(viewdiffLabel.getX(), viewdiffLabel.getY()+30, viewQuestionPane.getWidth()/2, 30);
+		((CustomButton)cancelBtn4).resize();
+
+	}
+
+	public void reinitializeViewQuestionPane(){
+		viewSubjChoices.setSelectedItem(null);
+		viewQuestionChoices.setSelectedItem(null);
+		viewSelectedSubject = null;
+		viewSelectedQuestion = -1;		
+
+		viewqField.setText("");
+		viewfchoiceField.setText("");
+		viewschoiceField.setText("");
+		viewtchoiceField.setText("");
+		viewfthchoiceField.setText("");
+		viewanswerField.setText("");
+		viewdiffField.setText("");		
 	}
 
 	public void reinitialize(boolean error, boolean changeMode, int state){
@@ -639,11 +934,13 @@ public class TeacherPanel extends JPanel{
 		else if(state == 2){
 			if(changeMode || !error) errorLabel3.setText("");
 			
-			selectedChoice = 0;
-			selectedDifficulty = "EASY";
+			selectedChoice = -1;
+			selectedSubject = null;
+			selectedDifficulty = null;
 
-			answerField.setSelectedIndex(0);
-			diffField.setSelectedIndex(0);
+			subjChoices.setSelectedItem(null);
+			answerField.setSelectedItem(null);
+			diffField.setSelectedItem(null);
 			qField.setText("");
 			fchoiceField.setText("");
 			schoiceField.setText("");
@@ -743,12 +1040,16 @@ public class TeacherPanel extends JPanel{
 					reinitialize(true, false, 0);
 				}
 				else{
+					SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
+					click.playSound();					
 					reinitialize(false, true, 0);
 					createStudentPane.setVisible(false);
 				}
 			}
 			else if(this.state == 1){
 				if(this.mode == 1){
+					SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
+					click.playSound();					
 					reinitialize(false, true, 1);
 					delStudentPane.setVisible(false);
 				}
