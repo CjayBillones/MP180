@@ -80,6 +80,13 @@ public class GamePanel extends JFrame{
 
 		question.setEditable(false);
 
+		addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        parent.setVisible(true);
+		    }
+		});
+
 	}
 
 

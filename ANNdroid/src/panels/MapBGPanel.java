@@ -221,6 +221,7 @@ public class MapBGPanel extends JPanel{
 				gpc.getQuestion();
 				gamePanel.setSize(width + stud_pan.leftSidePane.getWidth(),height + stud_pan.leftSidePane.getHeight());
 				gamePanel.setVisible(true);
+				parent.setVisible(false);
 			}
 			else if(src == biology){
 				p = glass.moveOnPath(s.findPath(cur,"B"), s, x, y, glass.getGraphics(),row,col);
@@ -231,6 +232,7 @@ public class MapBGPanel extends JPanel{
 				gpc.getQuestion();
 				gamePanel.setSize(width + stud_pan.leftSidePane.getWidth(),height + stud_pan.leftSidePane.getHeight());
 				gamePanel.setVisible(true);
+				parent.setVisible(false);
 			}else if(src == chemistry){
 				System.out.println(glass);
 				p = glass.moveOnPath(s.findPath(cur,"C"), s, x, y, glass.getGraphics(),row,col);
@@ -241,6 +243,7 @@ public class MapBGPanel extends JPanel{
 				gpc.getQuestion();
 				gamePanel.setSize(width + stud_pan.leftSidePane.getWidth(),height + stud_pan.leftSidePane.getHeight());
 				gamePanel.setVisible(true);
+				parent.setVisible(false);
 			}
 		}
 	}
