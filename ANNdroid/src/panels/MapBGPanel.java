@@ -227,12 +227,20 @@ public class MapBGPanel extends JPanel{
 				cur = "B";
 				x = (int)p.getX();
 				y = (int)p.getY();
+				gpc = new GamePanelController(gamePanel,ANNdroid.simulator.kingList.get(2),"Biology",3,3,5); 
+				gpc.getQuestion();
+				gamePanel.setSize(width + stud_pan.leftSidePane.getWidth(),height + stud_pan.leftSidePane.getHeight());
+				gamePanel.setVisible(true);
 			}else if(src == chemistry){
 				System.out.println(glass);
 				p = glass.moveOnPath(s.findPath(cur,"C"), s, x, y, glass.getGraphics(),row,col);
 				cur = "C";
 				x = (int)p.getX();
 				y = (int)p.getY();
+				gpc = new GamePanelController(gamePanel,ANNdroid.simulator.kingList.get(2),"Chemistry",3,3,5); 
+				gpc.getQuestion();
+				gamePanel.setSize(width + stud_pan.leftSidePane.getWidth(),height + stud_pan.leftSidePane.getHeight());
+				gamePanel.setVisible(true);
 			}
 		}
 	}
