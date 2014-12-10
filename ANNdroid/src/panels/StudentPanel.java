@@ -111,7 +111,7 @@ public class StudentPanel extends JPanel{
 	JLabel header_stat;
 	JLabel header_acct;
 
-	public StudentPanel(){
+	public StudentPanel(JFrame parent){
 
 		mapBgmx = new SoundPlayer("darkalley.mp3", true, 500);
 
@@ -127,7 +127,7 @@ public class StudentPanel extends JPanel{
 		leftSidePane.setBackground(Color.BLACK);
 
 		// Map Pane //
-		mapPane = new MapBGPanel(getWidth()-leftSidePane.getWidth(), getHeight(), 10, 12);
+		mapPane = new MapBGPanel(getWidth()-leftSidePane.getWidth(), getHeight(), 9, 9, parent,this);
 		mapPane.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
 		mapPane.setLayout(new GridLayout(10,12,2,2));
 		mapPane.setBounds(leftSidePane.getX()+leftSidePane.getWidth(), 0, getWidth()-leftSidePane.getWidth(), getHeight());
@@ -481,6 +481,7 @@ public class StudentPanel extends JPanel{
 
 
 						ANNdroid.simulator.saver.saveUsers(ANNdroid.simulator.userList, "ANNdroid/bin/users.bin");
+						SDataSL.save(ANNdroid.simulator.studentData);
 						reinitialize(true, false, 1);		
 					}
 					else{

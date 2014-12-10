@@ -2,12 +2,14 @@ package ANNdroid.src.panels;
 
 import ANNdroid.src.ai.search.*;
 import ANNdroid.src.ai.search.Search.Directions;
+import ANNdroid.src.panels.MapBGPanel.MapActionListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 
-	public class PlayerGlassPanel extends JPanel{
+	public class PlayerGlassPanel extends JPanel implements ActionListener{
 
 		Timer timer;
 		public int xPos = 600;
@@ -51,7 +53,7 @@ import java.awt.*;
 					xPos = initX;
 					Thread.sleep(3);
 					repaint();
-					timer = new Timer(30,new LayoutEx());
+					timer = new Timer(30,this);
 					timer.start();
 				}catch(InterruptedException e){}
 	
@@ -70,7 +72,7 @@ import java.awt.*;
 					yPos = initY;
 					Thread.sleep(3);
 					repaint();
-					timer = new Timer(30,new LayoutEx());
+					timer = new Timer(30,this);
 					timer.start();
 				}catch(InterruptedException e){}
 			}
@@ -89,6 +91,10 @@ import java.awt.*;
 			}
 
 			return point;
+
+		}
+
+		public void actionPerformed(ActionEvent e){
 
 		}
 	}

@@ -311,7 +311,8 @@ public class LeftSidePane extends JPanel{
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
 
 					((StudentPanel)ANNdroid.studentPanel).mapPane.setVisible(true);
-					
+					MapBGPanel map = (MapBGPanel)((StudentPanel)ANNdroid.studentPanel).mapPane;
+					map.setGlassPane();
 					if(!active){
 						active = true;
 						((StudentPanel)ANNdroid.studentPanel).mapBgmx.playSound();
@@ -329,6 +330,8 @@ public class LeftSidePane extends JPanel{
 
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
+					MapBGPanel map = (MapBGPanel)((StudentPanel)ANNdroid.studentPanel).mapPane;
+					map.resetGlassPane();
 
 					if(active){
 						active = false;
@@ -347,6 +350,9 @@ public class LeftSidePane extends JPanel{
 
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
+					MapBGPanel map = (MapBGPanel)((StudentPanel)ANNdroid.studentPanel).mapPane;
+					map.resetGlassPane();
+
 
 					if(active){
 						active = false;
@@ -363,6 +369,9 @@ public class LeftSidePane extends JPanel{
 					((StudentPanel)ANNdroid.studentPanel).instructionPane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).statPane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(true);
+					MapBGPanel map = (MapBGPanel)((StudentPanel)ANNdroid.studentPanel).mapPane;
+					map.resetGlassPane();
+
 
 					if(active){
 						active = false;
@@ -381,6 +390,9 @@ public class LeftSidePane extends JPanel{
 					
 					((StudentPanel)ANNdroid.studentPanel).profilePane.setVisible(false);
 					((StudentPanel)ANNdroid.studentPanel).reinitialize(false, true, 1);
+					MapBGPanel map = (MapBGPanel)((StudentPanel)ANNdroid.studentPanel).mapPane;
+					map.resetGlassPane();
+
 				
 					if(active){
 						active = false;
@@ -407,6 +419,9 @@ public class LeftSidePane extends JPanel{
 					ANNdroid.simulator.active = null;
 					ANNdroid.loginPanel.add(ANNdroid.bgPanel);
 					((StudentPanel)ANNdroid.studentPanel).remove(ANNdroid.bgPanel);
+					MapBGPanel map = (MapBGPanel)((StudentPanel)ANNdroid.studentPanel).mapPane;
+					map.resetGlassPane();
+
 			
 					CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
 					c1.show(ANNdroid.cards, ANNdroid.LOGINPANEL);						
