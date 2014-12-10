@@ -32,7 +32,7 @@ public class GameMaster{
 	public int getAnsFromKing(King king, Question quest, Domain domain, int p_bracket){
 		Random r = new Random();
 		int diceRoll = r.nextInt(100);
-		String dif = quest.getDifficulty();
+		String dif = quest.getDifficulty().toUpperCase();
 		int kingLuck = ((king.get_king_bracket(domain,Difficulty.valueOf(dif),p_bracket) + 1) * 10) - 5;
 		if(diceRoll <= kingLuck)
 			return quest.getAnswer();
