@@ -113,13 +113,18 @@ public class StudentData implements Serializable {
 
 	public void put(Student key, Map<? extends Enum, Object> value){
 		studentData.put(key,value);
+		SDataSL.save(this);
 	}
 
 	public void update(Student key, Enum e, Object value){
-		
-		Map<Enum, Object> map = new HashMap<Enum, Object>(studentData.get(key));
+		Map<Enum, Object> map;
+		try{
+			map = new HashMap<Enum, Object>(studentData.get(key));
+		}catch(NullPointerException NP){
+			map = new HashMap<Enum, Object>();
+		}
 		map.put(e,value);
-
+		SDataSL.save(this);
 
 	}
 
