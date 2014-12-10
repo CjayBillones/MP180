@@ -68,8 +68,11 @@ public class AdminPanel extends JPanel{
 	String newPword = "";
 	String conPword = "";
 
-	// General Header // 
-	JLabel header;
+	// General Header //
+	int headerheight = 50;
+	JLabel header_create;
+	JLabel header_delete;
+	JLabel header_pass;
 
 	public AdminPanel(){
 
@@ -270,11 +273,20 @@ public class AdminPanel extends JPanel{
 
 		// Headers //
 //here
-		header = new CustomLabel("Create Teacher", createTeachPane.getWidth(), 100, 1);
-		header.setBounds(createTeachPane.getX(), createTeachPane.getY()-100, createTeachPane.getWidth(), 100);
-		header.setVisible(false);
-		//header.setEditable(false);
-		add(header);
+		header_create = new CustomLabel("Create Teacher", createTeachPane.getWidth(), headerheight, 2);
+		header_create.setBounds(createTeachPane.getX(), createTeachPane.getY()-headerheight, createTeachPane.getWidth(), headerheight);
+		header_create.setVisible(false);
+		add(header_create);
+
+		header_delete = new CustomLabel("Delete Teacher", delTeachPane.getWidth(), headerheight, 2);
+		header_delete.setBounds(createTeachPane.getX(), delTeachPane.getY()-headerheight, delTeachPane.getWidth(), headerheight);
+		header_delete.setVisible(false);
+		add(header_delete);
+
+		header_pass = new CustomLabel("Change Password", changePwordPane.getWidth(), headerheight, 2);
+		header_pass.setBounds(createTeachPane.getX(), changePwordPane.getY()-headerheight, changePwordPane.getWidth(), headerheight);
+		header_pass.setVisible(false);
+		add(header_pass);
 
 		add(leftSidePane);
 		add(createTeachPane);
@@ -370,6 +382,16 @@ public class AdminPanel extends JPanel{
 
 		cancelBtn3.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());
 		((CustomButton)cancelBtn3).resize();
+
+		// Resize Headers //
+		header_create.setBounds(createTeachPane.getX(), createTeachPane.getY()-headerheight, createTeachPane.getWidth(), headerheight);
+		((CustomLabel)header_create).resize();
+
+		header_delete.setBounds(createTeachPane.getX(), delTeachPane.getY()-headerheight, delTeachPane.getWidth(), headerheight);
+		((CustomLabel)header_delete).resize();
+
+		header_pass.setBounds(createTeachPane.getX(), changePwordPane.getY()-headerheight, changePwordPane.getWidth(), headerheight);
+		((CustomLabel)header_pass).resize();
 	}
 
 	public void reinitialize(boolean error, boolean changeMode, int state){
