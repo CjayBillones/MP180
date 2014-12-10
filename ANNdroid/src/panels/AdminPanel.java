@@ -68,7 +68,11 @@ public class AdminPanel extends JPanel{
 	String newPword = "";
 	String conPword = "";
 
-
+	// Headers //
+	int headerheight = 50;
+	JLabel header_create;
+	JLabel header_delete;
+	JLabel header_pass;
 
 	public AdminPanel(){
 
@@ -156,6 +160,7 @@ public class AdminPanel extends JPanel{
 		cancelBtn1.setBounds(createBtn.getX() + createBtn.getWidth(), createBtn.getY(), createBtn.getWidth(), createBtn.getHeight());
 		createTeachPane.add(cancelBtn1);
 		cancelBtn1.addActionListener(new AdminActionListener(0, 1));
+
 
 		// Delete Teacher Pane Initialization //
 		delTeachPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/4-getHeight()/30, 1);
@@ -266,6 +271,22 @@ public class AdminPanel extends JPanel{
 		changePwordPane.add(cancelBtn3);
 		cancelBtn3.addActionListener(new AdminActionListener(2, 2));
 
+		// Headers //
+		header_create = new CustomLabel("Create Teacher", createTeachPane.getWidth(), headerheight, 2);
+		header_create.setBounds(createTeachPane.getX(), createTeachPane.getY()-headerheight, createTeachPane.getWidth(), headerheight);
+		header_create.setVisible(false);
+		add(header_create);
+
+		header_delete = new CustomLabel("Delete Teacher", delTeachPane.getWidth(), headerheight, 2);
+		header_delete.setBounds(createTeachPane.getX(), delTeachPane.getY()-headerheight, delTeachPane.getWidth(), headerheight);
+		header_delete.setVisible(false);
+		add(header_delete);
+
+		header_pass = new CustomLabel("Change Password", changePwordPane.getWidth(), headerheight, 2);
+		header_pass.setBounds(createTeachPane.getX(), changePwordPane.getY()-headerheight, changePwordPane.getWidth(), headerheight);
+		header_pass.setVisible(false);
+		add(header_pass);
+
 		add(leftSidePane);
 		add(createTeachPane);
 		add(delTeachPane);
@@ -360,6 +381,16 @@ public class AdminPanel extends JPanel{
 
 		cancelBtn3.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());
 		((CustomButton)cancelBtn3).resize();
+
+		// Resize Headers //
+		header_create.setBounds(createTeachPane.getX(), createTeachPane.getY()-headerheight, createTeachPane.getWidth(), headerheight);
+		((CustomLabel)header_create).resize();
+
+		header_delete.setBounds(createTeachPane.getX(), delTeachPane.getY()-headerheight, delTeachPane.getWidth(), headerheight);
+		((CustomLabel)header_delete).resize();
+
+		header_pass.setBounds(createTeachPane.getX(), changePwordPane.getY()-headerheight, changePwordPane.getWidth(), headerheight);
+		((CustomLabel)header_pass).resize();
 	}
 
 	public void reinitialize(boolean error, boolean changeMode, int state){
@@ -508,6 +539,7 @@ public class AdminPanel extends JPanel{
 					click.playSound();					
 					reinitialize(false, true, 0);
 					createTeachPane.setVisible(false);
+					header_create.setVisible(false);
 				}
 			}
 			else if(this.state == 1){
@@ -516,6 +548,7 @@ public class AdminPanel extends JPanel{
 					click.playSound();					
 					reinitialize(false, true, 1);
 					delTeachPane.setVisible(false);
+					header_delete.setVisible(false);
 				}
 				else{
 					if(!ANNdroid.simulator.active.getPassword().equals(Utilities.hashPassword(delPword))){
@@ -540,6 +573,7 @@ public class AdminPanel extends JPanel{
 					click.playSound();					
 					reinitialize(false, true, 2);
 					changePwordPane.setVisible(false);
+					header_pass.setVisible(false);
 				}
 				else{
 					if(!ANNdroid.simulator.active.getPassword().equals(oldPword)){
