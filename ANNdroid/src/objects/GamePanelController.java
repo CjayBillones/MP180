@@ -101,6 +101,7 @@ public class GamePanelController{
 
 	public void displayQuestion(Question q){
 		((CustomTextArea)((GamePane)gPanel).question).setText(q.getQuestion());
+		((CustomTextArea)((GamePane)gPanel).question).repaint();
 		LinkedList<String> choices = q.getChoices();		
 		for(int i = 0; i < 4; i++){
 			char[] letters = {'a','b','c','d'};
