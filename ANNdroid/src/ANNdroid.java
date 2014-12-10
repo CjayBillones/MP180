@@ -10,8 +10,8 @@ public class ANNdroid extends JFrame{
 
 	public static final Toolkit TK = Toolkit.getDefaultToolkit();
 
-	public static final int SCREEN_WIDTH = 800;
-	public static final int SCREEN_HEIGHT = 600;
+	public static final int SCREEN_WIDTH = TK.getScreenSize().width;
+	public static final int SCREEN_HEIGHT = TK.getScreenSize().height;;
 	public static final int SCREEN_XPOS = TK.getScreenSize().width/4;
 	public static final int SCREEN_YPOS = TK.getScreenSize().height/8;
 
@@ -49,8 +49,9 @@ public class ANNdroid extends JFrame{
 		setCursor(cursor);
 		setIconImage(TK.getImage("ANNdroid/resources/img/large_logo.png"));
 		glass.setVisible(true);
-		//setUndecorated(true);
-		setResizable(true);
+		setUndecorated(true);
+		setResizable(false);
+		setExtendedState(MAXIMIZED_BOTH);
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		setMinimumSize(new Dimension(800, 600));
 		setLocation(SCREEN_WIDTH/3, SCREEN_HEIGHT/8);

@@ -83,53 +83,7 @@ public class GamePane extends JPanel{
 			add(choiceButtons[i]);
 		};
 
-		//questionPanel = new JPanel();
-		//questionPanel.setLayout(new BoxLayout(questionPanel,BoxLayout.PAGE_AXIS));
-
-		//centralPanel = new JPanel();
-		//centralPanel.setLayout(new BoxLayout(centralPanel,BoxLayout.LINE_AXIS));
-
-		//choicesPanel = new JPanel();
-		//choicesPanel.setLayout(new GridLayout(2,2,50,50));
-
-		//rightPanel =  new JPanel();
-		//leftPanel = new JPanel();
-
-		//for(int i = 0; i < choiceButtons.length; i++){
-			//choiceButtons[i] = new JButton("Default String");
-			//choiceButtons[i].setSize(new Dimension(100,200));
-			//choicesPanel.add(choiceButtons[i]);
-		//}
-
-		//questionPanel.add(Box.createRigidArea(new Dimension(0,50)));
-		//questionPanel.add(question);
-		//questionPanel.add(Box.createRigidArea(new Dimension(0,50)));
-		//questionPanel.add(choicesPanel);
-		//questionPanel.add(Box.createRigidArea(new Dimension(0,100)));
-
-		//centralPanel.add(Box.createRigidArea(new Dimension(100,50)));
-		//centralPanel.add(questionPanel);
-		//centralPanel.add(Box.createRigidArea(new Dimension(100,50)));
-
-		//leftPanel.add(pHP);
-		//rightPanel.setLayout(new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS));
-		//rightPanel.add(kHP);
-		//rightPanel.add(king_answer);
-
-		//add(centralPanel,BorderLayout.CENTER);
-		//add(leftPanel,BorderLayout.LINE_START);
-		//add(rightPanel,BorderLayout.LINE_END);
-		//setExtendedState(JFrame.MAXIMIZED_BOTH);
-
 		question.setEditable(false);
-		/**
-		addWindowListener(new java.awt.event.WindowAdapter() {
-		    @Override
-		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		        parent.setVisible(true);
-		    }
-		});
-		**/
 	}
 
 	public void resize(){
@@ -153,8 +107,6 @@ public class GamePane extends JPanel{
 			}
 			add(choiceButtons[i]);
 		};
-
-		revalidate();
 	}
 
 
