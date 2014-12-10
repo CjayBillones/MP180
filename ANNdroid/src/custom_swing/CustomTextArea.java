@@ -19,7 +19,7 @@ public class CustomTextArea extends JTextArea{
 	BufferedImage scaledImage = null;
 
 	public CustomTextArea(String text, int rows, int columns){
-		super("", rows, columns);
+		super(text, rows, columns);
 		setOpaque(false);
 		try{
 			bgImage = ImageIO.read(new File("ANNdroid/resources/img/gamescreen/question.png"));
@@ -28,7 +28,7 @@ public class CustomTextArea extends JTextArea{
 
 	public CustomTextArea(Color caretColor, String text, int rows, int columns){
 		
-		super("", rows, columns);
+		super(text, rows, columns);
 
 		setForeground(Color.WHITE);
 		setOpaque(false);

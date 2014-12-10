@@ -6,6 +6,7 @@ import ANNdroid.src.objects.*;
 import ANNdroid.src.util.*;
 import ANNdroid.src.*;
 
+import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
@@ -101,6 +102,7 @@ public class StudentPanel extends JPanel{
 
 	// Instruction panel //
 	JPanel instructionPane;
+	JTextArea instruction;
 
 	// Stats Panel //
 	JPanel statPane;
@@ -506,9 +508,32 @@ public class StudentPanel extends JPanel{
 		});
 
 		// Instruction pane //
-		instructionPane = new GenericPane(profilePane.getWidth(), getHeight()/4, 1);
+		instructionPane = new GenericPane(profilePane.getWidth(), getHeight()*2/3, 1);
 		instructionPane.setBounds(leftSidePane.getWidth(), getHeight()*3/16, profilePane.getWidth(), getHeight()*2/3);
 		instructionPane.setVisible(false);
+		
+		File file = new File("ANNdroid/bin/instructions.txt");
+		String text="";
+		String read="";
+
+		if(file.exists()){
+			try{
+				FileReader fr = new FileReader(file);
+				BufferedReader br = new BufferedReader(fr);
+				
+				while((read = br.readLine()) != null){
+					text+=(read+"\n\n");
+				}
+				br.close();
+				fr.close();
+			}catch(IOException e){ e.printStackTrace();}
+		}		
+		
+		instruction = new CustomTextArea(new Color(0, 29, 60, 0), text, 50, 255);
+		instruction.setLineWrap(true);
+		instruction.setEditable(false);
+		instruction.setBounds(0, instructionPane.getY(), instructionPane.getWidth(), instructionPane.getHeight());
+		instructionPane.add(instruction);
 
 		// Stats Panel //
 		statPane = new GenericPane(profilePane.getWidth(), getHeight()/4, 1);
@@ -664,6 +689,8 @@ public class StudentPanel extends JPanel{
 		// Instruction Pane Resize //
 		instructionPane.setBounds(leftSidePane.getWidth(), getHeight()*3/16, profilePane.getWidth(), getHeight()*2/3);
 		((GenericPane)instructionPane).resize();
+
+		instruction.setBounds(instructionPane.getWidth()/20, instruction.getHeight()/6, instructionPane.getWidth()-instructionPane.getWidth()/11, instructionPane.getHeight());
 
 		// Stats Pane Resize //
 		statPane.setBounds(leftSidePane.getWidth(), getHeight()*3/16, profilePane.getWidth(), getHeight()*2/3);
