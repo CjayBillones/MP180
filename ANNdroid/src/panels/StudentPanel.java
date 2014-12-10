@@ -100,6 +100,11 @@ public class StudentPanel extends JPanel{
 	JButton change;
 	JButton cancelbtn;
 
+	// Headers //
+	int headerheight = 50;
+	//JLabel header_inst;
+	//JLabel header_stat;
+	JLabel header_acct;
 
 	public StudentPanel(){
 
@@ -494,6 +499,12 @@ public class StudentPanel extends JPanel{
 			profilePane.setVisible(false);
 		});
 
+		// Headers //
+		header_acct = new CustomLabel("Student Profile", profilePane.getWidth(), headerheight, 2);
+		header_acct.setBounds(profilePane.getX(), profilePane.getY()-headerheight, profilePane.getWidth(), headerheight);
+		header_acct.setVisible(false);
+		add(header_acct);
+
 		add(mapPane);
 		add(profilePane);
 		add(leftSidePane);
@@ -622,6 +633,8 @@ public class StudentPanel extends JPanel{
 		cancelbtn.setBounds(change.getX(), change.getY()+27, change.getWidth(), 20);
 		((CustomButton)cancelbtn).resize();
 
+		header_acct.setBounds(profilePane.getX(), profilePane.getY()-headerheight, profilePane.getWidth(), headerheight);
+		((CustomLabel)header_acct).resize();
 	}
 
 	public void reinitialize(boolean error, boolean changeMode, int state){

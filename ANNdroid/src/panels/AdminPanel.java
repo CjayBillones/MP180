@@ -68,7 +68,7 @@ public class AdminPanel extends JPanel{
 	String newPword = "";
 	String conPword = "";
 
-	// General Header //
+	// Headers //
 	int headerheight = 50;
 	JLabel header_create;
 	JLabel header_delete;
@@ -272,7 +272,6 @@ public class AdminPanel extends JPanel{
 		cancelBtn3.addActionListener(new AdminActionListener(2, 2));
 
 		// Headers //
-//here
 		header_create = new CustomLabel("Create Teacher", createTeachPane.getWidth(), headerheight, 2);
 		header_create.setBounds(createTeachPane.getX(), createTeachPane.getY()-headerheight, createTeachPane.getWidth(), headerheight);
 		header_create.setVisible(false);

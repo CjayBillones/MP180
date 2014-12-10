@@ -139,6 +139,13 @@ public class TeacherPanel extends JPanel{
 	JButton delQuestionButton;
 	JButton cancelBtn4;
 
+	// Headers //
+	int headerheight = 50;
+	JLabel header_create;
+	JLabel header_delete;
+	//JLabel header_stud;
+	JLabel header_subj;
+
 	public TeacherPanel(){
 
 		setLayout(null);
@@ -277,7 +284,7 @@ public class TeacherPanel extends JPanel{
 
 		// Manage Subjects Pane //
 		manageSubjectsButtonPane = new GenericPane(getWidth()-leftSidePane.getWidth()-30, getHeight() - 180, 1);
-		manageSubjectsButtonPane.setBounds(leftSidePane.getWidth(), getHeight()/8, getWidth()-leftSidePane.getWidth()-30, getHeight()/10);
+		manageSubjectsButtonPane.setBounds(leftSidePane.getWidth(), getHeight()/8+20, getWidth()-leftSidePane.getWidth()-30, getHeight()/10);
 		manageSubjectsButtonPane.setVisible(false);
 
 		manageSubjectPane = new GenericPane(getWidth()-leftSidePane.getWidth()-30, getHeight()-(manageSubjectsButtonPane.getHeight())*3, 1);
@@ -709,6 +716,29 @@ public class TeacherPanel extends JPanel{
 		});
 		manageSubjectsButtonPane.add(viewQuestions);
 
+		// Headers //
+		header_create = new CustomLabel("Create Student", createStudentPane.getWidth(), headerheight, 2);
+		header_create.setBounds(createStudentPane.getX(), createStudentPane.getY()-headerheight, createStudentPane.getWidth(), headerheight);
+		header_create.setVisible(false);
+		add(header_create);
+
+		header_delete = new CustomLabel("Delete Student", delStudentPane.getWidth(), headerheight, 2);
+		header_delete.setBounds(delStudentPane.getX(), delStudentPane.getY()-headerheight, delStudentPane.getWidth(), headerheight);
+		header_delete.setVisible(false);
+		add(header_delete);
+
+		/*
+		header_stud = new CustomLabel("Statistics", delStudentPane.getWidth(), headerheight, 2);
+		header_stud.setBounds(createStudentPane.getX(), delStudentPane.getY()-headerheight, delStudentPane.getWidth(), headerheight);
+		header_stud.setVisible(false);
+		add(header_stud);
+		*/
+
+		header_subj = new CustomLabel("Manage Subjects", manageSubjectPane.getWidth(), headerheight, 2);
+		header_subj.setBounds(manageSubjectPane.getX(), manageSubjectsButtonPane.getY()-headerheight, manageSubjectPane.getWidth(), headerheight);
+		header_subj.setVisible(false);
+		add(header_subj);
+
 		add(leftSidePane);
 		add(createStudentPane);
 		add(delStudentPane);
@@ -778,7 +808,7 @@ public class TeacherPanel extends JPanel{
 		((CustomButton)cancelBtn2).resize();
 		
 		// Manage Subjects //
-		manageSubjectsButtonPane.setBounds(leftSidePane.getWidth(), getHeight()/8, getWidth()-leftSidePane.getWidth()-30, getHeight()/10);
+		manageSubjectsButtonPane.setBounds(leftSidePane.getWidth(), getHeight()/8+50, getWidth()-leftSidePane.getWidth()-30, getHeight()/10);
 		((GenericPane)manageSubjectsButtonPane).resize();
 
 		addQuestion.setBounds(manageSubjectsButtonPane.getWidth()/25, 20, manageSubjectsButtonPane.getWidth()/2-20, manageSubjectsButtonPane.getHeight()/2);
@@ -891,6 +921,18 @@ public class TeacherPanel extends JPanel{
 		
 		cancelBtn4.setBounds(viewdiffLabel.getX(), viewdiffLabel.getY()+30, viewQuestionPane.getWidth()/2, 30);
 		((CustomButton)cancelBtn4).resize();
+
+		header_create.setBounds(createStudentPane.getX(), createStudentPane.getY()-headerheight, createStudentPane.getWidth(), headerheight);
+		((CustomLabel)header_create).resize();
+
+		header_delete.setBounds(createStudentPane.getX(), delStudentPane.getY()-headerheight, delStudentPane.getWidth(), headerheight);
+		((CustomLabel)header_delete).resize();
+		
+		//header_stud.setBounds(createStudentPane.getX(), delStudentPane.getY()-headerheight, delStudentPane.getWidth(), headerheight);
+		//((CustomLabel)header_stud).resize();
+		
+		header_subj.setBounds(manageSubjectPane.getX(), manageSubjectsButtonPane.getY()-headerheight, manageSubjectPane.getWidth(), headerheight);
+		((CustomLabel)header_subj).resize();
 
 	}
 
