@@ -1,0 +1,11 @@
+1) Complete student profile before you play your first game.
+
+2) Upon clicking the play button, a map displaying different subjects will be shown.
+
+3) Choose the corresponding subject that you want to take by clicking its icon.
+
+4) You will engage in a quiz bee type of game with an AI.
+
+5) Defeat the opponent by answering the series of questions correctly. Every mistake costs a single life.
+
+6) Game will end when a player loses all of his lives or if all questions are already asked. If all questions were asked, player with the most number of remaining lives wins.
