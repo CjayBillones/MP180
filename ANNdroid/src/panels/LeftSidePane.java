@@ -162,6 +162,10 @@ public class LeftSidePane extends JPanel{
 					SoundPlayer click = new SoundPlayer("click.mp3", false, 0);
 					click.playSound();
 
+					((AdminPanel)ANNdroid.adminPanel).header_create.setVisible(false);
+					((AdminPanel)ANNdroid.adminPanel).header_delete.setVisible(false);
+					((AdminPanel)ANNdroid.adminPanel).header_pass.setVisible(false);
+
 					((AdminPanel)ANNdroid.adminPanel).createTeachPane.setVisible(false);
 					((AdminPanel)ANNdroid.adminPanel).reinitialize(false, true, 0);
 
