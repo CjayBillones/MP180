@@ -109,6 +109,8 @@ public class LeftSidePane extends JPanel{
 		public void actionPerformed(ActionEvent e){
 			if(source == 0){
 				if(this.mode == 0){
+//					((AdminPanel)ANNdroid.adminPanel).header.setText("Create Teacher");
+					((AdminPanel)ANNdroid.adminPanel).header.setVisible(true);
 					((AdminPanel)ANNdroid.adminPanel).createTeachPane.setVisible(true);
 					
 					((AdminPanel)ANNdroid.adminPanel).delTeachPane.setVisible(false);
@@ -120,6 +122,7 @@ public class LeftSidePane extends JPanel{
 					((AdminPanel)ANNdroid.adminPanel).fnameField.requestFocus();
 				}
 				else if(this.mode == 1){
+					((AdminPanel)ANNdroid.adminPanel).header.setVisible(false);
 					((AdminPanel)ANNdroid.adminPanel).createTeachPane.setVisible(false);
 					((AdminPanel)ANNdroid.adminPanel).reinitialize(false, true, 0);
 
@@ -131,6 +134,7 @@ public class LeftSidePane extends JPanel{
 					((AdminPanel)ANNdroid.adminPanel).delUnameField.requestFocus();
 				}
 				else if(this.mode == 2){
+					((AdminPanel)ANNdroid.adminPanel).header.setVisible(false);
 					((AdminPanel)ANNdroid.adminPanel).createTeachPane.setVisible(false);
 					((AdminPanel)ANNdroid.adminPanel).reinitialize(false, true, 0);
 

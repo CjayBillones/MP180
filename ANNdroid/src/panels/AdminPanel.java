@@ -68,7 +68,8 @@ public class AdminPanel extends JPanel{
 	String newPword = "";
 	String conPword = "";
 
-
+	// General Header // 
+	JLabel header;
 
 	public AdminPanel(){
 
@@ -156,6 +157,7 @@ public class AdminPanel extends JPanel{
 		cancelBtn1.setBounds(createBtn.getX() + createBtn.getWidth(), createBtn.getY(), createBtn.getWidth(), createBtn.getHeight());
 		createTeachPane.add(cancelBtn1);
 		cancelBtn1.addActionListener(new AdminActionListener(0, 1));
+
 
 		// Delete Teacher Pane Initialization //
 		delTeachPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/4-getHeight()/30, 1);
@@ -265,6 +267,14 @@ public class AdminPanel extends JPanel{
 		cancelBtn3.setBounds(confirmBtn.getX() + confirmBtn.getWidth(), confirmBtn.getY(), confirmBtn.getWidth(), confirmBtn.getHeight());
 		changePwordPane.add(cancelBtn3);
 		cancelBtn3.addActionListener(new AdminActionListener(2, 2));
+
+		// Headers //
+//here
+		header = new CustomLabel("Create Teacher", createTeachPane.getWidth(), 100, 1);
+		header.setBounds(createTeachPane.getX(), createTeachPane.getY()-100, createTeachPane.getWidth(), 100);
+		header.setVisible(false);
+		//header.setEditable(false);
+		add(header);
 
 		add(leftSidePane);
 		add(createTeachPane);
