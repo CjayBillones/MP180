@@ -77,6 +77,7 @@ public class GamePanel extends JFrame{
 		add(centralPanel,BorderLayout.CENTER);
 		add(leftPanel,BorderLayout.LINE_START);
 		add(rightPanel,BorderLayout.LINE_END);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		question.setEditable(false);
 
