@@ -29,11 +29,10 @@ public class StudentPanel extends JPanel{
 	SoundPlayer mapBgmx;
 	JPanel leftSidePane;
 	JPanel mapPane;
-	JPanel instructionPane;
-	JPanel profilePane;
 
 	// Edit Profile Pane //
 
+	JPanel profilePane;
 	JLabel errorLabel2;
 	JLabel viewInformation;
 	JLabel editInformation;
@@ -100,10 +99,16 @@ public class StudentPanel extends JPanel{
 	JButton change;
 	JButton cancelbtn;
 
+	// Instruction panel //
+	JPanel instructionPane;
+
+	// Stats Panel //
+	JPanel statPane;
+
 	// Headers //
 	int headerheight = 50;
-	//JLabel header_inst;
-	//JLabel header_stat;
+	JLabel header_inst;
+	JLabel header_stat;
 	JLabel header_acct;
 
 	public StudentPanel(){
@@ -499,7 +504,27 @@ public class StudentPanel extends JPanel{
 			profilePane.setVisible(false);
 		});
 
+		// Instruction pane //
+		instructionPane = new GenericPane(profilePane.getWidth(), getHeight()/4, 1);
+		instructionPane.setBounds(leftSidePane.getWidth(), getHeight()*3/16, profilePane.getWidth(), getHeight()*2/3);
+		instructionPane.setVisible(false);
+
+		// Stats Panel //
+		statPane = new GenericPane(profilePane.getWidth(), getHeight()/4, 1);
+		statPane.setBounds(leftSidePane.getWidth(), getHeight()*3/16, profilePane.getWidth(), getHeight()*2/3);
+		statPane.setVisible(false);
+
 		// Headers //
+		header_inst = new CustomLabel("How to Play", instructionPane.getWidth(), headerheight, 2);
+		header_inst.setBounds(instructionPane.getX(), instructionPane.getY()-headerheight, instructionPane.getWidth(), headerheight);
+		header_inst.setVisible(false);
+		add(header_inst);
+
+		header_stat = new CustomLabel("Statistics", statPane.getWidth(), headerheight, 2);
+		header_stat.setBounds(statPane.getX(), statPane.getY()-headerheight, statPane.getWidth(), headerheight);
+		header_stat.setVisible(false);
+		add(header_stat);
+
 		header_acct = new CustomLabel("Student Profile", profilePane.getWidth(), headerheight, 2);
 		header_acct.setBounds(profilePane.getX(), profilePane.getY()-headerheight, profilePane.getWidth(), headerheight);
 		header_acct.setVisible(false);
@@ -507,6 +532,8 @@ public class StudentPanel extends JPanel{
 
 		add(mapPane);
 		add(profilePane);
+		add(instructionPane);
+		add(statPane);
 		add(leftSidePane);
 	}
 
@@ -633,8 +660,23 @@ public class StudentPanel extends JPanel{
 		cancelbtn.setBounds(change.getX(), change.getY()+27, change.getWidth(), 20);
 		((CustomButton)cancelbtn).resize();
 
+		// Instruction Pane Resize //
+		instructionPane.setBounds(leftSidePane.getWidth(), getHeight()*3/16, profilePane.getWidth(), getHeight()*2/3);
+		((GenericPane)instructionPane).resize();
+
+		// Stats Pane Resize //
+		statPane.setBounds(leftSidePane.getWidth(), getHeight()*3/16, profilePane.getWidth(), getHeight()*2/3);
+		((GenericPane)statPane).resize();		
+
+		// Header Resize //
+		header_inst.setBounds(instructionPane.getX(), instructionPane.getY()-headerheight, instructionPane.getWidth(), headerheight);
+		((CustomLabel)header_inst).resize();
+
 		header_acct.setBounds(profilePane.getX(), profilePane.getY()-headerheight, profilePane.getWidth(), headerheight);
 		((CustomLabel)header_acct).resize();
+
+		header_stat.setBounds(statPane.getX(), statPane.getY()-headerheight, statPane.getWidth(), headerheight);
+		((CustomLabel)header_stat).resize();
 	}
 
 	public void reinitialize(boolean error, boolean changeMode, int state){
