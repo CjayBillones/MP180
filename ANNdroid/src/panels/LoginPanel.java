@@ -202,7 +202,6 @@ public class LoginPanel extends JPanel{
 					if(!((Student)u).isProfileComplete()){
 						((LeftSidePane)((StudentPanel)ANNdroid.studentPanel).leftSidePane).btns[0].setEnabled(false);
 						((LeftSidePane)((StudentPanel)ANNdroid.studentPanel).leftSidePane).btns[0].setFocusable(false);
-						System.out.println(((Student)u).isProfileComplete());
 					}
 					else ((LeftSidePane)((StudentPanel)ANNdroid.studentPanel).leftSidePane).btns[0].setEnabled(true);
 
