@@ -4,11 +4,27 @@ import ANNdroid.src.*;
 import ANNdroid.src.events.*;
 import ANNdroid.src.panels.*;
 
+import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import javax.imageio.*;
+import java.awt.image.*;
+import java.awt.geom.*;
+
 public class CustomTextArea extends JTextArea{
+
+	BufferedImage bgImage = null;
+	BufferedImage scaledImage = null;
+
+	public CustomTextArea(String text, int rows, int columns){
+		super("", rows, columns);
+		setOpaque(false);
+		try{
+			bgImage = ImageIO.read(new File("ANNdroid/resources/img/gamescreen/question.png"));
+		}catch(Exception e){	e.printStackTrace();	}		
+	}
 
 	public CustomTextArea(Color caretColor, String text, int rows, int columns){
 		
@@ -30,8 +46,27 @@ public class CustomTextArea extends JTextArea{
 		});
 	}
 
+	// Resizes Background Image to Fit Panel //
+	public void resize() {
+		double widthScaleFactor = getWidth() / (double)bgImage.getWidth();
+		double heightScaleFactor = getHeight() / (double)bgImage.getHeight();
+		double scaleFactor = (widthScaleFactor > heightScaleFactor)? heightScaleFactor : widthScaleFactor;
+
+		AffineTransform at = new AffineTransform();
+		at.scale(scaleFactor, scaleFactor);
+
+		AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+		scaledImage = scaleOp.filter(bgImage, null);
+
+		repaint();
+	}	
+
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+
+		if(scaledImage != null) g.drawImage(scaledImage, 0, 0, getWidth(), getHeight(), null);
+
+
 		g.setColor(new Color(255,255,255,128));
 	}
 

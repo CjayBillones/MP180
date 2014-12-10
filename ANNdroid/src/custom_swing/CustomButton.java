@@ -18,6 +18,21 @@ public class CustomButton extends JButton{
 	public BufferedImage originalBGImage;
 	public BufferedImage scaledBGImage;
 
+	public CustomButton(String text, int width, int height, String filename){
+		super(text);
+
+		setLayout(null);
+		setPreferredSize(new Dimension(width, height));
+		setForeground(Color.WHITE);
+		setBorder(null);
+		setContentAreaFilled(false);
+		setOpaque(false);
+		addMouseListener(new CustomButtonMouseListener(this, 0));
+		try{
+			originalBGImage = ImageIO.read(new File("ANNdroid/resources/img/gamescreen/"+filename));
+		}catch(Exception e){ e.printStackTrace(); }
+	}
+
 	public CustomButton(String text, int width, int height){
 
 		super(text);

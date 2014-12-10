@@ -9,8 +9,12 @@ import java.awt.*;
 public class CustomButtonMouseListener extends MouseAdapter{
 
 	JButton button;
+	int mode = -1;
 
-	public CustomButtonMouseListener(){}
+	public CustomButtonMouseListener(JButton button, int mode){
+		this.button = button;
+		this.mode = mode;
+	}
 
 	public CustomButtonMouseListener(JButton button){
 		this.button = button;
@@ -20,7 +24,7 @@ public class CustomButtonMouseListener extends MouseAdapter{
 		if(button.isEnabled()){
 			SoundPlayer hover = new SoundPlayer("hover2.mp3", false, 0);
 			hover.playSound();
-			button.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
+			if(mode == -1) button.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
 		}
 	}
 
