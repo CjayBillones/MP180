@@ -22,12 +22,10 @@ public class CustomTextArea extends JTextArea{
 		addFocusListener(new FocusAdapter(){
 			public void focusGained(FocusEvent e){
 				((TeacherPanel)ANNdroid.teacherPanel).jp.setBorder(BorderFactory.createLineBorder(Color.YELLOW, 1));
-				//((TeacherPanel)ANNdroid.teacherPanel).jp.getViewport().setBorder(BorderFactory.createLineBorder(Color.YELLOW, 1));
 			}
 
 			public void focusLost(FocusEvent e){
 				((TeacherPanel)ANNdroid.teacherPanel).jp.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
-				//((TeacherPanel)ANNdroid.teacherPanel).jp.getViewport().setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
 			}
 		});
 	}
