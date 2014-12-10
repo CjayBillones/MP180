@@ -33,8 +33,8 @@ public class GamePanelController{
 	private int def_hp;
 	private int def_round;
 
-	private int n_questions;
-	private int n_answered;
+	private double n_questions;
+	private double n_answered;
 
 	public GamePanelController(GamePanel panel,King k ,String sub, int p_hp, int k_hp, int n_rounds){
 
@@ -187,6 +187,7 @@ public class GamePanelController{
 	}
 
 	public void reset(){
+		updateStudent();
 		king_hp = def_hp;
 		player_hp = def_hp;
 		rounds = def_round;
@@ -201,7 +202,36 @@ public class GamePanelController{
 	}
 
 	public void updateStudent(){
+		String username = sim.active.getUsername();
+		int oldBracket = (int)sim.studentData.studentData.get(username).get(Categories.valueOf(subject));
+		double new_accurac = (((double)(((oldBracket + 1) * 10) - 5)) + ((n_answered/n_questions) * 100)) / 2;
+		System.out.println(new_accurac);
+		int newBracket = 0;
 
+		if(new_accurac<= 10){
+			newBracket = 0;
+		}else if(new_accurac <= 20){
+			newBracket = 1;
+		}else if(new_accurac <= 30){
+			newBracket = 2;
+		}else if(new_accurac <= 40){
+			newBracket = 3;
+		}else if(new_accurac <= 50){
+			newBracket = 4;
+		}else if(new_accurac <= 60){
+			newBracket = 5;
+		}else if(new_accurac <= 70){
+			newBracket = 6;
+		}else if(new_accurac <= 80){
+			newBracket = 7;
+		}else if(new_accurac <= 90){
+			newBracket = 8;
+		}else if(new_accurac<= 100){
+			newBracket = 9;
+		}
+
+		sim.studentData.update((Student)sim.active,Categories.valueOf(subject),newBracket);
+		System.out.println(sim.studentData.studentData.get(username).get(Categories.valueOf(subject)));
 	}
 
 }

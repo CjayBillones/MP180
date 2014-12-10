@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
-public class GamePanel extends JFrame{
+public class GamePanel extends JPanel{
 
 	public JTextArea question;
 	public JLabel pHP;
@@ -34,7 +34,9 @@ public class GamePanel extends JFrame{
 		king_answer = new JLabel("");
 		pHP = new JLabel("Player HP:" + 5);
 		kHP = new JLabel("King HP:" + 5,SwingConstants.LEFT);
-		question = new JTextArea(20,255);
+		question = new JTextArea(5,5);
+		question.setLineWrap(true);
+		question.setWrapStyleWord(true);
 		Font font = question.getFont();
 		float size = font.getSize() + 5.0f;
 		question.setFont( font.deriveFont(size) );
@@ -55,8 +57,8 @@ public class GamePanel extends JFrame{
 
 		for(int i = 0; i < choiceButtons.length; i++){
 			choiceButtons[i] = new JButton("Default String");
-			choiceButtons[i].setSize(new Dimension(100,200));
 			choicesPanel.add(choiceButtons[i]);
+
 		}
 
 		questionPanel.add(Box.createRigidArea(new Dimension(0,50)));
@@ -77,19 +79,15 @@ public class GamePanel extends JFrame{
 		add(centralPanel,BorderLayout.CENTER);
 		add(leftPanel,BorderLayout.LINE_START);
 		add(rightPanel,BorderLayout.LINE_END);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		question.setEditable(false);
 
-		addWindowListener(new java.awt.event.WindowAdapter() {
-		    @Override
-		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		        parent.setVisible(true);
-		    }
-		});
+	
 
 	}
 
-
+	public void resize(){
+		
+	}
 
 }

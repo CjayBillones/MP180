@@ -27,6 +27,7 @@ public class ANNdroid extends JFrame{
 	public final static String ADMINPANEL = "admin";
 	public final static String TEACHERPANEL = "teacher";
 	public final static String STUDENTPANEL = "student";
+	public final static String GAMEPANEL = "game";
 
 	// Cards/Panels //
 	public static JPanel bgPanel;
@@ -34,6 +35,7 @@ public class ANNdroid extends JFrame{
 	public static JPanel adminPanel;
 	public static JPanel teacherPanel;
 	public static JPanel studentPanel;
+	public static JPanel gamePanel;
 
 	public ANNdroid(){
 
@@ -65,11 +67,14 @@ public class ANNdroid extends JFrame{
 	public void addComponentToPane(Container c){
 
 		// Initialize Cards //
+		gamePanel = new GamePanel(this);
 		bgPanel = new BackgroundPanel();
 		loginPanel = new LoginPanel(bgPanel);
 		adminPanel = new AdminPanel();
 		teacherPanel = new TeacherPanel();
 		studentPanel = new StudentPanel(this);
+		
+
 
 		// Add Cards/Panel to Cards Container //
 		cards = new JPanel(new CardLayout());
@@ -77,6 +82,7 @@ public class ANNdroid extends JFrame{
 		cards.add(adminPanel, ADMINPANEL);
 		cards.add(teacherPanel, TEACHERPANEL);
 		cards.add(studentPanel, STUDENTPANEL);
+		cards.add(gamePanel, GAMEPANEL);
 	
 		c.add(cards);
 	}
@@ -93,12 +99,15 @@ public class ANNdroid extends JFrame{
 			adminPanel.setBounds(0, 0, getWidth(), getHeight());
 			teacherPanel.setBounds(0, 0, getWidth(), getHeight());
 			studentPanel.setBounds(0, 0, getWidth(), getHeight());
+			gamePanel.setBounds(0, 0, getWidth(), getHeight());
 			((BackgroundPanel)bgPanel).resize(); // Resizes the bgImage //
 			((LoginPanel)loginPanel).resize();
 			((AdminPanel)adminPanel).resize();
 			((TeacherPanel)teacherPanel).resize();
 			((StudentPanel)studentPanel).resize();
+			((GamePanel)gamePanel).resize();
 		}
 	}
+
 }
 

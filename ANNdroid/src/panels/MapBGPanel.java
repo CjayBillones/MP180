@@ -66,9 +66,9 @@ public class MapBGPanel extends JPanel{
 		this.width = width;
 		this.height = height;
 
-		gamePanel = new GamePanel(parent);
+		gamePanel = (GamePanel)(((ANNdroid)parent).gamePanel);
 
-		gpc = new GamePanelController(gamePanel,ANNdroid.simulator.kingList.get(0),"NULL",3,3,5); 
+		gpc = new GamePanelController(gamePanel,ANNdroid.simulator.kingList.get(0),"NULL",10,10,15); 
 
 		kingdom.addActionListener(new MapActionListener());
 		physics.addActionListener(new MapActionListener());
@@ -207,7 +207,7 @@ public class MapBGPanel extends JPanel{
 			Point p = new Point(x,y);
 			Object src = evt.getSource();
 			PlayerGlassPanel glass = pGlass;
-			CardLayout cl = (CardLayout)defPan.getLayout();
+			CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
 			if(src == kingdom){
 				p = glass.moveOnPath(s.findPath(cur,"K"), s, x, y, glass.getGraphics(),row,col);
 				cur = "K";
@@ -222,9 +222,9 @@ public class MapBGPanel extends JPanel{
 				gpc.setSubject("Physics");
 				gpc.setKing(ANNdroid.simulator.kingList.get(2));
 				gpc.getQuestion();
-				gamePanel.setSize(width + stud_pan.leftSidePane.getWidth(),height + stud_pan.leftSidePane.getHeight());
-				gamePanel.setVisible(true);
-				parent.setVisible(false);
+				resetGlassPane();
+				c1.show(ANNdroid.cards,ANNdroid.GAMEPANEL);
+				
 			}
 			else if(src == biology){
 				p = glass.moveOnPath(s.findPath(cur,"B"), s, x, y, glass.getGraphics(),row,col);
@@ -234,9 +234,9 @@ public class MapBGPanel extends JPanel{
 				gpc.setSubject("Biology");
 				gpc.setKing(ANNdroid.simulator.kingList.get(0));
 				gpc.getQuestion();
-				gamePanel.setSize(width + stud_pan.leftSidePane.getWidth(),height + stud_pan.leftSidePane.getHeight());
-				gamePanel.setVisible(true);
-				parent.setVisible(false);
+				resetGlassPane();
+				c1.show(ANNdroid.cards,ANNdroid.GAMEPANEL);
+				
 			}else if(src == chemistry){
 				System.out.println(glass);
 				p = glass.moveOnPath(s.findPath(cur,"C"), s, x, y, glass.getGraphics(),row,col);
@@ -246,9 +246,9 @@ public class MapBGPanel extends JPanel{
 				gpc.setSubject("Chemistry");
 				gpc.setKing(ANNdroid.simulator.kingList.get(1));
 				gpc.getQuestion();
-				gamePanel.setSize(width + stud_pan.leftSidePane.getWidth(),height + stud_pan.leftSidePane.getHeight());
-				gamePanel.setVisible(true);
-				parent.setVisible(false);
+				resetGlassPane();
+				c1.show(ANNdroid.cards,ANNdroid.GAMEPANEL);
+				
 			}
 		}
 	}
