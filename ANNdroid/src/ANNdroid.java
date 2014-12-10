@@ -67,12 +67,12 @@ public class ANNdroid extends JFrame{
 	public void addComponentToPane(Container c){
 
 		// Initialize Cards //
+		gamePanel = new GamePane();
 		bgPanel = new BackgroundPanel();
 		loginPanel = new LoginPanel(bgPanel);
 		adminPanel = new AdminPanel();
 		teacherPanel = new TeacherPanel();
 		studentPanel = new StudentPanel(this);
-		gamePanel = new GamePane();
 
 		// Add Cards/Panel to Cards Container //
 		cards = new JPanel(new CardLayout());

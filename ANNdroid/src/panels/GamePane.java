@@ -55,7 +55,7 @@ public class GamePane extends JPanel{
 		kHP = new JLabel("King HP:" + 5,SwingConstants.LEFT);
 
 		//question = new JTextArea(20,255);
-		question = new CustomTextArea("", 20, 255);
+		question = new CustomTextArea("Default String", 20, 255);
 		question.setBounds(0, quitButton.getY() + 50, getWidth(), getHeight()/2);
 		add(question);
 
