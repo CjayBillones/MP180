@@ -540,6 +540,7 @@ public class AdminPanel extends JPanel{
 					click.playSound();					
 					reinitialize(false, true, 0);
 					createTeachPane.setVisible(false);
+					header_create.setVisible(false);
 				}
 			}
 			else if(this.state == 1){
@@ -548,6 +549,7 @@ public class AdminPanel extends JPanel{
 					click.playSound();					
 					reinitialize(false, true, 1);
 					delTeachPane.setVisible(false);
+					header_delete.setVisible(false);
 				}
 				else{
 					if(!ANNdroid.simulator.active.getPassword().equals(Utilities.hashPassword(delPword))){
@@ -572,6 +574,7 @@ public class AdminPanel extends JPanel{
 					click.playSound();					
 					reinitialize(false, true, 2);
 					changePwordPane.setVisible(false);
+					header_pass.setVisible(false);
 				}
 				else{
 					if(!ANNdroid.simulator.active.getPassword().equals(oldPword)){
