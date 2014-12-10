@@ -17,9 +17,11 @@ public class CustomTextArea extends JTextArea{
 
 	BufferedImage bgImage = null;
 	BufferedImage scaledImage = null;
+	public String text = null;
 
 	public CustomTextArea(String text, int rows, int columns){
 		super(text, rows, columns);
+		this.text = text;
 		setOpaque(false);
 		try{
 			bgImage = ImageIO.read(new File("ANNdroid/resources/img/gamescreen/question.png"));
@@ -59,13 +61,22 @@ public class CustomTextArea extends JTextArea{
 		scaledImage = scaleOp.filter(bgImage, null);
 
 		repaint();
-	}	
+	}
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 
 		if(scaledImage != null) g.drawImage(scaledImage, 0, 0, getWidth(), getHeight(), null);
 
+		if(text != null){
+			Graphics2D g2d = (Graphics2D)g.create();
+			FontMetrics fm = g2d.getFontMetrics();
+
+			int x = (getWidth() - fm.stringWidth(getText())) / 2;
+			int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+			this.setForeground(Color.WHITE);
+			g2d.drawString(getText(), x, y);
+		}
 
 		g.setColor(new Color(255,255,255,128));
 	}
