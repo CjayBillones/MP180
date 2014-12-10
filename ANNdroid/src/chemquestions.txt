@@ -138,3 +138,73 @@ calcinations
 froth floatation
 0
 INTERMEDIATE
+The molecules of which gas have highest speed?
+H2 at -73oC
+CH4 at 300 K
+N2 at 1,027oC
+O2 at 0oC
+0
+HARD
+The law which states that the amount of gas dissolved in a liquid is proportional to its partial pressure is
+Dalton's law
+Gay Lussac's law
+Henry's law
+Raoult's law
+2
+EASY
+The gas present in the stratosphere which filters out some of the sun's ultraviolet light and provides an effective shield against radiation damage to living things is
+helium
+ozone
+oxygen
+methane
+1
+EASY
+The most commonly used bleaching agent is
+alcohol
+carbon dioxide
+chlorine
+sodium chlorine
+2
+INTERMEDIATE
+The nucleus of a hydrogen atom consists of
+1 proton only
+1 proton + 2 neutron
+1 neutron only
+1 electron only
+0
+EASY
+The heat required to raise the temperature of body by 1 K is called
+specific heat
+thermal capacity
+water equivalent
+None of the above
+1
+INTERMEDIATE
+The mass of P4O10 that will be obtained from the reaction of 1.33 gram of P4 and 5.07 of oxygen is
+2.05 gram
+3.05 gram
+4.05 gram
+5.05 gram
+1
+INTERMEDIATE
+The nuclear particles which are assumed to hold the nucleons together are
+electrons
+positrons
+neutrons
+mesons
+3
+EASY
+The octane number of zero is assigned to
+2-methyl octane
+n-heptane
+iso-octane
+3-methyl octane
+1
+HARD
+The metal that is used as a catalyst in the hydrogenation of oils is
+Ni
+Pb
+Cu
+Pt
+0
+INTERMEDIATE

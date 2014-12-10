@@ -138,3 +138,85 @@ they are very far away from the earth resulting in decrease in intensity of ligh
 they are nearer to earth and hence we receive a greater amount of light and, therefore minor variations in the intensity are not noticeable
 3
 INTERMEDIATE
+Let a thin capillary tube be replaced with another tube of insufficient length then, we find water
+will overflow
+will not rise
+depressed
+change its meniscus
+1
+INTERMEDIATE
+Metals are good conductors of electricity because
+they contain free electrons
+the atoms are lightly packed
+they have high melting point
+All of the above
+0
+EASY
+Out of the following pairs, choose the pair in which the physical quantities do not have identical dimension?
+Pressure and Young's modules
+Planck's constant and Angular momentum
+Impulse and moment of force
+Force and rate of change of linear momentum
+2
+INTERMEDIATE
+If two bodies of different masses, initially at rest, are acted upon by the same force for the same time, then the both bodies acquire the same
+velocity
+momentum
+acceleration
+kinetic energy
+1
+EASY
+Pick out the scalar quantity
+force
+pressure
+velocity
+acceleration
+1
+EASY
+Rectifiers are used to convert
+Direct current to Alternating current
+Alternating current to Direct current
+high voltage to low voltage
+low voltage to high voltage
+1
+INTERMEDIATE
+out of the following, which is not emitted by radioactive substance?
+Electrons
+Electromagnetic radiations
+Alpha particles
+Neutrons
+3
+HARD
+Sound waves in air are
+transverse
+longitudinal
+electromagnetic
+polarised
+1
+EASY
+Magnetism at the centre of a bar magnet is
+minimum
+maximum
+zero
+minimum or maximum
+2
+INTERMEDIATE
+It is more difficult to walk on a sandy road than on a concrete road because
+sand is soft and concreter is hard
+the friction between sand and feet is less than that between concrete and feet
+the friction between sand and feet is more than that between concrete and feet
+the sand is grainy but concrete is smooth
+Find the maximum velocity for the overturn of a car moving on a circular track of radius 100 m. The co-efficient of friction between the road and tyre is 0.2
+0.14 m/s
+140 m/s
+1.4 km/s
+14 m/s
+3
+INTERMEDIATE
+Of the following properties of a wave, the one that is independent of the other is its
+amplitude
+velocity
+wavelength
+frequency
+0
+EASY
