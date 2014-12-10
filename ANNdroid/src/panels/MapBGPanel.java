@@ -157,7 +157,6 @@ public class MapBGPanel extends JPanel{
 							double cell_h = (double)this.height/ (double)this.row ;
 							this.x = (int)(((double)j * cell_w) + (cell_w * 0.5)) + stud_pan.leftSidePane.getWidth();
 							this.y = (int)(((double)i * cell_h) + (cell_h * 0.5)) ; 
-							System.out.println(this.y);
 						}break;
 						default:{ret[(i * y) + j] = new JLabel();} break;
 					}
@@ -254,7 +253,6 @@ public class MapBGPanel extends JPanel{
 				c1.show(ANNdroid.cards,ANNdroid.GAMEPANEL);
 				
 			}else if(src == chemistry){
-				System.out.println(glass);
 				p = glass.moveOnPath(s.findPath(cur,"C"), s, x, y, glass.getGraphics(),row,col);
 				cur = "C";
 				x = (int)p.getX();
