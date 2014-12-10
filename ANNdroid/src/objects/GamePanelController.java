@@ -39,8 +39,8 @@ public class GamePanelController{
 
 		sD = SDataSL.load();
 		System.out.println(sD.studentData);
-		System.out.println((Student)sim.active);
-		p_bracket = (sim.active == null)?5:(int)sD.studentData.get((Student)sim.active).get(Categories.valueOf(subject));
+		System.out.println(((Student)sim.active).getUsername());
+		p_bracket = (sim.active == null)?5:(int)sD.studentData.get(((Student)sim.active).getUsername()).get(Categories.valueOf(subject));
 		king = k;
 		student = (Student)sim.active;
 		gPanel = panel;
