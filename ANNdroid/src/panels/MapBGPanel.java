@@ -52,7 +52,7 @@ public class MapBGPanel extends JPanel{
 	JFrame parent;
 
 	PlayerGlassPanel pGlass;
-	GamePanel gamePanel;
+	JPanel gamePanel;
 	Search s;
 	StudentPanel stud_pan;
 	GamePanelController gpc;
@@ -66,7 +66,8 @@ public class MapBGPanel extends JPanel{
 		this.width = width;
 		this.height = height;
 
-		gamePanel = (GamePanel)(((ANNdroid)parent).gamePanel);
+		//gamePanel = (GamePanel)(((ANNdroid)parent).gamePanel);
+		gamePanel = (GamePane)ANNdroid.gamePanel;
 
 		gpc = new GamePanelController(gamePanel,ANNdroid.simulator.kingList.get(0),"NULL",10,10,15); 
 
@@ -208,6 +209,7 @@ public class MapBGPanel extends JPanel{
 			Object src = evt.getSource();
 			PlayerGlassPanel glass = pGlass;
 			CardLayout c1 = (CardLayout)(ANNdroid.cards.getLayout());
+
 			if(src == kingdom){
 				p = glass.moveOnPath(s.findPath(cur,"K"), s, x, y, glass.getGraphics(),row,col);
 				cur = "K";
@@ -221,8 +223,11 @@ public class MapBGPanel extends JPanel{
 				y = (int)p.getY();
 				gpc.setSubject("Physics");
 				gpc.setKing(ANNdroid.simulator.kingList.get(2));
-				gpc.getQuestion();
-				resetGlassPane();
+				//gpc.getQuestion();
+				//resetGlassPane();
+				pGlass.setVisible(false);
+				((StudentPanel)ANNdroid.studentPanel).remove(ANNdroid.bgPanel);
+				((GamePane)ANNdroid.gamePanel).add(ANNdroid.bgPanel);
 				c1.show(ANNdroid.cards,ANNdroid.GAMEPANEL);
 				
 			}
@@ -233,8 +238,11 @@ public class MapBGPanel extends JPanel{
 				y = (int)p.getY();
 				gpc.setSubject("Biology");
 				gpc.setKing(ANNdroid.simulator.kingList.get(0));
-				gpc.getQuestion();
-				resetGlassPane();
+				//gpc.getQuestion();
+				//resetGlassPane();
+				pGlass.setVisible(false);
+				((StudentPanel)ANNdroid.studentPanel).remove(ANNdroid.bgPanel);
+				((GamePane)ANNdroid.gamePanel).add(ANNdroid.bgPanel);				
 				c1.show(ANNdroid.cards,ANNdroid.GAMEPANEL);
 				
 			}else if(src == chemistry){
@@ -245,8 +253,11 @@ public class MapBGPanel extends JPanel{
 				y = (int)p.getY();
 				gpc.setSubject("Chemistry");
 				gpc.setKing(ANNdroid.simulator.kingList.get(1));
-				gpc.getQuestion();
-				resetGlassPane();
+				//gpc.getQuestion();
+				//resetGlassPane();
+				pGlass.setVisible(false);
+				((StudentPanel)ANNdroid.studentPanel).remove(ANNdroid.bgPanel);
+				((GamePane)ANNdroid.gamePanel).add(ANNdroid.bgPanel);								
 				c1.show(ANNdroid.cards,ANNdroid.GAMEPANEL);
 				
 			}

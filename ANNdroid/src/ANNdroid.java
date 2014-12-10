@@ -72,7 +72,7 @@ public class ANNdroid extends JFrame{
 		adminPanel = new AdminPanel();
 		teacherPanel = new TeacherPanel();
 		studentPanel = new StudentPanel(this);
-		//gamePanel = new GamePane();
+		gamePanel = new GamePane();
 
 		// Add Cards/Panel to Cards Container //
 		cards = new JPanel(new CardLayout());
@@ -80,7 +80,7 @@ public class ANNdroid extends JFrame{
 		cards.add(adminPanel, ADMINPANEL);
 		cards.add(teacherPanel, TEACHERPANEL);
 		cards.add(studentPanel, STUDENTPANEL);
-		//cards.add(gamePanel, GAMEPANEL);
+		cards.add(gamePanel, GAMEPANEL);
 
 		c.add(cards);
 	}
@@ -102,7 +102,7 @@ public class ANNdroid extends JFrame{
 			((AdminPanel)adminPanel).resize();
 			((TeacherPanel)teacherPanel).resize();
 			((StudentPanel)studentPanel).resize();
-			//((GamePane)gamePanel).resize();
+			((GamePane)gamePanel).resize();
 		}
 	}
 }
