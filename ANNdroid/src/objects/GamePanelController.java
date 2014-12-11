@@ -27,6 +27,7 @@ public class GamePanelController{
 	private Student student;
 
 	private String subject;
+	private String choice;
 
 	private int player_hp;
 	private int king_hp;
@@ -120,7 +121,7 @@ public class GamePanelController{
 
 	public int kingAnswer(){
 		int ans = gm.getAnsFromKing(king,curQuestion,subject,p_bracket);
-		String choice =  curQuestion.getChoices().get(ans);
+		choice =  curQuestion.getChoices().get(ans);
 		((GamePane)gPanel).king_answer.setText("The King chose: " + choice);
 		System.out.println("K:" + gm.checkAnswer(curQuestion,ans));
 
@@ -131,6 +132,7 @@ public class GamePanelController{
 
 		Boolean right = gm.checkAnswer(curQuestion,answer);
 		
+		String r_msg = (right)?"You are right!":"You are wrong!";
 		
 		if(right){
 			king_hp--;
@@ -142,10 +144,12 @@ public class GamePanelController{
 		if(right)
 			player_hp--;
 	
-
+		String msg = r_msg + "\nYour HP: "+player_hp+"\nKing HP: "+ king_hp+"\nThe King chose: " + choice;
 		((GamePane)gPanel).kHP.setText("King HP:" + king_hp);
 		((GamePane)gPanel).pHP.setText("Player HP:" + player_hp);
 		System.out.println(player_hp + " " + king_hp + " round" + rounds);
+		JOptionPane.showMessageDialog(null,msg);
+
 
 	}
 
