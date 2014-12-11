@@ -139,6 +139,27 @@ public class TeacherPanel extends JPanel{
 	JButton delQuestionButton;
 	JButton cancelBtn4;
 
+	// Stats Panel //
+	JLabel header_stat;
+	JPanel statPane;
+
+	JComboBox<String> studentbox;
+	JLabel gamesPlayed;
+	JLabel gamesWon;
+	JLabel gamesDraw;
+	JLabel gamesLost;
+	JLabel chemStrLabel;
+	JLabel physStrLabel;
+	JLabel bioStrLabel;
+
+	public JTextField gamesPlayedField;
+	public JTextField gamesWonField;
+	public JTextField gamesDrawField;
+	public JTextField gamesLostField;
+	public JTextField bioStrField;
+	public JTextField chemStrField;
+	public JTextField physStrField;
+
 	// Headers //
 	int headerheight = 50;
 	JLabel header_create;
@@ -162,6 +183,114 @@ public class TeacherPanel extends JPanel{
 		leftSidePane.setPreferredSize(new Dimension(getWidth()/4 + 60, getHeight()));
 		leftSidePane.setBounds(0, 0, getWidth()/4 + 60, getHeight());
 		leftSidePane.setBackground(Color.BLACK);		
+
+		// Stats Panel //
+		statPane = new GenericPane(getWidth()-leftSidePane.getWidth()-30, getHeight()/4, 1);
+		statPane.setBounds(leftSidePane.getWidth(), getHeight()*3/16, getWidth()-leftSidePane.getWidth()-30, getHeight()*2/3);
+		statPane.setVisible(false);
+		add(statPane);
+
+		gamesPlayed = new CustomLabel("Games Played: ", statPane.getWidth()/4, 20, 1);
+		gamesPlayed.setBounds(statPane.getWidth()/26, statPane.getHeight()/14, statPane.getWidth()/4, 20);
+		statPane.add(gamesPlayed);
+
+		studentbox = new CustomComboBox<String>();
+		studentbox.setBounds(gamesPlayed.getX(), gamesPlayed.getY()-40, gamesPlayed.getWidth(), 20);
+		statPane.add(studentbox);
+
+		for(User u : ANNdroid.simulator.userList){
+			if(u instanceof Student){
+				studentbox.addItem(u.getFullname());
+			}
+		}
+		studentbox.setSelectedItem(null);
+
+		((JLabel)studentbox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);		
+		studentbox.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				JComboBox<?> cb = (JComboBox<?>)e.getSource();
+
+				for(User u : ANNdroid.simulator.userList){
+					if(u.getFullname().equals(cb.getSelectedItem())){
+							gamesPlayedField.setText(Integer.toString(((Student)u).getGamesPlayed()));
+							gamesWonField.setText(Integer.toString(((Student)u).getGamesWon()));
+							gamesDrawField.setText(Integer.toString(((Student)u).getGamesDraw()));
+							gamesLostField.setText(Integer.toString(((Student)u).getGamesLost()));
+							if(((Student)u).getChemistry() != -1)
+								chemStrField.setText(Integer.toString(((Student)u).getChemistry()));
+							else
+								chemStrField.setText("n/a");
+							if(((Student)u).getPhysics() != -1)
+								physStrField.setText(Integer.toString(((Student)u).getPhysics()));										
+							else
+								physStrField.setText("n/a");
+							if(((Student)u).getBiology() != -1)
+								bioStrField.setText(Integer.toString(((Student)u).getBiology()));		
+							else
+								bioStrField.setText("n/a");
+					}
+				}
+			}
+		});	
+
+		gamesWon = new CustomLabel("Games Won: ", statPane.getWidth()/4, 20, 1);
+		gamesWon.setBounds(gamesPlayed.getX(), gamesPlayed.getY()+30, statPane.getWidth()/4, 20);
+		statPane.add(gamesWon);
+
+		gamesDraw = new CustomLabel("Games Draw: ", statPane.getWidth()/4, 20, 1);
+		gamesDraw.setBounds(gamesPlayed.getX(), gamesWon.getY()+30, statPane.getWidth()/4, 20);
+		statPane.add(gamesDraw);
+
+		gamesLost = new CustomLabel("Games Lost:", statPane.getWidth()/4, 20, 1);
+		gamesLost.setBounds(gamesPlayed.getX(), gamesDraw.getY()+30, statPane.getWidth()/4, 20);
+		statPane.add(gamesLost);
+
+		chemStrLabel = new CustomLabel("Chemistry Strength: ", statPane.getWidth()/4, 20, 1);
+		chemStrLabel.setBounds(gamesPlayed.getX(), gamesLost.getY()+30, statPane.getWidth()/4, 20);
+		statPane.add(chemStrLabel);
+
+		physStrLabel = new CustomLabel("Physics Strength: ", statPane.getWidth()/4, 20, 1);
+		physStrLabel.setBounds(gamesPlayed.getX(), chemStrLabel.getY()+30, statPane.getWidth()/4, 20);
+		statPane.add(physStrLabel);
+
+		bioStrLabel = new CustomLabel("Biology Strength: ", statPane.getWidth()/4, 20, 1);
+		bioStrLabel.setBounds(gamesPlayed.getX(), physStrLabel.getY()+30, statPane.getWidth()/4, 20);
+		statPane.add(bioStrLabel);
+
+		gamesPlayedField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		gamesPlayedField.setBounds(gamesPlayed.getX()+gamesPlayed.getWidth(), gamesPlayed.getY(), gamesPlayed.getWidth(), 20);
+		statPane.add(gamesPlayedField);
+
+		gamesWonField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		gamesWonField.setBounds(gamesPlayedField.getX(), gamesWon.getY(), gamesPlayedField.getWidth(), 20);
+		statPane.add(gamesWonField);
+
+		gamesDrawField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		gamesDrawField.setBounds(gamesPlayedField.getX(), gamesDraw.getY(), gamesPlayedField.getWidth(), 20);
+		statPane.add(gamesDrawField);
+
+		gamesLostField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		gamesLostField.setBounds(gamesPlayedField.getX(), gamesLost.getY(), gamesPlayedField.getWidth(), 20);
+		statPane.add(gamesLostField);
+
+		bioStrField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		bioStrField.setBounds(gamesPlayedField.getX(), bioStrLabel.getY(), gamesPlayedField.getWidth(), 20);
+		statPane.add(bioStrField);
+
+		chemStrField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		chemStrField.setBounds(gamesPlayedField.getX(), chemStrLabel.getY(), gamesPlayedField.getWidth(), 20);
+		statPane.add(chemStrField);
+
+		physStrField = new CustomTextField(new Color(0, 29, 60, 0), false, "");
+		physStrField.setBounds(gamesPlayedField.getX(), physStrLabel.getY(), gamesPlayedField.getWidth(), 20);
+		statPane.add(physStrField);		
+
+		header_stat = new CustomLabel("Statistics", statPane.getWidth(), headerheight, 2);
+		header_stat.setBounds(statPane.getX(), statPane.getY()-headerheight, statPane.getWidth(), headerheight);
+		header_stat.setVisible(false);
+		
+		add(header_stat);
+
 
 		// Create Student Pane //
 		createStudentPane = new GenericPane(getWidth() - leftSidePane.getWidth() - 200, getHeight()/3, 1);
@@ -727,12 +856,6 @@ public class TeacherPanel extends JPanel{
 		header_delete.setVisible(false);
 		add(header_delete);
 
-		/*
-		header_stud = new CustomLabel("Statistics", delStudentPane.getWidth(), headerheight, 2);
-		header_stud.setBounds(createStudentPane.getX(), delStudentPane.getY()-headerheight, delStudentPane.getWidth(), headerheight);
-		header_stud.setVisible(false);
-		add(header_stud);
-		*/
 
 		header_subj = new CustomLabel("Manage Subjects", manageSubjectPane.getWidth(), headerheight, 2);
 		header_subj.setBounds(manageSubjectPane.getX(), manageSubjectsButtonPane.getY()-headerheight, manageSubjectPane.getWidth(), headerheight);
@@ -922,6 +1045,49 @@ public class TeacherPanel extends JPanel{
 		cancelBtn4.setBounds(viewdiffLabel.getX(), viewdiffLabel.getY()+30, viewQuestionPane.getWidth()/2, 30);
 		((CustomButton)cancelBtn4).resize();
 
+		// Stats Pane Resize //
+		statPane.setBounds(leftSidePane.getWidth(), getHeight()*3/16, getWidth() - leftSidePane.getWidth() - 200, getHeight()*2/3);
+		((GenericPane)statPane).resize();
+
+		gamesPlayed.setBounds(statPane.getWidth()/26, statPane.getHeight()/7, statPane.getWidth()/4, 20);
+		((CustomLabel)gamesPlayed).resize();
+
+		studentbox.setBounds(gamesPlayed.getX(), gamesPlayed.getY()-40, gamesPlayed.getWidth(), 20);		
+
+		gamesWon.setBounds(gamesPlayed.getX(), gamesPlayed.getY()+50, statPane.getWidth()/4, 20);
+		((CustomLabel)gamesWon).resize();
+
+		gamesDraw.setBounds(gamesPlayed.getX(), gamesWon.getY()+50, statPane.getWidth()/4, 20);
+		((CustomLabel)gamesDraw).resize();
+
+		gamesLost.setBounds(gamesPlayed.getX(), gamesDraw.getY()+50, statPane.getWidth()/4, 20);
+		((CustomLabel)gamesLost).resize();
+
+		chemStrLabel.setBounds(gamesPlayed.getX(), gamesLost.getY()+50, statPane.getWidth()/4, 20);
+		((CustomLabel)chemStrLabel).resize();
+
+		physStrLabel.setBounds(gamesPlayed.getX(), chemStrLabel.getY()+50, statPane.getWidth()/4, 20);
+		((CustomLabel)physStrLabel).resize();
+
+		bioStrLabel.setBounds(gamesPlayed.getX(), physStrLabel.getY()+50, statPane.getWidth()/4, 20);
+		((CustomLabel)bioStrLabel).resize();
+
+		gamesPlayedField.setBounds(gamesPlayed.getX()+gamesPlayed.getWidth(), gamesPlayed.getY(), gamesPlayed.getWidth(), 20);
+
+		gamesWonField.setBounds(gamesPlayedField.getX(), gamesWon.getY(), gamesPlayedField.getWidth(), 20);
+
+		gamesDrawField.setBounds(gamesPlayedField.getX(), gamesDraw.getY(), gamesPlayedField.getWidth(), 20);
+
+		gamesLostField.setBounds(gamesPlayedField.getX(), gamesLost.getY(), gamesPlayedField.getWidth(), 20);
+
+		bioStrField.setBounds(gamesPlayedField.getX(), bioStrLabel.getY(), gamesPlayedField.getWidth(), 20);
+
+		chemStrField.setBounds(gamesPlayedField.getX(), chemStrLabel.getY(), gamesPlayedField.getWidth(), 20);
+
+		physStrField.setBounds(gamesPlayedField.getX(), physStrLabel.getY(), gamesPlayedField.getWidth(), 20);
+
+		header_stat.setBounds(statPane.getX(), statPane.getY()-headerheight, statPane.getWidth(), headerheight);
+
 		header_create.setBounds(createStudentPane.getX(), createStudentPane.getY()-headerheight, createStudentPane.getWidth(), headerheight);
 		((CustomLabel)header_create).resize();
 
@@ -988,7 +1154,15 @@ public class TeacherPanel extends JPanel{
 			schoiceField.setText("");
 			tchoiceField.setText("");
 			fthchoiceField.setText("");
-		}
+			}
+			gamesPlayedField.setText("");
+			gamesWonField.setText("");
+			gamesDrawField.setText("");
+			gamesLostField.setText("");
+			chemStrField.setText("");
+			physStrField.setText("");										
+			bioStrField.setText("");	
+			studentbox.setSelectedItem(null);		
 	}
 
 	private class FieldsFocusListener extends FocusAdapter{
@@ -1077,7 +1251,9 @@ public class TeacherPanel extends JPanel{
 					else{
 						errorLabel1.setText("* successfully created student account");
 						errorLabel1.setForeground(Color.YELLOW);
+						Student s = new Student(uname, Utilities.hashPassword(pword), fname, lname);
 						((Teacher)ANNdroid.simulator.active).createAcct(new Student(uname, Utilities.hashPassword(pword), fname, lname));
+						studentbox.addItem(s.getFullname());
 					}
 					reinitialize(true, false, 0);
 				}
