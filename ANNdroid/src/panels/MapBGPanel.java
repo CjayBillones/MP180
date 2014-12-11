@@ -156,7 +156,7 @@ public class MapBGPanel extends JPanel{
 							double cell_w = (double)this.width / (double)this.col;
 							double cell_h = (double)this.height/ (double)this.row ;
 							this.x = (int)(((double)j * cell_w) + (cell_w * 0.5)) + stud_pan.leftSidePane.getWidth();
-							this.y = (int)(((double)i * cell_h) + (cell_h * 0.5)) ; 
+							this.y = (int)(((double)i * cell_h)); 
 						}break;
 						default:{ret[(i * y) + j] = new JLabel();} break;
 					}
