@@ -167,7 +167,11 @@ public class GamePanelController{
 		for(int i = 0; i < 4 ; i++){
 			((GamePane)gPanel).choiceButtons[i].setVisible(false);
 		}
-
+		double ratio = ((double)(student.getGamesWon()) / (double)(student.getGamesLost()));
+		sD.update(student,Categories.GAME_RATIO, ratio);
+		System.out.println(Categories.valueOf(subject));
+		ratio = ratio * (double)(sD.studentData.get(student).get(Categories.valueOf(subject)));
+		sD.update(student,Categories.GAP, ratio);
 		updateStudent();
 		reset();
 		
@@ -225,6 +229,39 @@ public class GamePanelController{
 		double new_accurac = (((double)(((oldBracket + 1) * 10) - 5)) + ((n_answered/n_questions) * 100)) / 2;
 		System.out.println(new_accurac);
 		int newBracket = 0;
+
+		double adjust = (double)sD.studentData.get(student).get(Categories.GAP);
+
+		int k_ac = king.get_king_bracket(Domain.valueOf(subject),Difficulty.EASY,(int)sD.studentData.get(student).get(Categories.valueOf(subject)));
+
+		k_ac = (k_ac * 10) + 5 + (int)adjust;
+
+		if(k_ac <= 10){
+			k_ac = 0;
+		}else if(k_ac <= 20){
+			k_ac = 1;
+		}else if(k_ac <= 30){
+			k_ac = 2;
+		}else if(k_ac <= 40){
+			k_ac = 3;
+		}else if(k_ac <= 50){
+			k_ac = 4;
+		}else if(k_ac <= 60){
+			k_ac = 5;
+		}else if(k_ac <= 70){
+			k_ac = 6;
+		}else if(k_ac <= 80){
+			k_ac = 7;
+		}else if(new_accurac <= 90){
+			k_ac = 8;
+		}else {
+			k_ac = 9;
+		}
+
+		for(Difficulty d: Difficulty.values()){
+
+			king.adjust_attr(Domain.valueOf(subject),d,k_ac);
+		}
 
 		if(new_accurac<= 10){
 			newBracket = 0;
